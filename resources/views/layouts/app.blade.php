@@ -151,6 +151,19 @@
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -6px);
         }
+
+        /* PAGE TRANSITION LOADER */
+        #page-loader.active {
+            transform: scaleY(1);
+            height: 100vh;
+            transition: transform 0.4s ease, height 0.4s ease;
+        }
+
+        #page-loader.finish {
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.5s ease;
+        }
     </style>
 </head>
 
@@ -166,6 +179,12 @@
             TRPL A PAGI • OFFICIAL CLASS SITE • POLYTECHNIC • TRPL A PAGI • ENGINEERING • CODE • TRPL A PAGI •
         </div>
     </div>
+
+    <!-- PAGE LOADER -->
+    <div id="page-loader"
+        class="fixed top-0 left-0 w-full h-1 bg-brand-600 origin-top scale-y-0 z-[9999] transition-transform duration-500">
+    </div>
+
 
 
     {{-- NAVBAR --}}

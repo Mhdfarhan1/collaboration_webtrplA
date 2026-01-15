@@ -45,4 +45,35 @@
     }
     window.addEventListener("scroll", reveal);
     reveal();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("page-loader");
+
+        // Saat klik link internal
+        document.querySelectorAll("a[href]").forEach(link => {
+            const url = link.getAttribute("href");
+
+            if (
+                url &&
+                !url.startsWith("#") &&
+                !url.startsWith("http") &&
+                !link.hasAttribute("target")
+            ) {
+                link.addEventListener("click", e => {
+                    e.preventDefault();
+                    loader.classList.add("active");
+
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 400);
+                });
+            }
+        });
+
+        // Saat halaman selesai load
+        window.addEventListener("load", () => {
+            loader.classList.add("finish");
+            setTimeout(() => loader.remove(), 600);
+        });
+    });
 </script>
