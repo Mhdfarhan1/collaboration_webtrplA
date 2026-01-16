@@ -182,7 +182,7 @@
 
     <!-- PAGE LOADER -->
     <div id="page-loader"
-        class="fixed top-0 left-0 w-full h-1 bg-brand-600 origin-top scale-y-0 z-[9999] transition-transform duration-500">
+        class="fixed top-0 left-0 w-full h-1 bg-brand-600 origin-top scale-y-0 z-9999 transition-transform duration-500">
     </div>
 
 

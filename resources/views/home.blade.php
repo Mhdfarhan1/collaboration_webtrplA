@@ -15,7 +15,7 @@
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110">
 
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-900/40 to-slate-900/20"></div>
+        <div class="absolute inset-0 bg-linear-to-br from-slate-900/95 via-slate-900/40 to-slate-900/20"></div>
 
         <!-- Glow Ornaments -->
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-500/30 blur-[140px] rounded-full"></div>
@@ -45,14 +45,14 @@
                     </span>
 
                     <span class="block sm:inline text-transparent bg-clip-text
-                   bg-gradient-to-r from-cyan-300 via-sky-400 to-teal-300
+                   bg-linear-to-r from-cyan-300 via-sky-400 to-teal-300
                    animate-gradient-x">
                         A PAGI 2024
                     </span>
 
                     <!-- Glow halus -->
                     <span class="absolute inset-0 -z-10 blur-3xl opacity-30
-                   bg-gradient-to-r from-cyan-400 via-blue-500 to-teal-400">
+                   bg-linear-to-r from-cyan-400 via-blue-500 to-teal-400">
                     </span>
                 </h1>
             </div>
@@ -85,7 +85,7 @@
                    transition-all duration-300 hover:scale-105 active:scale-95
                    focus:outline-none focus:ring-2 focus:ring-brand-500 overflow-hidden">
 
-                    <div class="absolute inset-0 bg-gradient-to-br
+                    <div class="absolute inset-0 bg-linear-to-br
                        from-brand-500 via-blue-600 to-cyan-500
                        opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     </div>
@@ -101,7 +101,7 @@
                    transition-all duration-300 hover:scale-105 active:scale-95
                    focus:outline-none focus:ring-2 focus:ring-white/30 overflow-hidden">
 
-                    <div class="absolute inset-0 bg-gradient-to-br
+                    <div class="absolute inset-0 bg-linear-to-br
                        from-gray-700 via-gray-800 to-black
                        opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     </div>
@@ -130,7 +130,7 @@
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-3">
                     Siapa <br>
                     <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Kami?</span>
+                        class="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">Kami?</span>
                 </h2>
                 <div class="h-1.5 w-20 bg-blue-600 rounded-full"></div>
             </div>
@@ -198,8 +198,8 @@
             Use</p>
 
         <div class="relative flex overflow-x-hidden group">
-            <div class="absolute z-10 top-0 left-0 h-full w-24 bg-gradient-to-r from-[#f8fafc] to-transparent"></div>
-            <div class="absolute z-10 top-0 right-0 h-full w-24 bg-gradient-to-l from-[#f8fafc] to-transparent"></div>
+            <div class="absolute z-10 top-0 left-0 h-full w-24 bg-linear-to-r from-[#f8fafc] to-transparent"></div>
+            <div class="absolute z-10 top-0 right-0 h-full w-24 bg-linear-to-l from-[#f8fafc] to-transparent"></div>
 
             <div class="animate-marquee whitespace-nowrap flex items-center gap-16 py-4">
                 <span class="text-2xl font-bold text-slate-400 flex items-center gap-2"><img
@@ -272,7 +272,7 @@
             <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 alt="Main Activity">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-80">
+            <div class="absolute inset-0 bg-linear-to-t from-slate-900/90 via-transparent to-transparent opacity-80">
             </div>
             <div class="absolute bottom-0 left-0 p-8">
                 <span
@@ -352,7 +352,7 @@
             <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">The Squad</span>
             <h2 class="text-3xl md:text-5xl font-black text-slate-800">
                 Meet The <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-600">Kelas</span>
+                    class="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-blue-600">Kelas</span>
             </h2>
         </div>
         <div class="hidden md:flex gap-2 mt-4 md:mt-0">
@@ -368,13 +368,13 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 reveal">
 
         <div class="group relative">
-            <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg">
+            <div class="relative w-full aspect-4/5 rounded-4xl overflow-hidden mb-4 shadow-lg">
                 <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     alt="Member">
 
                 <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    class="absolute inset-0 bg-linear-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
 
                 <div
@@ -403,13 +403,13 @@
         </div>
 
         <div class="group relative">
-            <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg">
+            <div class="relative w-full aspect-4/5 rounded-4xl overflow-hidden mb-4 shadow-lg">
                 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     alt="Member">
 
                 <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    class="absolute inset-0 bg-linear-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
                 <div
                     class="absolute bottom-0 left-0 w-full p-4 flex justify-center gap-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
@@ -430,12 +430,12 @@
         </div>
 
         <div class="group relative">
-            <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg">
+            <div class="relative w-full aspect-4/5 rounded-4xl overflow-hidden mb-4 shadow-lg">
                 <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1974&auto=format&fit=crop"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     alt="Member">
                 <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    class="absolute inset-0 bg-linear-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
             </div>
             <div class="text-center">
@@ -446,12 +446,12 @@
         </div>
 
         <div class="group relative">
-            <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg">
+            <div class="relative w-full aspect-4/5 rounded-4xl overflow-hidden mb-4 shadow-lg">
                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974&auto=format&fit=crop"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     alt="Member">
                 <div
-                    class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    class="absolute inset-0 bg-linear-to-t from-brand-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 </div>
             </div>
             <div class="text-center">
@@ -477,7 +477,7 @@
         <div class="text-center mb-12 reveal">
             <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Portfolio</span>
             <h2 class="text-3xl md:text-5xl font-black text-slate-800">
-                Made by <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">TRPL A Pagi.</span>
+                Made by <span class="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">TRPL A Pagi.</span>
             </h2>
             <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
                 Karya terbaik yang menggabungkan kreativitas dan kode.
@@ -487,7 +487,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 reveal">
 
             <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-[2rem] shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
                     <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" 
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="SIA Polibatam">
                     
@@ -517,7 +517,7 @@
             </div>
 
             <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-[2rem] shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="E-Kantin">
                     <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -546,7 +546,7 @@
             </div>
 
             <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-[2rem] shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
                     <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2070&auto=format&fit=crop" 
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Smart Garden">
                     <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
