@@ -521,7 +521,6 @@
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     alt="SIA Polibatam">
-
                 <div
                     class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <a href="#"
@@ -540,10 +539,22 @@
 
                 <h3
                     class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    Sistem Informasi Akademik</h3>
+                    Sistem Informasi Akademik
+                </h3>
+
                 <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
                     Platform manajemen data mahasiswa terintegrasi dengan absensi real-time dan cetak KHS otomatis.
                 </p>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
+                    <div class="flex -space-x-2">
+                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                            src="https://i.pravatar.cc/100?img=1" alt="Dev 1" title="Budi Setiawan">
+                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                            src="https://i.pravatar.cc/100?img=5" alt="Dev 2" title="Siti Aminah">
+                    </div>
+                </div>
 
                 <div class="mt-auto pt-4 border-t border-slate-100">
                     <a href="#"
@@ -584,10 +595,20 @@
 
                 <h3
                     class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    E-Kantin Mobile App</h3>
+                    E-Kantin Mobile App
+                </h3>
+
                 <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
                     Aplikasi pemesanan makanan kantin kampus tanpa antri dengan fitur e-wallet terintegrasi.
                 </p>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
+                    <div class="flex shrink-0">
+                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                            src="https://i.pravatar.cc/100?img=12" alt="Dev 1" title="Rizky Pratama">
+                    </div>
+                </div>
 
                 <div class="mt-auto pt-4 border-t border-slate-100">
                     <a href="#"
@@ -628,10 +649,26 @@
 
                 <h3
                     class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    Smart Garden System</h3>
+                    Smart Garden System
+                </h3>
+
                 <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
                     Sistem penyiraman otomatis berbasis kelembaban tanah menggunakan ESP32 dan monitoring real-time.
                 </p>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
+                    <div class="flex -space-x-2">
+                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                            src="https://i.pravatar.cc/100?img=8" alt="Dev 1" title="Ahmad Fauzi">
+                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                            src="https://i.pravatar.cc/100?img=3" alt="Dev 2" title="Dewi Sartika">
+                        <div
+                            class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-600">
+                            +1
+                        </div>
+                    </div>
+                </div>
 
                 <div class="mt-auto pt-4 border-t border-slate-100">
                     <a href="#"
