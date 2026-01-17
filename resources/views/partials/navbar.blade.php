@@ -13,13 +13,13 @@
             </div>
 
             <ul class="hidden lg:flex items-center gap-1">
-                <li><a href="#"
+                <li><a href="{{ url('/') }}"
                         class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
                                       hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Home</a>
                 </li>
-                <li><a href="#"
+                <li><a href="{{ route('members') }}"
                         class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                                      hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Members</a>
+                         hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Members</a>
                 </li>
                 <li><a href="#"
                         class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 

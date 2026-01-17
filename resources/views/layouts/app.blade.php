@@ -15,6 +15,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo_trpl.png') }}">
+    <link rel="shortcut icon" href="/favikon.ico" type="image/x-icon">
+
+
     <script>
         tailwind.config = {
             theme: {
