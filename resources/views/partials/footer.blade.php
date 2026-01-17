@@ -1,8 +1,14 @@
 <footer class="relative bg-white pt-20 pb-10 overflow-hidden border-t border-slate-100">
 
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
         <div class="absolute top-1/2 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl"></div>
+
+        <div class="absolute -bottom-10 -right-10 flex justify-end items-end">
+            <img src="{{ asset('assets/img/logo_apgi.png') }}" alt=""
+                class="w-[400px] md:w-[600px] opacity-[0.03] grayscale -rotate-12 transform translate-x-10 translate-y-10">
+        </div>
     </div>
 
     <div class="relative z-10 w-[92%] max-w-6xl mx-auto">
@@ -50,6 +56,9 @@
                     <li><a href="#projects"
                             class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">Projects</a>
                     </li>
+                    <li><a href="#activities"
+                            class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">Activities</a>
+                    </li>
                 </ul>
             </div>
 
@@ -59,11 +68,21 @@
                     <li><a href="https://polibatam.ac.id" target="_blank"
                             class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">Polibatam
                             Official</a></li>
+                    <li>
+                        <a href="https://if.polibatam.ac.id/teknologi-rekayasa-perangkat-lunak/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">
+                            Prodi D4 TRPL
+                        </a>
+                    </li>
                     <li><a href="https://learning.polibatam.ac.id" target="_blank"
                             class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">E-Learning</a>
                     </li>
                     <li><a href="https://sia.polibatam.ac.id" target="_blank"
                             class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">SIA System</a>
+                    </li>
+                    <li><a href="https://sim.polibatam.ac.id" target="_blank"
+                            class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">SILAM</a>
                     </li>
                     <li><a href="#"
                             class="hover:text-brand-600 hover:translate-x-1 inline-block transition-all">Library</a>
@@ -79,7 +98,7 @@
             </p>
 
             <p class="text-slate-400 text-xs font-bold flex items-center gap-1">
-                Made with <span class="text-red-500 text-base animate-pulse">❤</span> & ☕ code.
+                Collaboratively developed by <span class="text-blue-600">TRPL A Pagi</span>.
             </p>
         </div>
 

@@ -129,8 +129,7 @@
             <div class="shrink-0">
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-3">
                     Siapa <br>
-                    <span
-                        class="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">Kami?</span>
+                    <span class="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">Kami?</span>
                 </h2>
                 <div class="h-1.5 w-20 bg-blue-600 rounded-full"></div>
             </div>
@@ -157,34 +156,62 @@
 <section class="px-4 md:px-0 w-[92%] max-w-6xl mx-auto pb-20">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
 
-        <!-- Total Students -->
-        <div class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group">
+        <div
+            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
             <div>
-                <p class="text-slate-500 font-bold text-xs uppercase mb-2">Total Students</p>
-                <h2 class="text-5xl font-black text-slate-800 group-hover:text-brand-600 transition-colors">
+                <p class="text-slate-400 font-bold text-xs uppercase mb-2 tracking-wider">Total Students</p>
+                <h2 class="text-5xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
                     32
                 </h2>
             </div>
             <div
-                class="w-14 h-14 rounded-full bg-blue-50 text-brand-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <!-- icon -->
+                class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
             </div>
         </div>
 
-        <!-- Schedule -->
         <div
-            class="glass-card rounded-[2.5rem] p-8 flex flex-col justify-between group cursor-pointer relative overflow-hidden">
-            <h3 class="text-xl font-bold text-slate-800 group-hover:text-orange-600">
-                Class Schedule
-            </h3>
-            <p class="text-sm text-slate-500">Check today's timeline.</p>
+            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
+            <div class="flex flex-col justify-center h-full">
+                <h3 class="text-xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors mb-1">
+                    Class Schedule
+                </h3>
+                <p class="text-sm text-slate-400 font-medium group-hover:text-slate-600 transition-colors">Check today's
+                    timeline.</p>
+            </div>
+            <div
+                class="w-16 h-16 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                </svg>
+            </div>
         </div>
 
-        <!-- Projects -->
         <div
-            class="glass-card rounded-[2.5rem] p-8 flex flex-col justify-between group cursor-pointer relative overflow-hidden">
-            <h3 class="text-xl font-bold text-slate-800">Our Projects</h3>
-            <span class="text-xs text-slate-500 font-bold mt-3">+5 New</span>
+            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
+            <div class="flex flex-col justify-center h-full">
+                <h3 class="text-xl font-bold text-slate-800 group-hover:text-green-600 transition-colors mb-1">
+                    Our Projects
+                </h3>
+                <span
+                    class="inline-flex items-center text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-md w-fit mt-1">
+                    +5 New Updates
+                </span>
+            </div>
+            <div
+                class="w-16 h-16 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+            </div>
         </div>
 
     </div>
@@ -473,114 +500,164 @@
 </section>
 
 <section id="projects" class="px-4 md:px-0 w-[92%] max-w-7xl mx-auto pb-32 pt-10">
-        
-        <div class="text-center mb-12 reveal">
-            <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Portfolio</span>
-            <h2 class="text-3xl md:text-5xl font-black text-slate-800">
-                Made by <span class="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">TRPL A Pagi.</span>
-            </h2>
-            <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
-                Karya terbaik yang menggabungkan kreativitas dan kode.
-            </p>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 reveal">
+    <div class="text-center mb-12 reveal">
+        <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Portfolio</span>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-800">
+            Made by <span class="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">TRPL A
+                Pagi.</span>
+        </h2>
+        <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
+            Karya terbaik yang menggabungkan kreativitas dan kode.
+        </p>
+    </div>
 
-            <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" 
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="SIA Polibatam">
-                    
-                    <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <a href="#" class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View Demo</a>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 reveal">
 
-                <div class="px-2 pb-2 flex flex-col h-full">
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="px-2.5 py-1 rounded-full bg-red-50 text-red-600 text-[10px] font-bold uppercase border border-red-100">Laravel</span>
-                        <span class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase border border-sky-100">Tailwind</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">Sistem Informasi Akademik</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                        Platform manajemen data mahasiswa terintegrasi dengan absensi real-time dan cetak KHS otomatis.
-                    </p>
+        <div
+            class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
+            <div
+                class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    alt="SIA Polibatam">
 
-                    <div class="mt-auto pt-4 border-t border-slate-100">
-                        <a href="#" class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
-                            <span>Lihat Case Study</span>
-                            <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </a>
-                    </div>
+                <div
+                    class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a href="#"
+                        class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
+                        Demo</a>
                 </div>
             </div>
 
-            <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="E-Kantin">
-                    <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <a href="#" class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View Demo</a>
-                    </div>
+            <div class="px-2 pb-2 flex flex-col h-full">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-red-50 text-red-600 text-[10px] font-bold uppercase border border-red-100">Laravel</span>
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase border border-sky-100">Tailwind</span>
                 </div>
 
-                <div class="px-2 pb-2 flex flex-col h-full">
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-600 text-[10px] font-bold uppercase border border-cyan-100">Flutter</span>
-                        <span class="px-2.5 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase border border-orange-100">Firebase</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">E-Kantin Mobile App</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                        Aplikasi pemesanan makanan kantin kampus tanpa antri dengan fitur e-wallet terintegrasi.
-                    </p>
+                <h3
+                    class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
+                    Sistem Informasi Akademik</h3>
+                <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                    Platform manajemen data mahasiswa terintegrasi dengan absensi real-time dan cetak KHS otomatis.
+                </p>
 
-                    <div class="mt-auto pt-4 border-t border-slate-100">
-                        <a href="#" class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
-                            <span>Lihat Case Study</span>
-                            <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </a>
-                    </div>
+                <div class="mt-auto pt-4 border-t border-slate-100">
+                    <a href="#"
+                        class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
+                        <span>Lihat Case Study</span>
+                        <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
+            <div
+                class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    alt="E-Kantin">
+                <div
+                    class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a href="#"
+                        class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
+                        Demo</a>
                 </div>
             </div>
 
-            <div class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-                <div class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2070&auto=format&fit=crop" 
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Smart Garden">
-                    <div class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <a href="#" class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View Demo</a>
-                    </div>
+            <div class="px-2 pb-2 flex flex-col h-full">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-600 text-[10px] font-bold uppercase border border-cyan-100">Flutter</span>
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase border border-orange-100">Firebase</span>
                 </div>
 
-                <div class="px-2 pb-2 flex flex-col h-full">
-                    <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="px-2.5 py-1 rounded-full bg-green-50 text-green-600 text-[10px] font-bold uppercase border border-green-100">IoT</span>
-                        <span class="px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-600 text-[10px] font-bold uppercase border border-yellow-100">Python</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">Smart Garden System</h3>
-                    <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                        Sistem penyiraman otomatis berbasis kelembaban tanah menggunakan ESP32 dan monitoring real-time.
-                    </p>
+                <h3
+                    class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
+                    E-Kantin Mobile App</h3>
+                <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                    Aplikasi pemesanan makanan kantin kampus tanpa antri dengan fitur e-wallet terintegrasi.
+                </p>
 
-                    <div class="mt-auto pt-4 border-t border-slate-100">
-                        <a href="#" class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
-                            <span>Lihat Case Study</span>
-                            <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                        </a>
-                    </div>
+                <div class="mt-auto pt-4 border-t border-slate-100">
+                    <a href="#"
+                        class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
+                        <span>Lihat Case Study</span>
+                        <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
+            <div
+                class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
+                <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2070&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    alt="Smart Garden">
+                <div
+                    class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a href="#"
+                        class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
+                        Demo</a>
                 </div>
             </div>
 
-        </div>
-        
-        <div class="mt-16 text-center reveal">
-            <a href="https://github.com" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                See More on GitHub
-            </a>
+            <div class="px-2 pb-2 flex flex-col h-full">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-green-50 text-green-600 text-[10px] font-bold uppercase border border-green-100">IoT</span>
+                    <span
+                        class="px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-600 text-[10px] font-bold uppercase border border-yellow-100">Python</span>
+                </div>
+
+                <h3
+                    class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
+                    Smart Garden System</h3>
+                <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                    Sistem penyiraman otomatis berbasis kelembaban tanah menggunakan ESP32 dan monitoring real-time.
+                </p>
+
+                <div class="mt-auto pt-4 border-t border-slate-100">
+                    <a href="#"
+                        class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
+                        <span>Lihat Case Study</span>
+                        <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
 
-    </section>
+    </div>
+
+    <div class="mt-16 text-center reveal">
+        <a href="https://github.com" target="_blank"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            See More on GitHub
+        </a>
+    </div>
+
+</section>
