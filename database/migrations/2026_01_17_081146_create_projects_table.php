@@ -12,14 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('team_id');
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade')->unique(); 
+            $table->id('project_id');
             $table->string('title');
             $table->text('description');
             $table->string('image_url');
             $table->string('demo_url')->nullable(); 
-            $table->text('tech_stack');
+            $table->timestamps();
+        });
+
+        Schema::create('project_techs', function (Blueprint $table) {
+            $table->id('project_tech_id');
+            $table->foreignId('project_id')->constrained('projects', 'project_id')->cascadeOnDelete();
+            $table->string('tech_name');
             $table->timestamps();
         });
     }
@@ -31,5 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_techs');
     }
 };

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_logos', function (Blueprint $table) {
-            $table->id('logo_id');
-            $table->string('logo_url');
+        Schema::create('activities', function (Blueprint $table) {
+            $table->id('activity_id');
+            $table->string('activity_name');
+            $table->string('activity_description');
+            $table->string('activity_image');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_logos');
+        Schema::dropIfExists('activities');
     }
 };

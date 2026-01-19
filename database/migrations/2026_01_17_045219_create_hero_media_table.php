@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('profile_picture_url')->nullable();
-            $table->boolean('is_core')->default(false);
+        Schema::create('hero_media', function (Blueprint $table) {
+            $table->id('hero_media_id');
+            $table->string('hero_title');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('hero_media');
     }
 };

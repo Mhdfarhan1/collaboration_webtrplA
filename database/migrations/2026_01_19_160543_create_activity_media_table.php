@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('image_url');
-            $table->boolean('is_featured')->default(false);
+        Schema::create('activity_media', function (Blueprint $table) {
+            $table->id('activity_media_id');
+            $table->foreignId('activity_id')->constrained('activities', 'activity_id')->cascadeOnDelete();
+            $table->string('activity_media_url');
+            $table->boolean('activity_media_is_thumbnail')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('activity_media');
     }
 };

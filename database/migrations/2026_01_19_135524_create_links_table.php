@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_logos', function (Blueprint $table) {
-            $table->id('logo_id');
-            $table->string('logo_url');
+        Schema::create('links', function (Blueprint $table) {
+            $table->id('link_id');
+            $table->string('link_url');
+            $table->enum('link_type', ['notion', 'instagram', 'schedule']);
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_logos');
+        Schema::dropIfExists('links');
     }
 };

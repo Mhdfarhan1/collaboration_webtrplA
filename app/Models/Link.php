@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClassLogo extends Model
+class Link extends Model
 {
-    protected $table = 'class_logos';
-    protected $primaryKey = 'logo_id';
+    protected $table = 'links';
+    protected $primaryKey = 'link_id';
     public $timestamps = true;
 
     protected $fillable = [
-        'logo_url',
+        'link_url',
+        'link_type',
     ];
 }

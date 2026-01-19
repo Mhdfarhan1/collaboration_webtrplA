@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
+    protected $table = 'members';
+    protected $primaryKey = 'member_id';
+    public $timestamps = true;
+
     protected $fillable = [
-        'name',
-        'profile_picture_url',
-        'is_core',
+        'member_name',
+        'member_image',
+        'member_nim',
+        'member_is_core',
     ];
 
-    public function teams()
+    public function project()
     {
-        return $this->belongsToMany(Team::class)
-            ->using(TeamMember::class)
-            ->withPivot('role')
+        return $this->belongsToMany(Project::class, 'team_members', 'member_id', 'project_id')
+            ->withPivot('team_member_role')
             ->withTimestamps();
     }
 }

@@ -6,17 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    protected $primaryKey = 'project_id';
+
     protected $fillable = [
-        'team_id',
         'title',
         'description',
         'image_url',
         'demo_url',
-        'tech_stack',
     ];
 
-    public function team()
+    public function teamMember()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasMany(TeamMember::class, 'project_id', 'project_id');
+    }
+
+    public function projectTechs()
+    {
+        return $this->hasMany(ProjectTech::class, 'project_id', 'project_id');
     }
 }
