@@ -4,7 +4,7 @@
 
 @section('content')
 
-
+{{-- Mana Ngodingnya Hah --}}
 <section class="min-h-screen pt-40 px-4 md:px-0 w-[92%] max-w-6xl mx-auto flex flex-col justify-center relative pb-24">
 
     <div
