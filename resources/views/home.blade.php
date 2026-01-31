@@ -129,17 +129,17 @@
             <div class="shrink-0">
                 <h2 class="text-4xl md:text-5xl font-black text-white mb-3">
                     Siapa <br>
-                    <span class="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-orange-400">Kami?</span>
+                    <span class="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Kami?</span>
                 </h2>
                 <div class="h-1.5 w-20 bg-blue-600 rounded-full"></div>
             </div>
 
             <div class="max-w-3xl">
                 <p class="text-lg md:text-2xl text-slate-300 font-medium">
-                    <span class="text-white font-bold underline decoration-blue-500 decoration-4 underline-offset-4">
+                    <span class="text-white font-bold">
                         TRPL A Pagi
                     </span>
-                    adalah kelas unggulan Rekayasa Perangkat Lunak di
+                    adalah kelas unggulan (howak) Rekayasa Perangkat Lunak di
                     <span class="text-blue-400 font-bold">Politeknik Negeri Batam</span>.
                 </p>
 
@@ -379,7 +379,7 @@
             <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">The Squad</span>
             <h2 class="text-3xl md:text-5xl font-black text-slate-800">
                 Meet The <span
-                    class="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-blue-600">Kelas</span>
+                    class="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">Member</span>
             </h2>
         </div>
         <div class="hidden md:flex gap-2 mt-4 md:mt-0">
@@ -504,8 +504,7 @@
     <div class="text-center mb-12 reveal">
         <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Portfolio</span>
         <h2 class="text-3xl md:text-5xl font-black text-slate-800">
-            Made by <span class="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-blue-600">TRPL A
-                Pagi.</span>
+            Made by <span class="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">TRPL A Pagi.</span>
         </h2>
         <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
             Karya terbaik yang menggabungkan kreativitas dan kode.
