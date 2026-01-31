@@ -44,10 +44,9 @@
                         Terpal
                     </span>
 
-                    <span class="block sm:inline text-transparent bg-clip-text
-                   bg-linear-to-r from-cyan-300 via-sky-400 to-teal-300
-                   animate-gradient-x">
-                        A PAGI 2024
+                    <span class="block sm:inline bg-clip-text text-transparent" 
+                        style="background-image: linear-gradient(to right, #67e8f9, #38bdf8, #2dd4bf);">
+                    A PAGI 2024
                     </span>
 
                     <!-- Glow halus -->

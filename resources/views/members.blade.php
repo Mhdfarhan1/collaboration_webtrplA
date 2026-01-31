@@ -66,27 +66,27 @@
                     <div
                         class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500">
                     </div>
-                    <div
-                        class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-gray-100">
-                        <input type="text" placeholder="Cari nama atau NIM..."
-                            class="w-full pl-6 pr-14 py-4 text-sm font-medium text-gray-700 bg-transparent outline-none placeholder-gray-400">
-                        <div class="absolute right-2 top-2 bottom-2">
-                            <button
-                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-blue-500 text-white flex items-center justify-center shadow-md hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
+                    <div class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-gray-100">
+                        <form action="{{ route('members.search') }}" method="GET">
+                            <input type="text" placeholder="Cari nama atau NIM..."
+                                name="q" class="w-full pl-6 pr-14 py-4 text-sm font-medium text-gray-700 bg-transparent outline-none placeholder-gray-400">
+                            <div class="absolute right-2 top-2 bottom-2">
+                                <button
+                                    class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-blue-500 text-white flex items-center justify-center shadow-md hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
             {{-- 3. GRID MEMBERS --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                @for ($i = 1; $i <= 8; $i++)
+                @foreach($members as $i => $member)
                     <div class="group relative cursor-pointer perspective">
                         {{-- Card Container --}}
                         <div
@@ -106,7 +106,7 @@
                                 <div
                                     class="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center shadow-lg group-hover:bg-blue-600/90 transition-all duration-300">
                                     <span class="text-[11px] font-mono font-bold text-white tracking-widest uppercase">
-                                        NIM : 24000{{ $i }}
+                                        NIM : {{ $member->member_nim }}
                                     </span>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
 
                                 {{-- Nama --}}
                                 <h3 class="text-2xl font-bold text-white mb-2 leading-tight">
-                                    Member Name {{ $i }}
+                                    {{ $member->member_name }}
                                 </h3>
                                 <p class="text-xs text-gray-400 mb-6 font-medium">Teknik Informatika • 2024</p>
 
@@ -161,29 +161,60 @@
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
 
             {{-- 4. PAGINATION --}}
             <div class="mt-20 flex justify-center">
                 <nav class="flex space-x-2" aria-label="Pagination">
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-500/40 font-bold transform scale-110">1</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">2</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
+                    {{-- Tombol Previous --}}
+                    @if ($members->onFirstPage())
+                        <button disabled
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                    @else
+                        <a href="{{ $members->previousPageUrl() }}"
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </a>
+                    @endif
+
+                    {{-- Nomor Halaman --}}
+                    @for ($i = 1; $i <= $members->lastPage(); $i++)
+                        @if ($i == $members->currentPage())
+                            <button
+                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-500/40 font-bold transform scale-110">
+                                {{ $i }}
+                            </button>
+                        @else
+                            <a href="{{ $members->url($i) }}"
+                                class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
+                                {{ $i }}
+                            </a>
+                        @endif
+                    @endfor
+
+                    {{-- Tombol Next --}}
+                    @if ($members->hasMorePages())
+                        <a href="{{ $members->nextPageUrl() }}"
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    @else
+                        <button disabled
+                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    @endif
                 </nav>
             </div>
 
