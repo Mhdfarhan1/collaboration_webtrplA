@@ -20,7 +20,7 @@
                 <li><a href="{{ route('members') }}" class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
                          hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Members</a>
                 </li>
-                <li><a href="#"
+                <li><a href="{{ route('albums') }}"
                         class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
                                hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Albums</a>
                 </li>
