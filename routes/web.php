@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
@@ -17,4 +16,13 @@ Route::get('/albums', function () {
 
 Route::get('/albums/detail', function () {
     return view('albums-detail');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', function () {
+    // Placeholder login logic
+    return redirect()->intended('/');
 });

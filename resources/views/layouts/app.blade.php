@@ -125,7 +125,6 @@
         .marquee-content {
             display: flex;
             white-space: nowrap;
-            animation: marquee 60s linear infinite;
         }
 
         .reveal {
@@ -179,7 +178,7 @@
     </div>
 
     <div class="marquee-container">
-        <div class="marquee-content text-[150px] font-black uppercase text-slate-900 leading-none">
+        <div class="marquee-content animate-marquee text-[150px] font-black uppercase text-slate-900 leading-none">
             TRPL A PAGI • OFFICIAL CLASS SITE • POLYTECHNIC • TRPL A PAGI • ENGINEERING • CODE • TRPL A PAGI •
         </div>
     </div>
