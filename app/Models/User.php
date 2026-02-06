@@ -12,8 +12,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    protected $table = 'admins';
-    protected $primaryKey = 'admin_id';
+    protected $primaryKey = 'user_id';
     public $timestamps = true;
 
     /**

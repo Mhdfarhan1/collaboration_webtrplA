@@ -13,7 +13,7 @@
             </div>
 
             <ul class="hidden lg:flex items-center gap-1">
-                <li><a href="{{ url('/') }}"
+                <li><a href="{{ route('home') }}"
                         class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
                                hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Home</a>
                 </li>
@@ -58,7 +58,7 @@
                    origin-top scale-95 opacity-0 invisible transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] z-40">
             <div
                 class="bg-white/90 backdrop-blur-2xl border border-white/60 rounded-3xl p-4 shadow-2xl shadow-slate-300/50 flex flex-col gap-1">
-                <a href="{{ url('/') }}"
+                <a href="{{ route('home') }}"
                     class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Home</a>
                 <a href="{{ route('members') }}"
                     class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Members</a>
