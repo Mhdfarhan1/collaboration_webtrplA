@@ -20,7 +20,7 @@ class MemberController extends Controller
 
         $members = Member::where('member_name', 'like', "%{$query}%")
                             ->orWhere('member_nim', 'like', "%{$query}%")
-                            ->orderBy('member_id', 'asc')
+                            ->orderBy('member_nim', 'asc')
                             ->paginate(8);
         
         return view('members', compact('members'));
