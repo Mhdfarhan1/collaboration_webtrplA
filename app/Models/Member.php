@@ -17,10 +17,10 @@ class Member extends Model
         'member_is_core',
     ];
 
-    public function project()
+    public function projects()
     {
-        return $this->belongsToMany(Project::class, 'team_members', 'member_id', 'project_id')
-            ->withPivot('team_member_role')
+        return $this->belongsToMany(Project::class, 'project_members', 'member_id', 'project_id')
+            ->withPivot('project_member_role')
             ->withTimestamps();
     }
 }

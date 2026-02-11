@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TeamMember extends Pivot
+class ProjectMember extends Pivot
 {
-    protected $table = 'team_members';
-    protected $primaryKey = 'team_member_id';
+    protected $table = 'project_members';
+    protected $primaryKey = 'project_member_id';
     public $timestamps = true;
 
     protected $fillable = [
-        'team_member_id',
+        'project_member_id',
         'member_id',
         'project_id',
-        'team_member_role',
+        'project_member_role',
     ];
 
     public function member()

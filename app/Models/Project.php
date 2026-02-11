@@ -15,9 +15,9 @@ class Project extends Model
         'demo_url',
     ];
 
-    public function teamMember()
+    public function projectMembers()
     {
-        return $this->hasMany(TeamMember::class, 'project_id', 'project_id');
+        return $this->hasMany(ProjectMember::class, 'project_id', 'project_id');
     }
 
     public function projectTechs()
