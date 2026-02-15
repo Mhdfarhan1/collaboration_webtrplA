@@ -20,6 +20,8 @@ Route::get('/albums/detail', function () {
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+
 
 Route::prefix('password')->name('password.')->group(function () {
     Route::get('/email', function () {
@@ -52,3 +54,9 @@ Route::prefix('password')->name('password.')->group(function () {
         return redirect()->route('login');
     })->name('update');
 });
+
+// route dashboard
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware('auth')->name('dashboard');
+

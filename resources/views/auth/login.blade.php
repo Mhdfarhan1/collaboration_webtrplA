@@ -27,7 +27,7 @@
                 <p class="text-slate-500 text-sm">Masuk untuk mengakses dashboard kelas.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-6">
+           <form action="{{ route('login.process') }}" method="POST" class="space-y-6">
                 @csrf
                 
                 {{-- Email Input --}}
