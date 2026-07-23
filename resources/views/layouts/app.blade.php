@@ -18,6 +18,14 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo_trpl.png') }}">
     <link rel="shortcut icon" href="/favikon.ico" type="image/x-icon">
 
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
+    </script>
+
 
     <script>
         tailwind.config = {

@@ -3,21 +3,86 @@
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Models\HeroMedia;
+use App\Models\Activity;
+use App\Models\Link;
 
 Route::get('/', function () {
-    return view('home');
+    $heroMedia = HeroMedia::latest()->first();
+    $projects = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->latest()->paginate(3)->fragment('projects');
+    $activities = Activity::latest()->take(3)->get();
+    $albums = \App\Models\Album::latest()->take(4)->get();
+    $links = Link::whereIn('link_type', ['schedule', 'notion', 'instagram'])->get()->keyBy('link_type');
+    $s = \App\Models\Setting::pluck('value', 'key'); // site settings shorthand
+    return view('home', compact('heroMedia', 'projects', 'activities', 'albums', 'links', 's'));
 })->name('home');
+
+Route::get('/projects', function () {
+    $projects = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->latest()->paginate(9);
+    return view('projects', compact('projects'));
+})->name('projects');
+
+Route::get('/projects/{id}', function ($id) {
+    $project = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->findOrFail($id);
+    return view('projects-detail', compact('project'));
+})->name('projects.detail');
 
 Route::get('/members', [MemberController::class, 'index'])->name('members');
 Route::get('/search', [MemberController::class, 'searchMembers'])->name('members.search');
 
+Route::get('/lecturers', function () {
+    $search = request('search');
+    $type = request('type');
+
+    $lecturers = \App\Models\Lecturer::with('projects')
+        ->latest()
+        ->when($search, function($query) use ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('lecturer_name', 'like', "%$search%")
+                  ->orWhere('lecturer_expertise', 'like', "%$search%");
+            });
+        })
+        ->when($type == 'manpro', function($query) {
+            $query->where(function($q) {
+                $q->where('lecturer_type', 'manpro')
+                  ->orWhereHas('projects');
+            });
+        })
+        ->paginate(8)
+        ->withQueryString();
+    return view('lecturers', compact('lecturers'));
+})->name('lecturers');
+
+
+
 Route::get('/albums', function () {
-    return view('albums');
+    $search = request('search');
+    $albums = \App\Models\Album::latest()
+        ->when($search, function($query) use ($search) {
+            $query->where('album_name', 'like', "%$search%")
+                  ->orWhere('album_description', 'like', "%$search%");
+        })
+        ->paginate(4)
+        ->withQueryString();
+    return view('albums', compact('albums'));
 })->name('albums');
 
-Route::get('/albums/detail', function () {
-    return view('albums-detail');
-});
+Route::get('/activities', function () {
+    $search = request('search');
+    $activities = Activity::latest()
+        ->when($search, function($query) use ($search) {
+            $query->where('activity_name', 'like', "%$search%")
+                  ->orWhere('activity_description', 'like', "%$search%");
+        })
+        ->paginate(4)
+        ->withQueryString();
+    return view('activities', compact('activities'));
+})->name('activities');
+
+Route::get('/albums/{id}', function ($id) {
+    $album = \App\Models\Album::with('images')->findOrFail($id);
+    return view('albums-detail', compact('album'));
+})->name('albums.detail');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -57,6 +122,57 @@ Route::prefix('password')->name('password.')->group(function () {
 
 // route dashboard
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    $counts = [
+        'members' => \App\Models\Member::count(),
+        'core_members' => \App\Models\Member::where('member_is_core', 1)->count(),
+        'projects' => \App\Models\Project::count(),
+        'activities' => \App\Models\Activity::count(),
+        'albums' => \App\Models\Album::count(),
+        'lecturers' => \App\Models\Lecturer::count(),
+    ];
+    
+    $latestMembers = \App\Models\Member::latest()->take(5)->get();
+    
+    return view('admin.dashboard', compact('counts', 'latestMembers'));
 })->middleware('auth')->name('dashboard');
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Other admin routes can go here...
+
+    // Hero Media Routes
+    Route::resource('heromedia', App\Http\Controllers\Admin\HeroMediaController::class);
+
+    // Member Management Routes
+    Route::resource('members', App\Http\Controllers\Admin\MemberController::class);
+
+    // Projects Routes
+    Route::resource('projects', App\Http\Controllers\Admin\ProjectController::class);
+
+    // Project Members (Team) Nested Routes
+    Route::resource('projects.members', App\Http\Controllers\Admin\ProjectMemberController::class)->only(['index', 'store', 'destroy']);
+
+    // Class Logos Routes
+    Route::resource('logos', App\Http\Controllers\Admin\ClassLogoController::class)->only(['index', 'store', 'destroy']);
+
+    // Activities Routes
+    Route::resource('activities', App\Http\Controllers\Admin\ActivityController::class);
+
+    // Activity Media (Gallery) Nested Routes
+    Route::resource('activities.media', App\Http\Controllers\Admin\ActivityMediaController::class)->only(['index', 'store', 'destroy', 'update']);
+
+    // Albums Routes
+    Route::resource('albums', App\Http\Controllers\Admin\AlbumController::class);
+
+    // Album Images (Gallery) Nested Routes
+    Route::resource('albums.images', App\Http\Controllers\Admin\AlbumImageController::class)->only(['index', 'store', 'destroy', 'update']);
+
+    // Links Routes
+    Route::resource('links', App\Http\Controllers\Admin\LinkController::class);
+
+    // Lecturers Routes
+    Route::resource('lecturers', App\Http\Controllers\Admin\LecturerController::class);
+
+    // Site Settings Routes
+    Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+});

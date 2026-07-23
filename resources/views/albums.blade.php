@@ -7,82 +7,60 @@
     <section class="bg-gray-50 min-h-screen pt-36 pb-20 font-sans selection:bg-blue-500 selection:text-white">
         <div class="container mx-auto px-6">
 
-            {{-- 1. BREADCRUMB (Style Identik dengan Members) --}}
-            <nav class="flex mb-10" aria-label="Breadcrumb">
+            {{-- 1. BREADCRUMB --}}
+            <nav class="flex mb-8 animate-fade-in-up" aria-label="Breadcrumb">
                 <ol
-                    class="inline-flex items-center space-x-2 bg-white py-3 px-6 rounded-full shadow-lg shadow-gray-200/50 border border-gray-100">
+                    class="inline-flex items-center space-x-1 sm:space-x-2 bg-white/80 backdrop-blur-md py-2 px-4 rounded-full shadow-sm border border-slate-200/60">
                     <li class="inline-flex items-center">
                         <a href="{{ route('home') }}"
-                            class="inline-flex items-center text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors group">
-                            <div
-                                class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-blue-100 group-hover:text-blue-600 transition-all duration-300">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                    </path>
-                                </svg>
-                            </div>
+                            class="inline-flex items-center text-[11px] font-bold text-slate-500 hover:text-brand-600 transition-colors group">
+                            <i data-lucide="home" class="w-3.5 h-3.5 mr-1.5"></i>
                             Home
                         </a>
                     </li>
                     <li>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        <i data-lucide="chevron-right" class="w-3 h-3 text-slate-300 mx-1"></i>
                     </li>
                     <li>
-                        <div class="flex items-center">
-                            <span class="inline-flex items-center text-sm font-bold text-blue-600">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 text-blue-600 shadow-sm shadow-blue-200">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                Albums
-                            </span>
+                        <div class="flex items-center text-[11px] font-bold text-brand-600">
+                            <i data-lucide="images" class="w-3.5 h-3.5 mr-1.5"></i> Albums
                         </div>
                     </li>
                 </ol>
             </nav>
 
-            {{-- 2. HEADER & SEARCH BOX (Style Identik dengan Members) --}}
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-200 pb-8 gap-6">
+            {{-- 2. HEADER & SEARCH --}}
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b border-gray-200 pb-6 gap-6">
                 <div class="mb-2 md:mb-0 w-full md:w-auto">
-                    <h2 class="text-4xl font-extrabold text-gray-900 leading-tight mb-2">
-                        Our <span class="text-blue-600">Gallery</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight mb-2 tracking-tight">
+                        Our <span class="text-brand-600">Gallery</span>
                     </h2>
-                    <p class="text-gray-500 max-w-lg text-lg">
+                    <p class="text-slate-500 max-w-lg text-sm md:text-base font-medium">
                         Kenangan dan dokumentasi kegiatan kami.
                     </p>
                 </div>
 
                 {{-- Search Box --}}
-                <div class="relative w-full md:w-96 group">
+                <form action="{{ route('albums') }}" method="GET" class="relative w-full md:w-96 group">
                     <div
-                        class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500">
+                        class="absolute -inset-1 bg-gradient-to-r from-brand-400 to-purple-400 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500">
                     </div>
                     <div
-                        class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-gray-100">
-                        <input type="text" placeholder="Cari album kegiatan..."
-                            class="w-full pl-6 pr-14 py-4 text-sm font-medium text-gray-700 bg-transparent outline-none placeholder-gray-400">
+                        class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-slate-100">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari album kegiatan..."
+                            class="w-full pl-6 pr-14 py-4 text-sm font-medium text-slate-700 bg-transparent outline-none placeholder-slate-400">
                         <div class="absolute right-2 top-2 bottom-2">
-                            <button
-                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-blue-500 text-white flex items-center justify-center shadow-md hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
+                            <button type="submit"
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 text-white flex items-center justify-center shadow-md hover:shadow-brand-500/50 hover:scale-105 transition-all duration-300">
+                                <i data-lucide="search" class="w-5 h-5"></i>
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @for($i = 1; $i <= 8; $i++)
+                @forelse($albums as $album)
                     <div class="group relative perspective">
                         {{-- Card Container (Ukuran diperkecil ke aspect-square) --}}
                         <div
@@ -90,74 +68,61 @@
 
                             {{-- Image --}}
                             <div class="h-full w-full overflow-hidden rounded-[1.5rem] bg-slate-100">
-                                <img src="https://picsum.photos/seed/{{ $i + 500 }}/600/600" alt="Album {{ $i }}"
-                                    class="h-full w-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                                @if ($album->album_cover)
+                                    <img src="{{ asset($album->album_cover) }}" alt="{{ $album->album_name }}"
+                                        class="h-full w-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                                @else
+                                    <div class="h-full w-full bg-slate-200 flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                @endif
                             </div>
 
                             {{-- Overlay Konten (Ukuran teks & padding diperkecil) --}}
                             <div
-                                class="absolute inset-0 z-10 flex flex-col justify-end bg-gradient-to-t from-blue-900/90 via-blue-800/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100 px-5 pb-6">
-
-                                {{-- Badge --}}
-                                <div class="mb-2 translate-y-8 transition-all duration-500 group-hover:translate-y-0 delay-75">
-                                    <span
-                                        class="text-[9px] font-black tracking-tighter text-white bg-blue-500 px-2 py-0.5 rounded-md uppercase">
-                                        Event {{ $i }}
-                                    </span>
-                                </div>
+                                class="absolute inset-0 z-10 flex flex-col justify-end bg-gradient-to-t from-blue-900/90 via-blue-800/60 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100 px-5 pb-6 rounded-[1.5rem] m-2">
 
                                 {{-- Judul (Kecilkan ke text-lg) --}}
                                 <h3
-                                    class="text-lg font-bold text-white leading-tight mb-3 translate-y-8 transition-all duration-500 group-hover:translate-y-0 delay-150">
-                                    Workshop IT {{ $i }}
+                                    class="text-base sm:text-lg font-bold text-white leading-tight mb-3 translate-y-8 transition-all duration-500 group-hover:translate-y-0 delay-150 line-clamp-2">
+                                    {{ $album->album_name }}
                                 </h3>
 
                                 {{-- Button (Dibuat lebih compact) --}}
                                 <div class="translate-y-8 transition-all duration-500 group-hover:translate-y-0 delay-300">
-                                    <span
-                                        class="inline-flex items-center rounded-lg bg-white px-4 py-2 text-[10px] font-black text-blue-600 shadow-md uppercase tracking-tight">
+                                    <a href="{{ route('albums.detail', $album->album_id) }}"
+                                        class="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-[10px] font-black text-blue-600 shadow-md uppercase tracking-tight hover:bg-blue-50 transition-colors w-max">
                                         View Album
                                         <svg class="w-3 h-3 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
                                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                         </svg>
-                                    </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @empty
+                    <div class="col-span-full py-12 text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
+                            <i data-lucide="image-off" class="w-8 h-8 text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">Belum ada Album</h3>
+                        <p class="text-slate-500">Galeri kegiatan kelas saat ini sedang kosong.</p>
+                    </div>
+                @endforelse
             </div>
 
             {{-- 4. PAGINATION (Style Identik dengan Members) --}}
-            <div class="mt-20 flex justify-center">
-                <nav class="flex space-x-2" aria-label="Pagination">
-                    {{-- Previous --}}
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    {{-- Numbers --}}
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-500/40 font-bold transform scale-110">1</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">2</button>
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">3</button>
-
-                    {{-- Next --}}
-                    <button
-                        class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </nav>
-            </div>
+            @if(isset($albums) && $albums->hasPages())
+                <div class="mt-20 flex justify-center">
+                    {{ $albums->links() }}
+                </div>
+            @endif
 
         </div>
     </section>

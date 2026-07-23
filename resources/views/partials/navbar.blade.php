@@ -14,28 +14,27 @@
 
             <ul class="hidden lg:flex items-center gap-1">
                 <li><a href="{{ route('home') }}"
-                        class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                               hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Home</a>
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('home') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Home</a>
                 </li>
-                <li><a href="{{ route('members') }}" class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                         hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Members</a>
+                <li><a href="{{ route('members') }}" 
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('members') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Members</a>
                 </li>
                 <li><a href="{{ route('albums') }}"
-                        class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                               hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Albums</a>
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('albums*') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Albums</a>
                 </li>
-                <li><a href="#"
-                        class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                               hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Projects</a>
+                <li><a href="{{ route('projects') }}"
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('projects*') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Projects</a>
                 </li>
-                <li><a href="#"
-                        class="px-5 py-2.5 rounded-full text-sm font-bold text-slate-600 
-                               hover:bg-white hover:text-brand-600 hover:shadow-md transition-all duration-300">Activities</a>
+                <li><a href="{{ route('activities') }}"
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('activities*') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Activities</a>
+                </li>
+                <li><a href="{{ route('lecturers') }}"
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('lecturers') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Dosen</a>
                 </li>
             </ul>
 
             <div class="flex items-center gap-3">
-                <a href="https://notion.so" target="_blank"
+                <a href="{{ $links['notion']->link_url ?? 'https://notion.so' }}" target="_blank"
                     class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full 
                            text-xs font-bold hover:bg-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
@@ -59,18 +58,20 @@
             <div
                 class="bg-white/90 backdrop-blur-2xl border border-white/60 rounded-3xl p-4 shadow-2xl shadow-slate-300/50 flex flex-col gap-1">
                 <a href="{{ route('home') }}"
-                    class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Home</a>
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('home') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Home</a>
                 <a href="{{ route('members') }}"
-                    class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Members</a>
-                <a href="#"
-                    class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Albums</a>
-                <a href="#"
-                    class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Projects</a>
-                <a href="#"
-                    class="text-sm font-bold text-slate-700 py-3 px-5 rounded-2xl hover:bg-slate-100 transition-colors">Activities</a>
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('members') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Members</a>
+                <a href="{{ route('albums') }}"
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('albums*') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Albums</a>
+                <a href="{{ route('projects') }}"
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('projects*') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Projects</a>
+                <a href="{{ route('activities') }}"
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('activities*') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Activities</a>
+                <a href="{{ route('lecturers') }}"
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('lecturers') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Dosen</a>
 
                 <div class="mt-2 pt-2 border-t border-slate-200">
-                    <a href="https://notion.so" target="_blank"
+                    <a href="{{ $links['notion']->link_url ?? 'https://notion.so' }}" target="_blank"
                         class="flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-2xl text-xs font-bold">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
                             class="w-3 h-3 brightness-0 invert" alt="">

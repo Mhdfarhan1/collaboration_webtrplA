@@ -15,6 +15,9 @@ class Member extends Model
         'member_image',
         'member_nim',
         'member_is_core',
+        'instagram_url',
+        'linkedin_url',
+        'github_url',
     ];
 
     public function projects()

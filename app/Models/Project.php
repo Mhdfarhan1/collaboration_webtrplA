@@ -13,7 +13,13 @@ class Project extends Model
         'description',
         'image_url',
         'demo_url',
+        'project_manager_id',
     ];
+
+    public function projectManager()
+    {
+        return $this->belongsTo(Lecturer::class, 'project_manager_id', 'lecturer_id');
+    }
 
     public function projectMembers()
     {

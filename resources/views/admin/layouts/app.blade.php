@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
@@ -191,10 +192,41 @@
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('success'))
+            @php
+                $msg = strtolower(session('success'));
+                $title = 'Berhasil!';
+                if (str_contains($msg, 'tambah')) {
+                    $title = 'Berhasil Ditambahkan!';
+                } elseif (str_contains($msg, 'perbarui') || str_contains($msg, 'ubah') || str_contains($msg, 'edit')) {
+                    $title = 'Berhasil Diperbarui!';
+                } elseif (str_contains($msg, 'hapus')) {
+                    $title = 'Berhasil Dihapus!';
+                }
+            @endphp
+            Swal.fire({
+                title: "{{ $title }}",
+                text: "{{ session('success') }}",
+                icon: "success",
+                draggable: true
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                draggable: true
+            });
+        @endif
+    </script>
     <script>
         lucide.createIcons();
     </script>
-
+    @stack('scripts')
 </body>
 
 </html>

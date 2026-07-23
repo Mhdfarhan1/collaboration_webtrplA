@@ -11,8 +11,13 @@
         class="relative w-full h-[560px] md:h-[680px] rounded-[3rem] overflow-hidden group shadow-2xl reveal border border-white/40">
 
         <!-- Background Image -->
-        <img src="{{ asset('assets/img/bg_utama.jpeg') }}" alt="TRPL Class"
-            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110">
+        @if($heroMedia)
+            <img src="{{ asset($heroMedia->image_url) }}" alt="{{ $heroMedia->hero_title }}"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110">
+        @else
+            <img src="{{ asset('assets/img/bg_utama.jpeg') }}" alt="TRPL Class"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2.5s] group-hover:scale-110">
+        @endif
 
         <!-- Overlay -->
         <div class="absolute inset-0 bg-linear-to-br from-slate-900/95 via-slate-900/40 to-slate-900/20"></div>
@@ -46,7 +51,7 @@
 
                     <span class="block sm:inline bg-clip-text text-transparent" 
                         style="background-image: linear-gradient(to right, #67e8f9, #38bdf8, #2dd4bf);">
-                    A PAGI 2024
+                    {{ $heroMedia ? $heroMedia->hero_title : 'A PAGI 2024' }}
                     </span>
 
                     <!-- Glow halus -->
@@ -60,16 +65,14 @@
             <!-- Subtitle -->
             <div class="opacity-0 animate-fade-up mt-4 sm:mt-5" style="animation-delay:0.5s;">
                 <p class="text-base sm:text-xl md:text-2xl text-slate-300 font-semibold tracking-wide">
-                    Software Engineering Class
+                    {{ $s['hero_subtitle'] ?? 'Software Engineering Class' }}
                 </p>
             </div>
 
             <!-- Description -->
             <div class="opacity-0 animate-fade-up mt-3" style="animation-delay:0.7s;">
                 <p class="max-w-xl sm:max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed">
-                    Part of <span class="text-cyan-400 font-semibold">Prodi TRPL</span>
-                    <span class="mx-2 text-slate-500">•</span>
-                    <span class="text-white font-medium">Politeknik Negeri Batam</span>
+                    {{ $s['hero_description'] ?? 'Part of Prodi TRPL • Politeknik Negeri Batam' }}
                 </p>
             </div>
 
@@ -136,15 +139,15 @@
             <div class="max-w-3xl">
                 <p class="text-lg md:text-2xl text-slate-300 font-medium">
                     <span class="text-white font-bold">
-                        TRPL A Pagi
+                        {{ $s['about_class_name'] ?? 'TRPL A Pagi' }}
                     </span>
-                    adalah kelas unggulan (howak) Rekayasa Perangkat Lunak di
-                    <span class="text-blue-400 font-bold">Politeknik Negeri Batam</span>.
+                    {{ $s['about_description'] ?? 'adalah kelas unggulan (howak) Rekayasa Perangkat Lunak di' }}
+                    <span class="text-blue-400 font-bold">{{ $s['about_university'] ?? 'Politeknik Negeri Batam' }}</span>.
                 </p>
 
                 <p class="text-sm md:text-base text-slate-400 mt-4 border-l-4 border-slate-700 pl-4">
-                    Fokus pada <span class="text-amber-400 font-bold">Software Development</span>,
-                    kolaborasi tim, dan manajemen proyek modern.
+                    Fokus pada <span class="text-amber-400 font-bold">{{ $s['about_focus_keyword'] ?? 'Software Development' }}</span>,
+                    {{ $s['about_tagline'] ?? 'kolaborasi tim, dan manajemen proyek modern.' }}
                 </p>
             </div>
         </div>
@@ -153,65 +156,92 @@
 </section>
 
 <section class="px-4 md:px-0 w-[92%] max-w-6xl mx-auto pb-20">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 reveal">
 
+        {{-- TOTAL STUDENTS --}}
         <div
-            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
             <div>
-                <p class="text-slate-400 font-bold text-xs uppercase mb-2 tracking-wider">Total Students</p>
-                <h2 class="text-5xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
+                <p class="text-slate-400 font-bold text-[10px] uppercase mb-1 tracking-wider">Total Students</p>
+                <h2 class="text-4xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
                     32
                 </h2>
             </div>
             <div
-                class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                    </path>
-                </svg>
+                class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <i data-lucide="users" class="w-6 h-6"></i>
             </div>
         </div>
 
-        <div
-            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
-            <div class="flex flex-col justify-center h-full">
-                <h3 class="text-xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors mb-1">
-                    Class Schedule
+        {{-- JADWAL MATKUL --}}
+        @if(isset($links['schedule']))
+        <a href="{{ $links['schedule']->link_url }}" target="_blank"
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col justify-center h-full relative z-10">
+                <p class="text-orange-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">E-Learning</p>
+                <h3 class="text-lg font-bold text-slate-800 group-hover:text-orange-600 transition-colors mb-0.5">
+                    Jadwal Matkul
                 </h3>
-                <p class="text-sm text-slate-400 font-medium group-hover:text-slate-600 transition-colors">Check today's
-                    timeline.</p>
+                <p class="text-[10px] text-slate-400 font-medium group-hover:text-slate-600 transition-colors italic">Daftar Mata Kuliah</p>
             </div>
             <div
-                class="w-16 h-16 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                    </path>
-                </svg>
+                class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10">
+                <i data-lucide="calendar" class="w-6 h-6"></i>
             </div>
-        </div>
+        </a>
+        @endif
 
-        <div
-            class="glass-card rounded-[2.5rem] p-8 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
-            <div class="flex flex-col justify-center h-full">
-                <h3 class="text-xl font-bold text-slate-800 group-hover:text-green-600 transition-colors mb-1">
+        {{-- NOTION KELAS --}}
+        @if(isset($links['notion']))
+        <a href="{{ $links['notion']->link_url }}" target="_blank"
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col justify-center h-full relative z-10">
+                <p class="text-slate-500/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Workspace</p>
+                <h3 class="text-lg font-bold text-slate-800 group-hover:text-black transition-colors mb-0.5">
+                    Notion Kelas
+                </h3>
+                <p class="text-[10px] text-slate-400 font-medium group-hover:text-slate-600 transition-colors italic">Catatan & Projek</p>
+            </div>
+            <div
+                class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" class="w-6 h-6 brightness-0 invert" alt="">
+            </div>
+        </a>
+        @endif
+
+        {{-- INSTAGRAM --}}
+        @if(isset($links['instagram']))
+        <a href="{{ $links['instagram']->link_url }}" target="_blank"
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-pink-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col justify-center h-full relative z-10">
+                <p class="text-pink-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Social Media</p>
+                <h3 class="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition-colors mb-0.5">
+                    Instagram
+                </h3>
+                <p class="text-[10px] text-slate-400 font-medium group-hover:text-slate-600 transition-colors italic">@trplapagi</p>
+            </div>
+            <div
+                class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+            </div>
+        </a>
+        @endif
+
+        {{-- OUR PROJECTS --}}
+        <a href="{{ route('projects') }}"
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col justify-center h-full relative z-10">
+                <p class="text-green-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Portfolio</p>
+                <h3 class="text-lg font-bold text-slate-800 group-hover:text-green-600 transition-colors mb-0.5">
                     Our Projects
                 </h3>
-                <span
-                    class="inline-flex items-center text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-md w-fit mt-1">
-                    +5 New Updates
-                </span>
+                <p class="text-[10px] text-slate-400 font-medium group-hover:text-slate-600 transition-colors italic">Daftar Karya Kami</p>
             </div>
             <div
-                class="w-16 h-16 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z">
-                    </path>
-                </svg>
+                class="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 relative z-10">
+                <i data-lucide="layers" class="w-6 h-6"></i>
             </div>
-        </div>
+        </a>
 
     </div>
 </section>
@@ -282,52 +312,110 @@
     </div>
 </section>
 
+<section id="activities" class="px-4 md:px-0 w-[92%] max-w-6xl mx-auto pb-24 pt-10">
+    <div class="flex flex-col items-center text-center mb-10 reveal">
+        <span class="text-brand-600 font-bold tracking-widest text-[10px] uppercase mb-2">Our Events</span>
+        <h2 class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">
+            Class <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Activities</span>
+        </h2>
+        <a href="{{ route('activities') }}" class="group flex items-center gap-2 text-slate-400 hover:text-brand-600 font-bold text-sm transition-all">
+            Lihat Semua Kegiatan
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+        @forelse($activities as $activity)
+            <div class="group relative bg-white rounded-[2.5rem] p-5 shadow-xl shadow-slate-200/40 border border-slate-100 hover:-translate-y-2 transition-all duration-500">
+                <div class="relative aspect-video rounded-[1.8rem] overflow-hidden mb-6">
+                    @if($activity->activity_image)
+                        <img src="{{ asset($activity->activity_image) }}" alt="{{ $activity->activity_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    @else
+                        <div class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
+                            <i data-lucide="image" class="w-10 h-10"></i>
+                        </div>
+                    @endif
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg shadow-sm border border-white/50 text-[10px] font-black text-slate-800 uppercase tracking-widest">
+                        {{ $activity->created_at->format('d M Y') }}
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brand-600 transition-colors line-clamp-1">{{ $activity->activity_name }}</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2 italic">"{{ $activity->activity_description }}"</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Event</span>
+                    <a href="{{ route('activities') }}" class="text-brand-600 font-bold text-xs flex items-center gap-1.5 group/link">
+                        Detail
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5"></i>
+                    </a>
+                </div>
+            </div>
+        @empty
+            <div class="col-span-full py-12 text-center bg-slate-50 rounded-[2.5rem] border-2 border-dashed border-slate-200">
+                <p class="text-slate-400 font-bold italic">Belum ada kegiatan yang dipublikasikan.</p>
+            </div>
+        @endforelse
+    </div>
+</section>
+
+
 <section id="gallery" class="px-4 md:px-0 w-[92%] max-w-6xl mx-auto pb-24">
 
-    <div class="text-center mb-12 reveal">
-        <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Culture</span>
-        <h2 class="text-3xl md:text-5xl font-black text-slate-800">
+    <div class="text-center mb-10 reveal">
+        <span class="text-brand-600 font-bold tracking-widest text-[10px] uppercase mb-2 block">Our Culture</span>
+        <h2 class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight">
             Work Hard, <span class="italic font-serif text-slate-400 font-normal">Play Hard.</span>
         </h2>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-3 gap-4 h-[800px] md:h-[600px] reveal">
 
+        @php $featuredAlbum = $albums->first(); @endphp
+        @if($featuredAlbum)
         <div
             class="col-span-2 row-span-2 md:row-span-3 relative rounded-[2.5rem] overflow-hidden group border border-white/40 shadow-xl">
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop"
+            <img src="{{ asset($featuredAlbum->album_cover) }}"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Main Activity">
+                alt="{{ $featuredAlbum->album_name }}">
             <div class="absolute inset-0 bg-linear-to-t from-slate-900/90 via-transparent to-transparent opacity-80">
             </div>
             <div class="absolute bottom-0 left-0 p-8">
                 <span
-                    class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 text-[10px] font-bold uppercase backdrop-blur-md">Featured</span>
-                <h3 class="text-white font-bold text-2xl mt-2 leading-tight">Momen Kebersamaan <br>di Lab Komputer</h3>
+                    class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-200 border border-blue-400/30 text-[10px] font-bold uppercase backdrop-blur-md">Featured Album</span>
+                <h3 class="text-white font-bold text-2xl mt-2 leading-tight">{{ $featuredAlbum->album_name }}</h3>
             </div>
+            <a href="{{ route('albums.detail', $featuredAlbum->album_id) }}" class="absolute inset-0 z-20"></a>
         </div>
+        @endif
 
+        @php $secondAlbum = $albums->skip(1)->first(); @endphp
+        @if($secondAlbum)
         <div
             class="col-span-2 md:col-span-2 row-span-1 relative rounded-[2.5rem] overflow-hidden group border border-white/40 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
+            <img src="{{ asset($secondAlbum->album_cover) }}"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Discussion">
+                alt="{{ $secondAlbum->album_name }}">
             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
             <div
                 class="absolute bottom-4 left-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <p class="text-white font-bold text-lg">Focus Group Discussion</p>
+                <p class="text-white font-bold text-lg">{{ $secondAlbum->album_name }}</p>
             </div>
+            <a href="{{ route('albums.detail', $secondAlbum->album_id) }}" class="absolute inset-0 z-20"></a>
         </div>
+        @endif
 
+        @php $thirdAlbum = $albums->skip(2)->first(); @endphp
+        @if($thirdAlbum)
         <div
             class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 relative rounded-[2.5rem] overflow-hidden group border border-white/40 shadow-lg">
-            <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop"
+            <img src="{{ asset($thirdAlbum->album_cover) }}"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Study">
+                alt="{{ $thirdAlbum->album_name }}">
             <div
                 class="absolute top-4 right-4 w-8 h-8 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white text-xs">
                 📸</div>
+            <a href="{{ route('albums.detail', $thirdAlbum->album_id) }}" class="absolute inset-0 z-20"></a>
         </div>
+        @endif
 
         <div
             class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 relative rounded-[2.5rem] overflow-hidden group border border-white/40 shadow-lg cursor-pointer">
@@ -357,7 +445,7 @@
                 <h4 class="text-white font-bold text-lg md:text-xl text-center leading-tight">
                     Lihat Semua <br>
                     <span
-                        class="text-slate-400 group-hover:text-blue-100 transition-colors duration-300">Kegiatan</span>
+                        class="text-slate-400 group-hover:text-blue-100 transition-colors duration-300">Galeri Foto</span>
                 </h4>
 
                 <span
@@ -365,29 +453,21 @@
                     Explore Gallery
                 </span>
             </div>
+            <a href="{{ route('albums') }}" class="absolute inset-0 z-20"></a>
         </div>
 
     </div>
 </section>
 
-
 <section id="members" class="px-4 md:px-0 w-[92%] max-w-6xl mx-auto pb-24 pt-10">
-
-    <div class="flex flex-col md:flex-row items-end justify-between mb-12 reveal">
-        <div>
-            <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">The Squad</span>
-            <h2 class="text-3xl md:text-5xl font-black text-slate-800">
-                Meet The <span
-                    class="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">Member</span>
-            </h2>
-        </div>
-        <div class="hidden md:flex gap-2 mt-4 md:mt-0">
-            <span
-                class="px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold cursor-pointer hover:bg-slate-700 transition">All
-                Members</span>
-            <span
-                class="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-500 text-xs font-bold cursor-pointer hover:border-brand-500 hover:text-brand-500 transition">Core
-                Team</span>
+    <div class="flex flex-col items-center text-center mb-12 reveal">
+        <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2">The Squad</span>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight mb-6">
+            Meet The <span class="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">Member</span>
+        </h2>
+        <div class="flex gap-2">
+            <span class="px-4 py-2 rounded-full bg-slate-900 text-white text-[10px] font-bold cursor-pointer hover:bg-slate-700 transition">All Members</span>
+            <span class="px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-500 text-[10px] font-bold cursor-pointer hover:border-brand-500 hover:text-brand-500 transition">Core Team</span>
         </div>
     </div>
 
@@ -500,28 +580,36 @@
 
 <section id="projects" class="px-4 md:px-0 w-[92%] max-w-7xl mx-auto pb-32 pt-10">
 
-    <div class="text-center mb-12 reveal">
-        <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2 block">Our Portfolio</span>
-        <h2 class="text-3xl md:text-5xl font-black text-slate-800">
+    <div class="flex flex-col items-center text-center mb-12 reveal">
+        <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-2">Our Portfolio</span>
+        <h2 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
             Made by <span class="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">TRPL A Pagi.</span>
         </h2>
-        <p class="text-slate-500 mt-4 max-w-2xl mx-auto">
+        <p class="text-slate-500 mt-4 max-w-2xl">
             Karya terbaik yang menggabungkan kreativitas dan kode.
         </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 reveal">
-
+        @forelse($projects as $project)
         <div
             class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
             <div
                 class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="SIA Polibatam">
+                @if($project->image_url)
+                    <img src="{{ asset($project->image_url) }}"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        alt="{{ $project->title }}">
+                @else
+                    <div class="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
+                        <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                @endif
                 <div
                     class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href="#"
+                    <a href="{{ $project->demo_url ?? '#' }}" {{ $project->demo_url ? 'target="_blank"' : '' }}
                         class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
                         Demo</a>
                 </div>
@@ -529,33 +617,51 @@
 
             <div class="px-2 pb-2 flex flex-col h-full">
                 <div class="flex flex-wrap gap-2 mb-3">
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-red-50 text-red-600 text-[10px] font-bold uppercase border border-red-100">Laravel</span>
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase border border-sky-100">Tailwind</span>
+                    @foreach($project->projectTechs as $tech)
+                        @php
+                            $colors = ['red', 'sky', 'cyan', 'orange', 'green', 'yellow', 'blue', 'purple', 'pink', 'indigo'];
+                            $colorIndex = abs(crc32($tech->tech_name)) % count($colors);
+                            $color = $colors[$colorIndex];
+                        @endphp
+                        <span
+                            class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase border border-slate-200">{{ $tech->tech_name }}</span>
+                    @endforeach
                 </div>
 
                 <h3
                     class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    Sistem Informasi Akademik
+                    {{ $project->title }}
                 </h3>
 
                 <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                    Platform manajemen data mahasiswa terintegrasi dengan absensi real-time dan cetak KHS otomatis.
+                    {{ $project->description }}
                 </p>
 
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3 mb-4 mt-auto">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
                     <div class="flex -space-x-2">
-                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
-                            src="https://i.pravatar.cc/100?img=1" alt="Dev 1" title="Budi Setiawan">
-                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
-                            src="https://i.pravatar.cc/100?img=5" alt="Dev 2" title="Siti Aminah">
+                        @foreach($project->projectMembers->take(3) as $pm)
+                            @if($pm->member && $pm->member->member_image)
+                                <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
+                                    src="{{ asset($pm->member->member_image) }}" alt="{{ $pm->member->member_name }}" title="{{ $pm->member->member_name }} - {{ $pm->project_member_role }}">
+                            @else
+                                <div class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-500" title="{{ $pm->member ? $pm->member->member_name : 'Member' }}">
+                                    {{ substr($pm->member ? $pm->member->member_name : 'U', 0, 1) }}
+                                </div>
+                            @endif
+                        @endforeach
+                        
+                        @if($project->projectMembers->count() > 3)
+                            <div
+                                class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-600">
+                                +{{ $project->projectMembers->count() - 3 }}
+                            </div>
+                        @endif
                     </div>
                 </div>
 
-                <div class="mt-auto pt-4 border-t border-slate-100">
-                    <a href="#"
+                <div class="pt-4 border-t border-slate-100 mt-2">
+                    <a href="{{ route('projects.detail', $project->project_id) }}"
                         class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
                         <span>Lihat Case Study</span>
                         <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
@@ -567,132 +673,23 @@
                 </div>
             </div>
         </div>
-
-        <div
-            class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-            <div
-                class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="E-Kantin">
-                <div
-                    class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href="#"
-                        class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
-                        Demo</a>
+        @empty
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12 text-slate-500">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-16 h-16 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
                 </div>
+                <p class="text-lg font-medium text-slate-600">Belum Ada Proyek</p>
+                <p class="text-sm">Proyek-proyek keren dari mahasiswa TRPL A Pagi akan segera hadir di sini.</p>
             </div>
-
-            <div class="px-2 pb-2 flex flex-col h-full">
-                <div class="flex flex-wrap gap-2 mb-3">
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-600 text-[10px] font-bold uppercase border border-cyan-100">Flutter</span>
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase border border-orange-100">Firebase</span>
-                </div>
-
-                <h3
-                    class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    E-Kantin Mobile App
-                </h3>
-
-                <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                    Aplikasi pemesanan makanan kantin kampus tanpa antri dengan fitur e-wallet terintegrasi.
-                </p>
-
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
-                    <div class="flex shrink-0">
-                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
-                            src="https://i.pravatar.cc/100?img=12" alt="Dev 1" title="Rizky Pratama">
-                    </div>
-                </div>
-
-                <div class="mt-auto pt-4 border-t border-slate-100">
-                    <a href="#"
-                        class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
-                        <span>Lihat Case Study</span>
-                        <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="glass-card rounded-[2.5rem] p-4 flex flex-col gap-4 group hover:border-brand-400/50 transition-all duration-500 hover:-translate-y-2">
-            <div
-                class="w-full aspect-4/3 overflow-hidden rounded-4xl shadow-md relative group-hover:shadow-xl transition-all duration-500">
-                <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2070&auto=format&fit=crop"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="Smart Garden">
-                <div
-                    class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a href="#"
-                        class="px-5 py-2.5 bg-white text-slate-900 rounded-full font-bold text-xs transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:scale-105">View
-                        Demo</a>
-                </div>
-            </div>
-
-            <div class="px-2 pb-2 flex flex-col h-full">
-                <div class="flex flex-wrap gap-2 mb-3">
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-green-50 text-green-600 text-[10px] font-bold uppercase border border-green-100">IoT</span>
-                    <span
-                        class="px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-600 text-[10px] font-bold uppercase border border-yellow-100">Python</span>
-                </div>
-
-                <h3
-                    class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-brand-600 transition-colors">
-                    Smart Garden System
-                </h3>
-
-                <p class="text-slate-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                    Sistem penyiraman otomatis berbasis kelembaban tanah menggunakan ESP32 dan monitoring real-time.
-                </p>
-
-                <div class="flex items-center gap-3 mb-4">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dev Team:</span>
-                    <div class="flex -space-x-2">
-                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
-                            src="https://i.pravatar.cc/100?img=8" alt="Dev 1" title="Ahmad Fauzi">
-                        <img class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover"
-                            src="https://i.pravatar.cc/100?img=3" alt="Dev 2" title="Dewi Sartika">
-                        <div
-                            class="w-8 h-8 rounded-full border-2 border-white shadow-sm bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-600">
-                            +1
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-auto pt-4 border-t border-slate-100">
-                    <a href="#"
-                        class="flex items-center gap-2 text-xs font-bold text-slate-800 hover:text-brand-600 transition-colors group/link">
-                        <span>Lihat Case Study</span>
-                        <svg class="w-3 h-3 transform group-hover/link:translate-x-1 transition-transform" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
+        @endforelse
     </div>
 
-    <div class="mt-16 text-center reveal">
-        <a href="https://github.com" target="_blank"
-            class="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            See More on GitHub
-        </a>
-    </div>
+    @if(isset($projects) && $projects->hasPages())
+        <div class="mt-16 flex justify-center reveal">
+            {{ $projects->links() }}
+        </div>
+    @endif
 
 </section>
