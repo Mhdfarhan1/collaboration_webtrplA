@@ -9,41 +9,22 @@
         <div class="container mx-auto px-6">
 
 
-            <nav class="flex mb-10" aria-label="Breadcrumb">
-                <ol
-                    class="inline-flex items-center space-x-2 bg-white py-3 px-6 rounded-full shadow-lg shadow-gray-200/50 border border-gray-100">
+            {{-- BREADCRUMB --}}
+            <nav class="flex mb-8" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1.5 sm:space-x-2 bg-white/90 backdrop-blur-md py-2.5 px-5 rounded-full shadow-2xs border border-slate-200/80 text-xs font-bold text-slate-500">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('home') }}"
-                            class="inline-flex items-center text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors group">
-                            <div
-                                class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-blue-100 group-hover:text-blue-600 transition-all duration-300">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                    </path>
-                                </svg>
-                            </div>
-                            Home
+                        <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-blue-600 transition-colors group">
+                            <i data-lucide="home" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600"></i>
+                            <span>Home</span>
                         </a>
                     </li>
                     <li>
-                        <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
                     </li>
                     <li>
-                        <div class="flex items-center">
-                            <span class="inline-flex items-center text-sm font-bold text-blue-600">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3 text-blue-600 shadow-sm shadow-blue-200">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                Members
-                            </span>
+                        <div class="flex items-center gap-1.5 text-blue-600 font-extrabold">
+                            <i data-lucide="users" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span>Members</span>
                         </div>
                     </li>
                 </ol>
@@ -182,59 +163,8 @@
             </div>
 
             {{-- 4. PAGINATION --}}
-            <div class="mt-20 flex justify-center">
-                <nav class="flex space-x-2" aria-label="Pagination">
-                    {{-- Tombol Previous --}}
-                    @if ($members->onFirstPage())
-                        <button disabled
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                                </path>
-                            </svg>
-                        </button>
-                    @else
-                        <a href="{{ $members->previousPageUrl() }}"
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                                </path>
-                            </svg>
-                        </a>
-                    @endif
-
-                    {{-- Nomor Halaman --}}
-                    @for ($i = 1; $i <= $members->lastPage(); $i++)
-                        @if ($i == $members->currentPage())
-                            <button
-                                class="w-10 h-10 flex items-center justify-center rounded-lg bg-blue-600 text-white shadow-lg shadow-blue-500/40 font-bold transform scale-110">
-                                {{ $i }}
-                            </button>
-                        @else
-                            <a href="{{ $members->url($i) }}"
-                                class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                                {{ $i }}
-                            </a>
-                        @endif
-                    @endfor
-
-                    {{-- Tombol Next --}}
-                    @if ($members->hasMorePages())
-                        <a href="{{ $members->nextPageUrl() }}"
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-500 hover:bg-white hover:shadow-md transition-all">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    @else
-                        <button disabled
-                            class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    @endif
-                </nav>
+            <div class="mt-16 flex justify-center">
+                {{ $members->links() }}
             </div>
 
         </div>

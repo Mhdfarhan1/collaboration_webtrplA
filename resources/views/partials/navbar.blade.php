@@ -29,7 +29,7 @@
                         class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('activities*') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Activities</a>
                 </li>
                 <li><a href="{{ route('lecturers') }}"
-                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('lecturers') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Dosen</a>
+                        class="px-5 py-2.5 rounded-full text-sm font-bold {{ request()->routeIs('lecturers') ? 'bg-white text-brand-600 shadow-md' : 'text-slate-600 hover:bg-white hover:text-brand-600 hover:shadow-md' }} transition-all duration-300">Lecturers</a>
                 </li>
             </ul>
 
@@ -68,7 +68,7 @@
                 <a href="{{ route('activities') }}"
                     class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('activities*') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Activities</a>
                 <a href="{{ route('lecturers') }}"
-                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('lecturers') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Dosen</a>
+                    class="text-sm font-bold py-3 px-5 rounded-2xl transition-colors {{ request()->routeIs('lecturers') ? 'bg-brand-50 text-brand-600' : 'text-slate-700 hover:bg-slate-100' }}">Lecturers</a>
 
                 <div class="mt-2 pt-2 border-t border-slate-200">
                     <a href="{{ $links['notion']->link_url ?? 'https://notion.so' }}" target="_blank"

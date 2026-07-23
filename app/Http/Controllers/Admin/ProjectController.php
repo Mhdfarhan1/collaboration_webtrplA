@@ -13,10 +13,29 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with(['projectTechs', 'projectManager'])->latest()->paginate(10);
-        return view('admin.projects.index', compact('projects'));
+        $semester = $request->query('semester');
+        $search = $request->query('search');
+
+        $projects = Project::with(['projectTechs', 'projectManager'])
+            ->when($semester, function ($query, $semester) {
+                return $query->where('semester', $semester);
+            })
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('description', 'like', "%{$search}%")
+                      ->orWhereHas('projectTechs', function ($qt) use ($search) {
+                          $qt->where('tech_name', 'like', "%{$search}%");
+                      });
+                });
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.projects.index', compact('projects', 'semester', 'search'));
     }
 
     /**
@@ -37,6 +56,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'semester' => 'required|integer|min:1|max:8',
             'description' => 'required|string',
             'technologies' => 'required|string',
             'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -44,7 +64,7 @@ class ProjectController extends Controller
             'project_manager_id' => 'nullable|exists:lecturers,lecturer_id',
         ]);
 
-        $data = $request->only(['title', 'description', 'demo_url', 'project_manager_id']);
+        $data = $request->only(['title', 'semester', 'description', 'demo_url', 'project_manager_id']);
 
         if ($request->hasFile('image_url')) {
             $image = $request->file('image_url');
@@ -81,6 +101,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'semester' => 'required|integer|min:1|max:8',
             'description' => 'required|string',
             'technologies' => 'required|string',
             'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -88,7 +109,7 @@ class ProjectController extends Controller
             'project_manager_id' => 'nullable|exists:lecturers,lecturer_id',
         ]);
 
-        $data = $request->only(['title', 'description', 'demo_url', 'project_manager_id']);
+        $data = $request->only(['title', 'semester', 'description', 'demo_url', 'project_manager_id']);
 
         if ($request->hasFile('image_url')) {
             // Hapus gambar lama

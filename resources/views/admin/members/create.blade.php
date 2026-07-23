@@ -97,7 +97,7 @@
                                 URL</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i data-lucide="instagram" class="w-4 h-4 text-slate-400"></i>
+                                    <i class="fa-brands fa-instagram text-pink-600 text-sm"></i>
                                 </div>
                                 <input type="url" id="instagram_url" name="instagram_url" value="{{ old('instagram_url') }}"
                                     class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400 text-sm"
@@ -114,7 +114,7 @@
                                 URL</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i data-lucide="linkedin" class="w-4 h-4 text-slate-400"></i>
+                                    <i class="fa-brands fa-linkedin text-blue-600 text-sm"></i>
                                 </div>
                                 <input type="url" id="linkedin_url" name="linkedin_url" value="{{ old('linkedin_url') }}"
                                     class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400 text-sm"
@@ -130,7 +130,7 @@
                             <label for="github_url" class="block text-xs font-medium text-slate-500 mb-1">GitHub URL</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i data-lucide="github" class="w-4 h-4 text-slate-400"></i>
+                                    <i class="fa-brands fa-github text-slate-700 text-sm"></i>
                                 </div>
                                 <input type="url" id="github_url" name="github_url" value="{{ old('github_url') }}"
                                     class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400 text-sm"

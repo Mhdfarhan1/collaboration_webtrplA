@@ -155,13 +155,13 @@
                                 </div>
                                 
                                 <form action="{{ route('admin.projects.members.destroy', [$project->project_id, $projectMember->project_member_id]) }}" method="POST"
-                                    onsubmit="return confirm('Keluarkan anggota ini dari tim project?');">
+                                    class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-400 bg-white border border-slate-200 hover:text-red-600 hover:bg-red-50 hover:border-red-200 transition-all shadow-sm tooltip"
+                                        class="w-8 h-8 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-colors"
                                         title="Keluarkan dari Tim">
-                                        <i data-lucide="user-minus" class="w-4 h-4"></i>
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
                                     </button>
                                 </form>
                             </div>

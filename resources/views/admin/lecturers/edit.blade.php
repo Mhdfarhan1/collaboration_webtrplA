@@ -79,6 +79,20 @@
                                 <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <!-- Checkbox Wali Dosen -->
+                        <div class="mt-6 pt-6 border-t border-slate-100">
+                            <label class="relative flex items-center p-4 bg-slate-50 rounded-2xl border border-slate-200 cursor-pointer hover:bg-slate-100 transition-all select-none">
+                                <input type="checkbox" name="is_advisor" value="1" class="w-5 h-5 rounded-lg border-slate-300 text-brand-600 focus:ring-brand-500 transition-all cursor-pointer" {{ old('is_advisor', $lecturer->is_advisor) ? 'checked' : '' }}>
+                                <div class="ml-3">
+                                    <p class="text-xs font-black text-slate-700 uppercase tracking-wide">Jadikan Wali Dosen</p>
+                                    <p class="text-[10px] text-slate-400 font-medium mt-0.5">Tandai pendidik ini sebagai Wali Dosen kelas TRPL A Pagi.</p>
+                                </div>
+                            </label>
+                            @error('is_advisor')
+                                <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -204,19 +218,19 @@
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="graduation-cap" class="w-4 h-4"></i></span>
+                                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"><i class="fa-solid fa-graduation-cap text-indigo-600 text-sm"></i></span>
                                     <input type="url" name="scholar_url" value="{{ old('scholar_url', $lecturer->scholar_url) }}" placeholder="Google Scholar URL" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-2 focus:ring-brand-500">
                                 </div>
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="award" class="w-4 h-4"></i></span>
+                                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"><i class="fa-solid fa-book-bookmark text-cyan-600 text-sm"></i></span>
                                     <input type="url" name="scopus_url" value="{{ old('scopus_url', $lecturer->scopus_url) }}" placeholder="Scopus URL" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-2 focus:ring-brand-500">
                                 </div>
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="linkedin" class="w-4 h-4"></i></span>
+                                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"><i class="fa-brands fa-linkedin text-blue-600 text-sm"></i></span>
                                     <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $lecturer->linkedin_url) }}" placeholder="LinkedIn URL" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-2 focus:ring-brand-500">
                                 </div>
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="instagram" class="w-4 h-4"></i></span>
+                                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"><i class="fa-brands fa-instagram text-pink-600 text-sm"></i></span>
                                     <input type="url" name="instagram_url" value="{{ old('instagram_url', $lecturer->instagram_url) }}" placeholder="Instagram URL" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:ring-2 focus:ring-brand-500">
                                 </div>
                             </div>

@@ -75,5 +75,111 @@
             loader.classList.add("finish");
             setTimeout(() => loader.remove(), 600);
         });
+
+        // --- GLOBAL FORM SUBMIT PROCESSING ALERTS FOR PUBLIC FORMS ---
+        document.addEventListener('submit', function (e) {
+            const form = e.target;
+            if (form.hasAttribute('data-no-alert')) return;
+
+            const isDeleteMethod = form.querySelector('input[name="_method"][value="DELETE"]') || form.classList.contains('delete-form');
+
+            if (isDeleteMethod && !form.dataset.confirmed) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    text: 'Data yang dihapus tidak dapat dikembalikan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'rounded-2xl shadow-2xl border border-slate-100'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.dataset.confirmed = 'true';
+                        Swal.fire({
+                            title: 'Menghapus Data...',
+                            html: '<div class="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto my-3"></div><p class="text-sm text-slate-600">Mohon tunggu...</p>',
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+                        form.submit();
+                    }
+                });
+                return;
+            }
+
+            const fileInputs = form.querySelectorAll('input[type="file"]');
+            let hasSelectedFile = false;
+            fileInputs.forEach(input => {
+                if (input.files && input.files.length > 0) hasSelectedFile = true;
+            });
+
+            let alertTitle = 'Memproses Data...';
+            let alertMessage = 'Mohon tunggu sebentar...';
+
+            if (hasSelectedFile) {
+                alertTitle = 'Mengunggah File...';
+                alertMessage = 'Mohon tunggu, file sedang diunggah.';
+            } else if (form.action.includes('login')) {
+                alertTitle = 'Memverifikasi Login...';
+                alertMessage = 'Sedang mengecek email dan kata sandi Anda.';
+            }
+
+            Swal.fire({
+                title: alertTitle,
+                html: `
+                    <div class="flex flex-col items-center gap-3 py-3">
+                        <div class="w-12 h-12 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p class="text-sm text-slate-600 font-medium">${alertMessage}</p>
+                    </div>
+                `,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                customClass: {
+                    popup: 'rounded-2xl shadow-2xl border border-slate-100 p-6'
+                }
+            });
+
+            const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+            if (submitBtn && !submitBtn.disabled) {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+            }
+        });
+
+        // Flash message session alerts
+        @if(session('success'))
+            Swal.fire({
+                title: "Berhasil!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                customClass: { popup: 'rounded-2xl shadow-2xl' }
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                title: "Gagal!",
+                text: "{{ session('error') }}",
+                icon: "error",
+                customClass: { popup: 'rounded-2xl shadow-2xl' }
+            });
+        @endif
+
+        @if($errors->any())
+            Swal.fire({
+                title: "Periksa kembali inputan Anda",
+                html: `<ul class="text-left text-sm text-red-600 mt-2 space-y-1">@foreach($errors->all() as $error)<li>• {{ $error }}</li>@endforeach</ul>`,
+                icon: "warning",
+                customClass: { popup: 'rounded-2xl shadow-2xl' }
+            });
+        @endif
     });
-</script>
+</script>

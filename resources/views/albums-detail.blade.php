@@ -10,31 +10,29 @@
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
 
                 {{-- BREADCRUMB --}}
-                <nav class="flex mb-6 animate-fade-in-up" aria-label="Breadcrumb">
-                    <ol
-                        class="inline-flex items-center space-x-1 sm:space-x-2 bg-white/80 backdrop-blur-md py-2 px-4 rounded-full shadow-sm border border-slate-200/60">
+                <nav class="flex mb-8" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1.5 sm:space-x-2 bg-white/90 backdrop-blur-md py-2.5 px-5 rounded-full shadow-2xs border border-slate-200/80 text-xs font-bold text-slate-500">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('home') }}"
-                                class="inline-flex items-center text-[11px] font-bold text-slate-500 hover:text-brand-600 transition-colors group">
-                                <i data-lucide="home" class="w-3.5 h-3.5 mr-1.5"></i>
-                                Home
+                            <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-blue-600 transition-colors group">
+                                <i data-lucide="home" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600"></i>
+                                <span>Home</span>
                             </a>
                         </li>
                         <li>
-                            <i data-lucide="chevron-right" class="w-3 h-3 text-slate-300 mx-1"></i>
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
                         </li>
                         <li class="inline-flex items-center">
-                            <a href="{{ route('albums') }}"
-                                class="inline-flex items-center text-[11px] font-bold text-slate-500 hover:text-brand-600 transition-colors">
-                                Albums
+                            <a href="{{ route('albums') }}" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-blue-600 transition-colors">
+                                <i data-lucide="images" class="w-3.5 h-3.5 text-slate-400"></i>
+                                <span>Albums</span>
                             </a>
                         </li>
                         <li>
-                            <i data-lucide="chevron-right" class="w-3 h-3 text-slate-300 mx-1"></i>
+                            <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
                         </li>
                         <li>
-                            <div class="flex items-center text-[11px] font-bold text-brand-600">
-                                <i data-lucide="images" class="w-3.5 h-3.5 mr-1.5"></i> Detail
+                            <div class="flex items-center gap-1.5 text-blue-600 font-extrabold">
+                                <span>Detail</span>
                             </div>
                         </li>
                     </ol>

@@ -3,149 +3,164 @@
 @section('title', 'Activities')
 
 @section('content')
-    <section class="bg-gray-50 min-h-screen pt-36 pb-20 font-sans selection:bg-blue-500 selection:text-white">
-        <div class="container mx-auto px-6">
+    <div class="pt-32 pb-20">
+        <div class="w-[92%] max-w-7xl mx-auto">
 
             {{-- BREADCRUMB --}}
-            <nav class="flex mb-8 animate-fade-in-up" aria-label="Breadcrumb">
-                <ol
-                    class="inline-flex items-center space-x-1 sm:space-x-2 bg-white/80 backdrop-blur-md py-2 px-4 rounded-full shadow-sm border border-slate-200/60">
+            <nav class="flex mb-8" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1.5 sm:space-x-2 bg-white/90 backdrop-blur-md py-2.5 px-5 rounded-full shadow-2xs border border-slate-200/80 text-xs font-bold text-slate-500">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('home') }}"
-                            class="inline-flex items-center text-[11px] font-bold text-slate-500 hover:text-brand-600 transition-colors group">
-                            <i data-lucide="home" class="w-3.5 h-3.5 mr-1.5"></i>
-                            Home
+                        <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-blue-600 transition-colors group">
+                            <i data-lucide="home" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600"></i>
+                            <span>Home</span>
                         </a>
                     </li>
                     <li>
-                        <i data-lucide="chevron-right" class="w-3 h-3 text-slate-300 mx-1"></i>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
                     </li>
                     <li>
-                        <div class="flex items-center text-[11px] font-bold text-brand-600">
-                            <i data-lucide="activity" class="w-3.5 h-3.5 mr-1.5"></i> Activities
+                        <div class="flex items-center gap-1.5 text-blue-600 font-extrabold">
+                            <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span>Activities</span>
                         </div>
                     </li>
                 </ol>
             </nav>
 
-            {{-- HEADER & SEARCH --}}
-            <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b border-gray-200 pb-6 gap-6">
-                <div class="mb-2 md:mb-0 w-full md:w-auto">
-                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight mb-2 tracking-tight">
-                        Class <span class="text-brand-600">Activities</span>
-                    </h2>
-                    <p class="text-slate-500 max-w-lg text-sm md:text-base font-medium">
-                        Informasi dan agenda kegiatan kelas kami.
-                    </p>
+            {{-- HEADER & SEARCH BAR --}}
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 pb-8 border-b border-slate-200/80 gap-6 reveal">
+                <div>
+                    <span class="text-blue-600 font-extrabold tracking-widest text-xs uppercase mb-2 block">Agenda & Dokumentasi</span>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-none">
+                        Class <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">Activities</span>
+                    </h1>
+                    <p class="text-slate-500 mt-3 text-sm sm:text-base max-w-xl">Dokumentasi momen berharga dan agenda kegiatan seru kelas TRPL A Pagi.</p>
                 </div>
 
-                {{-- Search Box --}}
-                <form action="{{ route('activities') }}" method="GET" class="relative w-full md:w-96 group">
-                    <div
-                        class="absolute -inset-1 bg-gradient-to-r from-brand-400 to-purple-400 rounded-full blur opacity-20 group-hover:opacity-40 transition duration-500">
-                    </div>
-                    <div
-                        class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-slate-100">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kegiatan..."
-                            class="w-full pl-6 pr-14 py-4 text-sm font-medium text-slate-700 bg-transparent outline-none placeholder-slate-400">
-                        <div class="absolute right-2 top-2 bottom-2">
-                            <button type="submit"
-                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-600 to-brand-500 text-white flex items-center justify-center shadow-md hover:shadow-brand-500/50 hover:scale-105 transition-all duration-300">
-                                <i data-lucide="search" class="w-5 h-5"></i>
-                            </button>
-                        </div>
+                {{-- Sleek Pill Search Input --}}
+                <form action="{{ route('activities') }}" method="GET" class="w-full lg:w-auto">
+                    <div class="relative flex items-center bg-white rounded-full shadow-lg border border-slate-100 w-full sm:w-80 group">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari agenda atau kegiatan..."
+                            class="w-full py-3.5 pl-6 pr-14 text-xs font-semibold text-slate-700 placeholder:text-slate-400 focus:outline-none bg-transparent">
+                        
+                        @if(request('search'))
+                            <a href="{{ route('activities') }}" 
+                                class="absolute right-12 text-slate-400 hover:text-red-500 transition-colors" title="Hapus pencarian">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </a>
+                        @endif
+
+                        <button type="submit" 
+                            class="absolute right-1.5 w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-md shadow-blue-500/30 transition-all active:scale-95 shrink-0">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </form>
             </div>
 
-            {{-- LIST OF ACTIVITIES --}}
-            <div class="space-y-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
                 @forelse($activities as $activity)
-                    <div
-                        class="bg-white rounded-[2rem] p-6 md:p-8 flex flex-col md:flex-row gap-8 shadow-xl shadow-slate-200/40 border border-slate-100 group relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-500/10">
+                    <div class="reveal group bg-white rounded-3xl p-5 shadow-sm border border-slate-200/80 hover:shadow-xl hover:border-blue-300 transition-all duration-500 hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between h-full">
+                        
+                        
+                        <div class="absolute -top-16 -right-16 w-36 h-36 bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-transparent rounded-full blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
 
-                        {{-- Decorative gradient blob for hover effect --}}
-                        <div
-                            class="absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br from-brand-100/50 to-blue-50/50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                        </div>
-
-                        {{-- Image / Thumbnail --}}
-                        <div class="w-full md:w-5/12 lg:w-1/3 shrink-0 relative z-10">
-                            <div
-                                class="w-full aspect-[4/3] rounded-[1.5rem] overflow-hidden bg-slate-100 relative shadow-inner">
+                        <div class="relative z-10">
+                            {{-- Image / Thumbnail Frame (Aspect 16:10 Box) --}}
+                            <a href="{{ route('activities.detail', \App\Helpers\SecurityHelper::encode($activity->activity_id)) }}" class="block w-full aspect-[16/10] rounded-2xl overflow-hidden relative shadow-2xs border border-slate-100 group-hover:border-blue-200 transition-colors mb-4">
                                 @if($activity->activity_image)
                                     <img src="{{ asset($activity->activity_image) }}" alt="{{ $activity->activity_name }}"
-                                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 @else
-                                    <div class="w-full h-full flex items-center justify-center bg-slate-50">
-                                        <i data-lucide="image" class="w-16 h-16 text-slate-200"></i>
+                                    {{-- Modern Gradient Fallback Banner --}}
+                                    <div class="w-full h-full bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 flex flex-col items-center justify-center p-4 text-white text-center relative overflow-hidden">
+                                        <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center mb-1.5 shadow-inner">
+                                            <i data-lucide="sparkles" class="w-5 h-5 text-cyan-300"></i>
+                                        </div>
+                                        <span class="text-[9px] font-black uppercase tracking-widest text-cyan-200">TRPL A Activity</span>
                                     </div>
                                 @endif
 
-
-                                <div
-                                    class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-black tracking-wider uppercase px-4 py-2 rounded-xl shadow-sm border border-white/50 flex flex-col items-center justify-center">
-                                    <span
-                                        class="text-brand-600 text-lg leading-none mb-0.5">{{ $activity->created_at->format('d') }}</span>
-                                    <span class="text-[9px]">{{ $activity->created_at->format('M Y') }}</span>
+                                {{-- Date Badge (Top-Left Floating) --}}
+                                <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-xs border border-white/80 flex flex-col items-center justify-center text-center">
+                                    <span class="text-blue-600 text-sm font-black leading-none mb-0.5">{{ $activity->created_at->format('d') }}</span>
+                                    <span class="text-[8px] font-extrabold text-slate-500 uppercase tracking-wider">{{ $activity->created_at->format('M Y') }}</span>
                                 </div>
+
+                                {{-- Photos Count Badge (Bottom-Right Floating) --}}
+                                <div class="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-md text-white px-2.5 py-1 rounded-lg text-[10px] font-extrabold flex items-center gap-1 shadow-sm border border-white/20">
+                                    <i data-lucide="image" class="w-3.5 h-3.5 text-cyan-400"></i>
+                                    <span>{{ $activity->activityMedia->count() }} Foto</span>
+                                </div>
+                            </a>
+
+                            {{-- Content Section --}}
+                            <div class="mb-4">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-100 mb-2.5">
+                                    <i data-lucide="calendar" class="w-3 h-3 text-blue-500"></i>
+                                    <span>Event Kelas</span>
+                                </span>
+
+                                <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug group-hover:text-blue-600 transition-colors mb-2 line-clamp-2">
+                                    <a href="{{ route('activities.detail', \App\Helpers\SecurityHelper::encode($activity->activity_id)) }}">
+                                        {{ $activity->activity_name }}
+                                    </a>
+                                </h3>
+
+                                <p class="text-xs text-slate-500 leading-relaxed line-clamp-3 font-medium">
+                                    {{ $activity->activity_description }}
+                                </p>
                             </div>
                         </div>
 
-                        {{-- Content --}}
-                        <div class="w-full md:w-7/12 lg:w-2/3 flex flex-col justify-center relative z-10 py-2">
+                        {{-- Card Footer --}}
+                        <div class="relative z-10 pt-3 border-t border-slate-100 flex items-center justify-between gap-3 mt-auto">
+                            <a href="{{ route('activities.detail', \App\Helpers\SecurityHelper::encode($activity->activity_id)) }}" class="inline-flex items-center gap-1 text-[11px] font-extrabold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform">
+                                <span>Lihat Detail</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </a>
 
-                            {{-- Category / Meta --}}
-                            <div class="flex items-center gap-3 mb-4">
-                                <span
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest">
-                                    <i data-lucide="folder" class="w-3 h-3"></i> Class Event
-                                </span>
-                                <span class="inline-flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                                    <i data-lucide="image" class="w-3.5 h-3.5"></i> {{ $activity->activityMedia->count() }}
-                                    Photos
-                                </span>
-                            </div>
-
-                            {{-- Title & Desc --}}
-                            <h3
-                                class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 group-hover:text-brand-600 transition-colors duration-300 tracking-tight leading-tight">
-                                {{ $activity->activity_name }}
-                            </h3>
-                            <p class="text-slate-500 text-base md:text-lg mb-8 line-clamp-3 leading-relaxed">
-                                {{ $activity->activity_description }}
-                            </p>
-
-                            {{-- Placeholder for potential detail page in the future --}}
-                            <div class="mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
-                                <span
-                                    class="bg-blue-50 text-blue-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest border border-blue-100">
-                                    Official Event
-                                </span>
-                            </div>
+                            {{-- Gallery Preview Thumbnails if media available --}}
+                            @if($activity->activityMedia->count() > 0)
+                                <div class="flex items-center -space-x-1.5 overflow-hidden">
+                                    @foreach($activity->activityMedia->take(3) as $media)
+                                        <div class="w-6 h-6 rounded-md overflow-hidden border-2 border-white shadow-2xs bg-slate-100">
+                                            <img src="{{ asset($media->activity_media_url) }}" class="w-full h-full object-cover">
+                                        </div>
+                                    @endforeach
+                                    @if($activity->activityMedia->count() > 3)
+                                        <div class="w-6 h-6 rounded-md bg-blue-600 text-white text-[8px] font-black flex items-center justify-center border-2 border-white shadow-2xs">
+                                            +{{ $activity->activityMedia->count() - 3 }}
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
+
                     </div>
                 @empty
-                    <div
-                        class="bg-white rounded-[2rem] p-16 text-center border border-dashed border-slate-300 w-full max-w-2xl mx-auto">
-                        <div
-                            class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-slate-50 mb-6 shadow-inner">
-                            <i data-lucide="calendar-x" class="w-10 h-10 text-slate-400"></i>
+                    <div class="col-span-full py-20 text-center bg-white rounded-3xl border-2 border-dashed border-slate-200 reveal">
+                        <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 border border-blue-100">
+                            <i data-lucide="calendar-x" class="w-10 h-10"></i>
                         </div>
-                        <h3 class="text-2xl font-extrabold text-slate-800 mb-3 tracking-tight">Belum ada Kegiatan</h3>
-                        <p class="text-slate-500 text-lg">Informasi dan agenda kegiatan belum tersedia saat ini. Silakan kembali
-                            lagi nanti.</p>
+                        <h2 class="text-xl font-extrabold text-slate-800 mb-2">Kegiatan Tidak Ditemukan</h2>
+                        <p class="text-slate-500 text-sm">Maaf, kami tidak dapat menemukan agenda kegiatan dengan pencarian tersebut.</p>
+                        <a href="{{ route('activities') }}" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white font-bold rounded-xl text-xs shadow-md hover:bg-blue-700 transition-all">
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Semua Kegiatan
+                        </a>
                     </div>
                 @endforelse
             </div>
 
             {{-- PAGINATION --}}
             @if(isset($activities) && $activities->hasPages())
-                <div class="mt-16 flex justify-center">
+                <div class="flex justify-center mt-10 reveal">
                     {{ $activities->links() }}
                 </div>
             @endif
 
         </div>
-    </section>
+    </div>
 @endsection

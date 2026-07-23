@@ -157,11 +157,11 @@
                                             @endif
 
                                             <!-- Action: Hapus -->
-                                            <form action="{{ route('admin.activities.media.destroy', [$activity->activity_id, $item->activity_media_id]) }}" method="POST" onsubmit="return confirm('Hapus foto ini dari galeri kegiatan?');">
+                                            <form action="{{ route('admin.activities.media.destroy', [$activity->activity_id, $item->activity_media_id]) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="w-9 h-9 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 hover:scale-110 shadow-lg transition-all mx-auto" title="Hapus Foto">
-                                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                                <button type="submit" class="p-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 hover:scale-105 transition-all text-xs font-semibold flex items-center gap-1.5" title="Hapus Foto">
+                                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Hapus
                                                 </button>
                                             </form>
                                             

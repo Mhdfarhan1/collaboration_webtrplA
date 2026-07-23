@@ -14,16 +14,44 @@ Route::get('/', function () {
     $albums = \App\Models\Album::latest()->take(4)->get();
     $links = Link::whereIn('link_type', ['schedule', 'notion', 'instagram'])->get()->keyBy('link_type');
     $s = \App\Models\Setting::pluck('value', 'key'); // site settings shorthand
-    return view('home', compact('heroMedia', 'projects', 'activities', 'albums', 'links', 's'));
+
+    $totalMembersCount = \App\Models\Member::count();
+    $members = \App\Models\Member::orderBy('member_is_core', 'desc')->orderBy('member_name', 'asc')->take(4)->get();
+
+    return view('home', compact('heroMedia', 'projects', 'activities', 'albums', 'links', 's', 'members', 'totalMembersCount'));
 })->name('home');
 
 Route::get('/projects', function () {
-    $projects = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->latest()->paginate(9);
-    return view('projects', compact('projects'));
+    $semester = request('semester');
+    $search = request('search');
+
+    $projects = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])
+        ->when($semester, function ($query, $semester) {
+            return $query->where('semester', $semester);
+        })
+        ->when($search, function ($query, $search) {
+            return $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('projectTechs', function ($qt) use ($search) {
+                        $qt->where('tech_name', 'like', "%{$search}%");
+                    });
+            });
+        })
+        ->when(!$semester && !$search, function ($query) {
+            return $query->orderBy('semester', 'asc')->latest();
+        }, function ($query) {
+            return $query->latest();
+        })
+        ->paginate(9)
+        ->withQueryString();
+
+    return view('projects', compact('projects', 'semester', 'search'));
 })->name('projects');
 
 Route::get('/projects/{id}', function ($id) {
-    $project = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->findOrFail($id);
+    $realId = \App\Helpers\SecurityHelper::decode($id) ?? $id;
+    $project = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->findOrFail($realId);
     return view('projects-detail', compact('project'));
 })->name('projects.detail');
 
@@ -36,17 +64,20 @@ Route::get('/lecturers', function () {
 
     $lecturers = \App\Models\Lecturer::with('projects')
         ->latest()
-        ->when($search, function($query) use ($search) {
-            $query->where(function($q) use ($search) {
+        ->when($search, function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('lecturer_name', 'like', "%$search%")
-                  ->orWhere('lecturer_expertise', 'like', "%$search%");
+                    ->orWhere('lecturer_expertise', 'like', "%$search%");
             });
         })
-        ->when($type == 'manpro', function($query) {
-            $query->where(function($q) {
+        ->when($type == 'manpro', function ($query) {
+            $query->where(function ($q) {
                 $q->where('lecturer_type', 'manpro')
-                  ->orWhereHas('projects');
+                    ->orWhereHas('projects');
             });
+        })
+        ->when($type == 'advisor', function ($query) {
+            $query->where('is_advisor', true);
         })
         ->paginate(8)
         ->withQueryString();
@@ -58,9 +89,9 @@ Route::get('/lecturers', function () {
 Route::get('/albums', function () {
     $search = request('search');
     $albums = \App\Models\Album::latest()
-        ->when($search, function($query) use ($search) {
+        ->when($search, function ($query) use ($search) {
             $query->where('album_name', 'like', "%$search%")
-                  ->orWhere('album_description', 'like', "%$search%");
+                ->orWhere('album_description', 'like', "%$search%");
         })
         ->paginate(4)
         ->withQueryString();
@@ -70,22 +101,30 @@ Route::get('/albums', function () {
 Route::get('/activities', function () {
     $search = request('search');
     $activities = Activity::latest()
-        ->when($search, function($query) use ($search) {
+        ->when($search, function ($query) use ($search) {
             $query->where('activity_name', 'like', "%$search%")
-                  ->orWhere('activity_description', 'like', "%$search%");
+                ->orWhere('activity_description', 'like', "%$search%");
         })
-        ->paginate(4)
+        ->paginate(6)
         ->withQueryString();
     return view('activities', compact('activities'));
 })->name('activities');
 
+Route::get('/activities/{id}', function ($id) {
+    $realId = \App\Helpers\SecurityHelper::decode($id) ?? $id;
+    $activity = \App\Models\Activity::with('activityMedia')->findOrFail($realId);
+    return view('activities-detail', compact('activity'));
+})->name('activities.detail');
+
 Route::get('/albums/{id}', function ($id) {
-    $album = \App\Models\Album::with('images')->findOrFail($id);
+    $realId = \App\Helpers\SecurityHelper::decode($id) ?? $id;
+    $album = \App\Models\Album::with('images')->findOrFail($realId);
     return view('albums-detail', compact('album'));
 })->name('albums.detail');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::prefix('password')->name('password.')->group(function () {
@@ -130,9 +169,9 @@ Route::get('/dashboard', function () {
         'albums' => \App\Models\Album::count(),
         'lecturers' => \App\Models\Lecturer::count(),
     ];
-    
+
     $latestMembers = \App\Models\Member::latest()->take(5)->get();
-    
+
     return view('admin.dashboard', compact('counts', 'latestMembers'));
 })->middleware('auth')->name('dashboard');
 

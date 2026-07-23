@@ -27,6 +27,11 @@ class Lecturer extends Model
         'twitter_url',
         'facebook_url',
         'instagram_url',
+        'is_advisor',
+    ];
+
+    protected $casts = [
+        'is_advisor' => 'boolean',
     ];
 
     public function projects()

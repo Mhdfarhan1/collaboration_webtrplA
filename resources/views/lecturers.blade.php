@@ -6,6 +6,27 @@
     <div class="pt-32 pb-20">
         <div class="w-[92%] max-w-7xl mx-auto">
 
+            {{-- BREADCRUMB --}}
+            <nav class="flex mb-8" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1.5 sm:space-x-2 bg-white/90 backdrop-blur-md py-2.5 px-5 rounded-full shadow-2xs border border-slate-200/80 text-xs font-bold text-slate-500">
+                    <li class="inline-flex items-center">
+                        <a href="{{ route('home') }}" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-blue-600 transition-colors group">
+                            <i data-lucide="home" class="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
+                    </li>
+                    <li>
+                        <div class="flex items-center gap-1.5 text-blue-600 font-extrabold">
+                            <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span>Dosen</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
             <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8 reveal">
                 <div class="text-center md:text-left">
                     <span class="text-brand-600 font-bold tracking-widest text-xs uppercase mb-3 block">Pendidik Kami</span>
@@ -37,6 +58,7 @@
                             class="w-full appearance-none bg-white border-2 border-slate-100 rounded-2xl py-4 pl-6 pr-12 text-sm font-bold text-slate-700 focus:border-brand-500 focus:ring-0 transition-all shadow-xl shadow-slate-200/50 cursor-pointer">
                             <option value="">Semua Dosen</option>
                             <option value="manpro" {{ request('type') == 'manpro' ? 'selected' : '' }}>Hanya Manajer Proyek</option>
+                            <option value="advisor" {{ request('type') == 'advisor' ? 'selected' : '' }}>Hanya Wali Dosen</option>
                         </select>
                         <div class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
                             <i data-lucide="filter" class="w-4 h-4"></i>
@@ -82,6 +104,9 @@
                                         @if($isManpro)
                                             <span class="inline-flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100 flex-shrink-0">Manager Proyek</span>
                                         @endif
+                                        @if($lecturer->is_advisor)
+                                            <span class="inline-flex items-center text-[9px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100 flex-shrink-0">Wali Dosen</span>
+                                        @endif
                                     </div>
                                     <p class="text-[15px] font-medium text-slate-500">
                                         {{ $lecturer->lecturer_position ?? 'Dosen Pengajar' }}
@@ -122,23 +147,47 @@
                                     </div>
                                 </div>
 
-                                {{-- Projects Managed Section (Only show if Manpro filter is active) --}}
+                                {{-- Rekam Jejak / Riwayat Manpro di TRPL A Pagi (Hanya muncul saat filter Hanya Manager Proyek aktif) --}}
                                 @if(request('type') == 'manpro' && $lecturer->projects->count() > 0)
-                                    <div class="mb-8 p-4 bg-slate-50 rounded-2xl border border-slate-100 shadow-inner">
-                                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                            <i data-lucide="folder-kanban" class="w-3 h-3 text-amber-500"></i> Mengelola Proyek
-                                        </h3>
+                                    <div class="mb-6 p-4 bg-gradient-to-br from-amber-50/80 to-orange-50/40 rounded-2xl border border-amber-100 shadow-2xs">
+                                        <div class="flex items-center justify-between gap-2 mb-3">
+                                            <h3 class="text-xs font-extrabold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
+                                                <i data-lucide="folder-kanban" class="w-4 h-4 text-amber-600"></i>
+                                                <span>Riwayat Manpro di TRPL A Pagi</span>
+                                            </h3>
+                                            <span class="text-[10px] font-extrabold text-amber-700 bg-amber-100/80 px-2.5 py-0.5 rounded-full border border-amber-200">
+                                                {{ $lecturer->projects->count() }} Proyek
+                                            </span>
+                                        </div>
+
                                         <div class="space-y-2">
                                             @foreach($lecturer->projects as $project)
-                                                <div class="flex items-center gap-3 bg-white p-2 rounded-xl border border-slate-50 shadow-sm group/project transition-all hover:border-amber-200">
-                                                    @if($project->image_url)
-                                                        <img src="{{ asset($project->image_url) }}" class="w-8 h-8 rounded-lg object-cover shadow-sm">
-                                                    @else
-                                                        <div class="w-8 h-8 rounded-lg bg-slate-200 flex items-center justify-center">
-                                                            <i data-lucide="image" class="w-4 h-4 text-slate-400"></i>
+                                                <div class="flex items-center justify-between gap-3 bg-white p-2.5 rounded-xl border border-amber-100/80 shadow-2xs group/project transition-all hover:border-amber-300 hover:shadow-xs">
+                                                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                                                        <div class="w-9 h-9 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/60 shadow-2xs">
+                                                            @if($project->image_url)
+                                                                <img src="{{ asset($project->image_url) }}" class="w-full h-full object-cover">
+                                                            @else
+                                                                <div class="w-full h-full flex items-center justify-center text-slate-400">
+                                                                    <i data-lucide="image" class="w-4 h-4"></i>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                    @endif
-                                                    <span class="text-[13px] font-bold text-slate-700 truncate group-hover/project:text-amber-600 transition-colors">{{ $project->title }}</span>
+                                                        <div class="min-w-0 flex-1">
+                                                            <a href="{{ route('projects.detail', \App\Helpers\SecurityHelper::encode($project->project_id)) }}" class="text-xs font-extrabold text-slate-800 truncate block group-hover/project:text-blue-600 transition-colors">
+                                                                {{ $project->title }}
+                                                            </a>
+                                                            <p class="text-[10px] text-slate-400 truncate mt-0.5">
+                                                                {{ Str::limit($project->description, 45) }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Semester Badge --}}
+                                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-100 shrink-0">
+                                                        <i data-lucide="layers" class="w-3 h-3 text-blue-500"></i>
+                                                        <span>Semester {{ $project->semester ?? 1 }}</span>
+                                                    </span>
                                                 </div>
                                             @endforeach
                                         </div>

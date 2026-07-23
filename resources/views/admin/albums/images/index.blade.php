@@ -126,11 +126,10 @@
                                                 </form>
                                             @endif
 
-                                            <!-- Delete -->
-                                            <form action="{{ route('admin.albums.images.destroy', [$album->album_id, $image->album_image_id]) }}" method="POST">
+                                            <form action="{{ route('admin.albums.images.destroy', [$album->album_id, $image->album_image_id]) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="p-2 bg-red-500/90 backdrop-blur-md rounded-lg text-white hover:bg-red-600 transition-all tooltip" title="Hapus Foto" onsubmit="return confirm('Hapus foto ini dari galeri?')">
+                                                <button type="submit" class="p-2 bg-red-500/90 backdrop-blur-md rounded-lg text-white hover:bg-red-600 transition-all tooltip" title="Hapus Foto">
                                                     <i data-lucide="trash-2" class="w-4 h-4"></i>
                                                 </button>
                                             </form>

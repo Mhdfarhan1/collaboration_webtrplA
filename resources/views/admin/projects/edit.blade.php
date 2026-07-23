@@ -39,15 +39,33 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Title -->
-                <div>
-                    <label for="title" class="block text-sm font-semibold text-slate-700 mb-2">Judul Project <span
-                            class="text-red-500">*</span></label>
-                    <input type="text" id="title" name="title" value="{{ old('title', $project->title) }}" required
-                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400">
-                    @error('title')
-                        <p class="text-red-500 text-sm mt-1.5">{{ $message }}</p>
-                    @enderror
+                <!-- Title & Semester Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2">
+                        <label for="title" class="block text-sm font-semibold text-slate-700 mb-2">Judul Project <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="title" name="title" value="{{ old('title', $project->title) }}" required
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400">
+                        @error('title')
+                            <p class="text-red-500 text-sm mt-1.5">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="semester" class="block text-sm font-semibold text-slate-700 mb-2">Semester <span
+                                class="text-red-500">*</span></label>
+                        <select id="semester" name="semester" required
+                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all">
+                            @for ($i = 1; $i <= 8; $i++)
+                                <option value="{{ $i }}" {{ old('semester', $project->semester ?? 1) == $i ? 'selected' : '' }}>
+                                    Semester {{ $i }}
+                                </option>
+                            @endfor
+                        </select>
+                        @error('semester')
+                            <p class="text-red-500 text-sm mt-1.5">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Description -->

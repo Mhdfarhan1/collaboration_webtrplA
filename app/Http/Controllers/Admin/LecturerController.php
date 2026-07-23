@@ -49,11 +49,13 @@ class LecturerController extends Controller
             'twitter_url' => 'nullable|url|max:255',
             'facebook_url' => 'nullable|url|max:255',
             'instagram_url' => 'nullable|url|max:255',
+            'is_advisor' => 'nullable|boolean',
             'project_ids' => 'nullable|array',
             'project_ids.*' => 'exists:projects,project_id',
         ]);
 
         $data = $request->except(['lecturer_image', 'project_ids']);
+        $data['is_advisor'] = $request->has('is_advisor') ? 1 : 0;
 
         if ($request->hasFile('lecturer_image')) {
             $image = $request->file('lecturer_image');
@@ -104,11 +106,13 @@ class LecturerController extends Controller
             'twitter_url' => 'nullable|url|max:255',
             'facebook_url' => 'nullable|url|max:255',
             'instagram_url' => 'nullable|url|max:255',
+            'is_advisor' => 'nullable|boolean',
             'project_ids' => 'nullable|array',
             'project_ids.*' => 'exists:projects,project_id',
         ]);
 
         $data = $request->except(['lecturer_image', 'project_ids']);
+        $data['is_advisor'] = $request->has('is_advisor') ? 1 : 0;
 
         if ($request->hasFile('lecturer_image')) {
             // Delete old image
