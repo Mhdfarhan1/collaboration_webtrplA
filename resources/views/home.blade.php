@@ -20,7 +20,7 @@
         @endif
 
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-linear-to-br from-slate-900/95 via-slate-900/40 to-slate-900/20"></div>
+        <div class="absolute inset-0 bg-slate-950/50"></div>
 
         <!-- Glow Ornaments -->
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-500/30 blur-[140px] rounded-full"></div>
@@ -139,9 +139,9 @@
             <div class="max-w-3xl">
                 <p class="text-lg md:text-2xl text-slate-300 font-medium">
                     <span class="text-white font-bold">
-                        {{ $s['about_class_name'] ?? 'TRPL A Pagi' }}
+                        {{ $s['about_class_name'] ?? 'TRPL A Pagi 2024' }}
                     </span>
-                    {{ $s['about_description'] ?? 'adalah kelas unggulan (howak) Rekayasa Perangkat Lunak di' }}
+                    {{ $s['about_description'] ?? 'adalah salah satu kelas di program studi Teknologi Rekayasa Perangkat Lunak di' }}
                     <span class="text-blue-400 font-bold">{{ $s['about_university'] ?? 'Politeknik Negeri Batam' }}</span>.
                 </p>
 
@@ -570,10 +570,10 @@
     </div>
 
     <div class="mt-16 text-center reveal">
-        <button
+        <a href="{{ route('members') }}"
             class="px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-600 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl">
             View All 32 Members
-        </button>
+        </a>
     </div>
 
 </section>
