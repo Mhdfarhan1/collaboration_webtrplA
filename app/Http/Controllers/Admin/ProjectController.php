@@ -43,8 +43,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $lecturers = \App\Models\Lecturer::where('lecturer_type', 'manpro')
-            ->orderBy('lecturer_name')
+        $lecturers = \App\Models\Lecturer::orderBy('lecturer_name')
             ->get();
         return view('admin.projects.create', compact('lecturers'));
     }
@@ -86,8 +85,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $lecturers = \App\Models\Lecturer::where('lecturer_type', 'manpro')
-            ->orderBy('lecturer_name')
+        $lecturers = \App\Models\Lecturer::orderBy('lecturer_name')
             ->get();
         $techs = $project->projectTechs->pluck('tech_name')->toArray();
         $techs_string = implode(', ', $techs);

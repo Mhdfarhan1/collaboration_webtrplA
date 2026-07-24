@@ -18,9 +18,10 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo_trpl.png') }}">
     <link rel="shortcut icon" href="/favikon.ico" type="image/x-icon">
 
-    <!-- Lucide Icons & FontAwesome & SweetAlert2 -->
+    <!-- Lucide Icons & FontAwesome & Devicon & SweetAlert2 -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicon/devicon@latest/devicon.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

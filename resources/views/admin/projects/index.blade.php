@@ -150,8 +150,8 @@
                                 <td class="px-6 py-4 max-w-xs">
                                     <div class="flex flex-wrap gap-1.5">
                                         @forelse ($project->projectTechs as $tech)
-                                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100/80 text-slate-700 border border-slate-200/60 shadow-2xs hover:bg-slate-200/60 transition-colors">
-                                                <i data-lucide="code-2" class="w-3 h-3 text-brand-500"></i>
+                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100/80 text-slate-700 border border-slate-200/60 shadow-2xs hover:bg-slate-200/60 transition-colors">
+                                                {!! \App\Helpers\TechHelper::renderIcon($tech->tech_name) !!}
                                                 {{ $tech->tech_name }}
                                             </span>
                                         @empty

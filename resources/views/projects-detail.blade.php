@@ -41,8 +41,8 @@
                                 </span>
                                 
                                 @foreach($project->projectTechs as $tech)
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-[11px] font-bold uppercase border border-blue-100">
-                                        <i data-lucide="code-2" class="w-3.5 h-3.5 text-blue-500"></i>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-[11px] font-bold uppercase border border-blue-100">
+                                        {!! \App\Helpers\TechHelper::renderIcon($tech->tech_name) !!}
                                         {{ $tech->tech_name }}
                                     </span>
                                 @endforeach

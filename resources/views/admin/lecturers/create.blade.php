@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.lecturers.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('admin.lecturers.store') }}" method="POST" enctype="multipart/form-data" novalidate class="space-y-6">
             @csrf
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -134,42 +134,60 @@
                                     <input type="text" name="lecturer_name" id="lecturer_name" value="{{ old('lecturer_name') }}"
                                         class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                         placeholder="Contoh: Supardianto">
+                                    @error('lecturer_name')
+                                        <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label for="lecturer_title" class="block text-xs font-bold text-slate-700 mb-2">Gelar Akademik</label>
+                                        <label for="lecturer_title" class="block text-xs font-bold text-slate-700 mb-2">Gelar Akademik <span class="text-red-500">*</span></label>
                                         <input type="text" name="lecturer_title" id="lecturer_title" value="{{ old('lecturer_title') }}"
                                             class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                             placeholder="Contoh: M.Eng.">
+                                        @error('lecturer_title')
+                                            <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div>
-                                        <label for="lecturer_nip" class="block text-xs font-bold text-slate-700 mb-2" id="label-nip">NIK / NIP</label>
+                                        <label for="lecturer_nip" class="block text-xs font-bold text-slate-700 mb-2" id="label-nip">NIK / NIP <span class="text-red-500">*</span></label>
                                         <input type="text" name="lecturer_nip" id="lecturer_nip" value="{{ old('lecturer_nip') }}"
                                             class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                             placeholder="Contoh: 113105">
+                                        @error('lecturer_nip')
+                                            <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="md:col-span-2">
-                                        <label for="lecturer_position" class="block text-xs font-bold text-slate-700 mb-2">Jabatan / Struktural</label>
+                                        <label for="lecturer_position" class="block text-xs font-bold text-slate-700 mb-2">Jabatan / Struktural <span class="text-slate-400 font-normal">(Opsional)</span></label>
                                         <input type="text" name="lecturer_position" id="lecturer_position" value="{{ old('lecturer_position') }}"
                                             class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                             placeholder="Contoh: Kepala Program Studi Teknologi Rekayasa Perangkat Lunak">
+                                        @error('lecturer_position')
+                                            <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div>
-                                        <label for="lecturer_email" class="block text-xs font-bold text-slate-700 mb-2">Email Institusi</label>
+                                        <label for="lecturer_email" class="block text-xs font-bold text-slate-700 mb-2">Email Institusi <span class="text-red-500">*</span></label>
                                         <input type="email" name="lecturer_email" id="lecturer_email" value="{{ old('lecturer_email') }}"
                                             class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                             placeholder="email@polibatam.ac.id">
+                                        @error('lecturer_email')
+                                            <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div>
-                                        <label for="lecturer_expertise" class="block text-xs font-bold text-slate-700 mb-2" id="label-expertise">Bidang Spesialis</label>
+                                        <label for="lecturer_expertise" class="block text-xs font-bold text-slate-700 mb-2" id="label-expertise">Bidang Spesialis <span class="text-red-500">*</span></label>
                                         <input type="text" name="lecturer_expertise" id="lecturer_expertise" value="{{ old('lecturer_expertise') }}"
                                             class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                             placeholder="Contoh: Ilmu Komputer">
+                                        @error('lecturer_expertise')
+                                            <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -183,17 +201,23 @@
                             
                             <div class="grid grid-cols-1 gap-6">
                                 <div>
-                                    <label for="last_education" class="block text-xs font-bold text-slate-700 mb-2">Pendidikan Tertinggi</label>
+                                    <label for="last_education" class="block text-xs font-bold text-slate-700 mb-2">Pendidikan Tertinggi <span class="text-red-500">*</span></label>
                                     <input type="text" name="last_education" id="last_education" value="{{ old('last_education') }}"
                                         class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                         placeholder="Contoh: Magister Strata 2 (S2)">
+                                    @error('last_education')
+                                        <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
-                                    <label for="education_history" class="block text-xs font-bold text-slate-700 mb-2">Riwayat Pendidikan (Satu baris per entri)</label>
+                                    <label for="education_history" class="block text-xs font-bold text-slate-700 mb-2">Riwayat Pendidikan (Satu baris per entri) <span class="text-red-500">*</span></label>
                                     <textarea name="education_history" id="education_history" rows="4"
                                         class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
                                         placeholder="Contoh:&#10;Sarjana (S1) Institut Teknologi Bandung : Teknik Media Digital&#10;Magister (S2) Universitas Gadjah Mada : Teknologi Informasi">{{ old('education_history') }}</textarea>
+                                    @error('education_history')
+                                        <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -34,7 +34,7 @@
         </div>
 
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" novalidate
                 class="p-6 sm:p-8 space-y-6">
                 @csrf
 
@@ -81,18 +81,49 @@
                 </div>
 
                 <!-- Technologies -->
-                <div>
-                    <label for="technologies" class="block text-sm font-semibold text-slate-700 mb-2">Teknologi yang
-                        Digunakan <span class="text-red-500">*</span></label>
-                    <input type="text" id="technologies" name="technologies" value="{{ old('technologies') }}" required
-                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-slate-400"
-                        placeholder="Pisahkan dengan koma (Contoh: Laravel, Tailwind CSS, MySQL)">
-                    <p class="text-xs text-slate-500 mt-1.5 flex items-center gap-1.5">
-                        <i data-lucide="info" class="w-3.5 h-3.5"></i>
-                        Pemisahan teks menggunakan koma akan otomatis tersimpan sebagai label terpisah
-                    </p>
+                <div class="space-y-3">
+                    <label for="technologies" class="block text-sm font-semibold text-slate-700">Teknologi yang Digunakan <span class="text-red-500">*</span></label>
+
+                    <!-- Dropdown & Manual Input Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="sm:col-span-1">
+                            <select id="tech-dropdown" onchange="addTechFromDropdown(this.value)"
+                                class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none text-xs font-bold text-slate-700 transition-all cursor-pointer">
+                                <option value="">+ Pilih dari Dropdown...</option>
+                                @foreach(\App\Helpers\TechHelper::getAllTechs() as $techName => $iconClass)
+                                    <option value="{{ $techName }}">{{ $techName }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <input type="text" id="technologies" name="technologies" value="{{ old('technologies') }}" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all text-xs font-medium placeholder:text-slate-400"
+                                placeholder="Atau ketik sendiri dipisah koma (Contoh: Laravel, Tailwind CSS, MySQL)">
+                        </div>
+                    </div>
+
+                    <!-- Quick Preset Badges -->
+                    <div class="bg-slate-50/80 p-3 rounded-xl border border-slate-200/80">
+                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Klik untuk Pilih / Hapus Teknologi:</span>
+                        <div class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1 custom-scrollbar">
+                            @foreach(\App\Helpers\TechHelper::getAllTechs() as $techName => $iconUrl)
+                                <button type="button" onclick="toggleTechChip('{{ $techName }}')"
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-semibold hover:border-brand-500 hover:text-brand-600 transition-all select-none cursor-pointer shadow-2xs">
+                                    {!! \App\Helpers\TechHelper::renderIcon($techName) !!}
+                                    <span>{{ $techName }}</span>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Selected Tech Badges Preview -->
+                    <div>
+                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Teknologi Terpilih:</span>
+                        <div id="tech-preview-container" class="flex flex-wrap gap-2 min-h-[36px] p-2 bg-slate-50 rounded-xl border border-dashed border-slate-300 items-center"></div>
+                    </div>
+
                     @error('technologies')
-                        <p class="text-red-500 text-sm mt-1.5">{{ $message }}</p>
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -175,6 +206,100 @@
     </div>
 
     <script>
+        function addTechFromDropdown(value) {
+            if (!value) return;
+            toggleTechChip(value, true);
+            document.getElementById('tech-dropdown').value = '';
+        }
+
+        function toggleTechChip(techName, forceAdd = false) {
+            const input = document.getElementById('technologies');
+            if (!input) return;
+
+            let current = input.value.split(',').map(t => t.trim()).filter(t => t.length > 0);
+            const index = current.findIndex(t => t.toLowerCase() === techName.toLowerCase());
+
+            if (index >= 0) {
+                if (!forceAdd) {
+                    current.splice(index, 1);
+                }
+            } else {
+                current.push(techName);
+            }
+
+            input.value = current.join(', ');
+            updateTechPreview();
+        }
+
+        const TECH_ICON_MAP = {
+            'laravel': 'fa-brands fa-laravel text-red-500',
+            'tailwind': 'fa-solid fa-wind text-cyan-400',
+            'bootstrap': 'fa-brands fa-bootstrap text-purple-600',
+            'php': 'fa-brands fa-php text-indigo-500',
+            'mysql': 'fa-solid fa-database text-blue-600',
+            'postgre': 'fa-solid fa-database text-blue-500',
+            'react': 'fa-brands fa-react text-sky-400',
+            'vue': 'fa-brands fa-vuejs text-emerald-500',
+            'javascript': 'fa-brands fa-js text-yellow-500',
+            'js': 'fa-brands fa-js text-yellow-500',
+            'typescript': 'fa-brands fa-js text-blue-600',
+            'ts': 'fa-brands fa-js text-blue-600',
+            'python': 'fa-brands fa-python text-blue-500',
+            'node': 'fa-brands fa-node-js text-green-600',
+            'express': 'fa-solid fa-server text-emerald-600',
+            'next': 'fa-brands fa-react text-slate-800',
+            'flutter': 'fa-solid fa-mobile-screen-button text-sky-500',
+            'golang': 'fa-solid fa-code text-cyan-600',
+            'go': 'fa-solid fa-code text-cyan-600',
+            'html': 'fa-brands fa-html5 text-orange-500',
+            'css': 'fa-brands fa-css3-alt text-blue-500',
+            'codeigniter': 'fa-solid fa-fire text-orange-600',
+            'firebase': 'fa-solid fa-fire text-amber-500',
+            'mongo': 'fa-solid fa-leaf text-emerald-600',
+            'docker': 'fa-brands fa-docker text-sky-500',
+            'git': 'fa-brands fa-git-alt text-orange-600',
+            'figma': 'fa-brands fa-figma text-pink-500',
+            'android': 'fa-brands fa-android text-emerald-500',
+            'java': 'fa-brands fa-java text-orange-600'
+        };
+
+        function getTechIconHtml(tech) {
+            const lower = tech.toLowerCase().trim();
+            for (const [key, iconClass] of Object.entries(TECH_ICON_MAP)) {
+                if (lower.includes(key)) {
+                    return `<i class="${iconClass} text-sm"></i>`;
+                }
+            }
+            return `<i class="fa-solid fa-code text-blue-500 text-sm"></i>`;
+        }
+
+        function updateTechPreview() {
+            const input = document.getElementById('technologies');
+            const container = document.getElementById('tech-preview-container');
+            if (!input || !container) return;
+
+            const techs = input.value.split(',').map(t => t.trim()).filter(t => t.length > 0);
+            container.innerHTML = '';
+
+            if (techs.length === 0) {
+                container.innerHTML = '<span class="text-xs text-slate-400 italic">Belum ada teknologi terpilih</span>';
+                return;
+            }
+
+            techs.forEach(tech => {
+                const iconHtml = getTechIconHtml(tech);
+                const badge = document.createElement('span');
+                badge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-50/90 text-blue-800 text-xs font-bold uppercase border border-blue-200 shadow-2xs cursor-pointer hover:bg-red-50 hover:text-red-700 hover:border-red-200 transition-all';
+                badge.title = 'Klik untuk hapus';
+                badge.onclick = function() { toggleTechChip(tech); };
+                badge.innerHTML = `${iconHtml} <span>${tech}</span> <i class="fa-solid fa-xmark text-[10px] opacity-60"></i>`;
+                container.appendChild(badge);
+            });
+        }
+
+        document.getElementById('technologies')?.addEventListener('input', updateTechPreview);
+        document.addEventListener('DOMContentLoaded', updateTechPreview);
+
         function previewImage(event) {
             const input = event.target;
             const container = document.getElementById('image-preview-container');
