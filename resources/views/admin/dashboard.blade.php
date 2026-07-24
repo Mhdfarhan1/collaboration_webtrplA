@@ -25,7 +25,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div
-                class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+                class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
                 <div>
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Mahasiswa</p>
                     <h3 class="text-2xl font-bold text-slate-800 mt-1">{{ $counts['members'] }}</h3>
@@ -36,7 +36,7 @@
             </div>
 
             <div
-                class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+                class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
                 <div>
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Projek</p>
                     <h3 class="text-2xl font-bold text-slate-800 mt-1">{{ $counts['projects'] }}</h3>
@@ -47,7 +47,7 @@
             </div>
 
             <div
-                class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+                class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
                 <div>
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Data Galeri</p>
                     <h3 class="text-2xl font-bold text-slate-800 mt-1">{{ $counts['albums'] }}</h3>
@@ -58,7 +58,7 @@
             </div>
 
             <div
-                class="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+                class="bg-white p-5 rounded-xl border border-slate-300 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
                 <div>
                     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kegiatan Kelas</p>
                     <h3 class="text-2xl font-bold text-slate-800 mt-1">{{ $counts['activities'] }}</h3>
@@ -73,7 +73,7 @@
 
             <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Member Chart -->
-                <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5">
+                <div class="bg-white rounded-xl border border-slate-300 shadow-sm p-5">
                     <h3 class="font-bold text-slate-800 text-sm mb-1">Distribusi Anggota</h3>
                     <p class="text-[10px] text-slate-400 mb-4">Perbandingan Anggota Inti vs Biasa</p>
                     <div class="h-[240px]">
@@ -82,7 +82,7 @@
                 </div>
 
                 <!-- Content Chart -->
-                <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5">
+                <div class="bg-white rounded-xl border border-slate-300 shadow-sm p-5">
                     <h3 class="font-bold text-slate-800 text-sm mb-1">Statistik Konten</h3>
                     <p class="text-[10px] text-slate-400 mb-4">Jumlah Projek, Galeri, dan Kegiatan</p>
                     <div class="h-[240px]">
@@ -92,7 +92,7 @@
             </div>
 
             <div class="space-y-6">
-                <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5">
+                <div class="bg-white rounded-xl border border-slate-300 shadow-sm p-5">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="font-bold text-slate-800">Mahasiswa Terbaru</h3>
                         <a href="{{ route('admin.members.index') }}" class="text-xs text-blue-600 hover:underline">Lihat Semua</a>

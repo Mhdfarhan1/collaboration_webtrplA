@@ -6,7 +6,7 @@
         <nav class="flex text-slate-500 text-sm font-medium" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 sm:space-x-2">
                 <li class="inline-flex items-center">
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('admin.dashboard') }}"
                         class="inline-flex items-center hover:text-brand-600 transition-colors">
                         <i data-lucide="home" class="w-4 h-4 mr-1.5 text-slate-400"></i>
                         Dashboard

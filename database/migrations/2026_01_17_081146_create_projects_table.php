@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id('project_id');
+            $table->foreignId('project_manager_id')->nullable()->constrained('lecturers', 'lecturer_id')->nullOnDelete();
             $table->string('title');
+            $table->unsignedTinyInteger('semester')->default(1);
             $table->text('description');
             $table->string('image_url');
             $table->string('demo_url')->nullable(); 

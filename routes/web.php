@@ -1,25 +1,24 @@
 <?php
 
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\Admin\ActivityMediaController;
+use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\Admin\AlbumImageController;
+use App\Http\Controllers\Admin\ClassLogoController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HeroMediaController;
+use App\Http\Controllers\Admin\LecturerController;
+use App\Http\Controllers\Admin\LinkController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ProjectMemberController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-use App\Models\HeroMedia;
+use App\Http\Controllers\HomeController;
 use App\Models\Activity;
-use App\Models\Link;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $heroMedia = HeroMedia::latest()->first();
-    $projects = \App\Models\Project::with(['projectTechs', 'projectMembers.member', 'projectManager'])->latest()->paginate(3)->fragment('projects');
-    $activities = Activity::latest()->take(3)->get();
-    $albums = \App\Models\Album::latest()->take(4)->get();
-    $links = Link::whereIn('link_type', ['schedule', 'notion', 'instagram'])->get()->keyBy('link_type');
-    $s = \App\Models\Setting::pluck('value', 'key'); // site settings shorthand
-
-    $totalMembersCount = \App\Models\Member::count();
-    $members = \App\Models\Member::orderBy('member_is_core', 'desc')->orderBy('member_name', 'asc')->take(4)->get();
-
-    return view('home', compact('heroMedia', 'projects', 'activities', 'albums', 'links', 's', 'members', 'totalMembersCount'));
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/projects', function () {
     $semester = request('semester');
@@ -159,59 +158,46 @@ Route::prefix('password')->name('password.')->group(function () {
     })->name('update');
 });
 
-// route dashboard
-Route::get('/dashboard', function () {
-    $counts = [
-        'members' => \App\Models\Member::count(),
-        'core_members' => \App\Models\Member::where('member_is_core', 1)->count(),
-        'projects' => \App\Models\Project::count(),
-        'activities' => \App\Models\Activity::count(),
-        'albums' => \App\Models\Album::count(),
-        'lecturers' => \App\Models\Lecturer::count(),
-    ];
+// Route Admin
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
-    $latestMembers = \App\Models\Member::latest()->take(5)->get();
-
-    return view('admin.dashboard', compact('counts', 'latestMembers'));
-})->middleware('auth')->name('dashboard');
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Other admin routes can go here...
+    // Route Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Hero Media Routes
-    Route::resource('heromedia', App\Http\Controllers\Admin\HeroMediaController::class);
+    Route::resource('heromedia', HeroMediaController::class);
 
     // Member Management Routes
-    Route::resource('members', App\Http\Controllers\Admin\MemberController::class);
+    Route::resource('members', MemberController::class);
 
     // Projects Routes
-    Route::resource('projects', App\Http\Controllers\Admin\ProjectController::class);
+    Route::resource('projects', ProjectController::class);
 
     // Project Members (Team) Nested Routes
-    Route::resource('projects.members', App\Http\Controllers\Admin\ProjectMemberController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('projects.members', ProjectMemberController::class)->only(['index', 'store', 'destroy']);
 
     // Class Logos Routes
-    Route::resource('logos', App\Http\Controllers\Admin\ClassLogoController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('logos', ClassLogoController::class)->only(['index', 'store', 'destroy']);
 
     // Activities Routes
-    Route::resource('activities', App\Http\Controllers\Admin\ActivityController::class);
+    Route::resource('activities', ActivityController::class);
 
     // Activity Media (Gallery) Nested Routes
-    Route::resource('activities.media', App\Http\Controllers\Admin\ActivityMediaController::class)->only(['index', 'store', 'destroy', 'update']);
+    Route::resource('activities.media', ActivityMediaController::class)->only(['index', 'store', 'destroy', 'update']);
 
     // Albums Routes
-    Route::resource('albums', App\Http\Controllers\Admin\AlbumController::class);
+    Route::resource('albums', AlbumController::class);
 
     // Album Images (Gallery) Nested Routes
-    Route::resource('albums.images', App\Http\Controllers\Admin\AlbumImageController::class)->only(['index', 'store', 'destroy', 'update']);
+    Route::resource('albums.images', AlbumImageController::class)->only(['index', 'store', 'destroy', 'update']);
 
     // Links Routes
-    Route::resource('links', App\Http\Controllers\Admin\LinkController::class);
+    Route::resource('links', LinkController::class);
 
     // Lecturers Routes
-    Route::resource('lecturers', App\Http\Controllers\Admin\LecturerController::class);
+    Route::resource('lecturers', LecturerController::class);
 
     // Site Settings Routes
-    Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
-    Route::put('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
 });

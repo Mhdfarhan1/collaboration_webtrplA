@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('member_image')->nullable();
             $table->string('member_nim');
             $table->boolean('member_is_core')->default(false);
+            $table->string('instagram_url')->nullable();
+            $table->string('linkedin_url')->nullable();
+            $table->string('github_url')->nullable();
             $table->timestamps();
         });
     }
