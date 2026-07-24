@@ -140,9 +140,9 @@
             <div class="max-w-3xl">
                 <p class="text-lg md:text-2xl text-slate-300 font-medium">
                     <span class="text-white font-bold">
-                        {{ $s['about_class_name'] ?? 'TRPL A Pagi' }}
+                        {{ $s['about_class_name'] ?? 'TRPL A Pagi 2024' }}
                     </span>
-                    {{ $s['about_description'] ?? 'adalah kelas unggulan (howak) Rekayasa Perangkat Lunak di' }}
+                    {{ $s['about_description'] ?? 'adalah salah satu kelas Program Studi Teknologi Rekayasa Perangkat Lunak di' }}
                     <span
                         class="text-blue-400 font-bold">{{ $s['about_university'] ?? 'Politeknik Negeri Batam' }}</span>.
                 </p>
@@ -150,7 +150,7 @@
                 <p class="text-sm md:text-base text-slate-400 mt-4 border-l-4 border-slate-700 pl-4">
                     Focusing on <span
                         class="text-amber-400 font-bold">{{ $s['about_focus_keyword'] ?? 'Software Development' }}</span>,
-                    {{ $s['about_tagline'] ?? 'team collaboration, and modern project management.' }}
+                    {{ $s['about_tagline'] ?? 'Team Collaboration, and Modern Project Management.' }}
                 </p>
             </div>
         </div>
@@ -163,7 +163,7 @@
 
         {{-- TOTAL STUDENTS --}}
         <div
-            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm">
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group hover:shadow-xl hover:shadow-blue-200/50 transition-all duration-300 bg-white border border-slate-300 shadow-sm">
             <div>
                 <p class="text-slate-400 font-bold text-[10px] uppercase mb-1 tracking-wider">Total Students</p>
                 <h2 class="text-4xl font-black text-slate-800 group-hover:text-blue-600 transition-colors">
@@ -179,7 +179,7 @@
         {{-- JADWAL MATKUL --}}
         @if(isset($links['schedule']))
             <a href="{{ $links['schedule']->link_url }}" target="_blank"
-                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-orange-200/50 transition-all duration-300 bg-white border border-slate-300 shadow-sm relative overflow-hidden">
                 <div class="flex flex-col justify-center h-full relative z-10">
                     <p class="text-orange-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">E-Learning</p>
                     <h3 class="text-lg font-bold text-slate-800 group-hover:text-orange-600 transition-colors mb-0.5">
@@ -199,7 +199,7 @@
         {{-- NOTION KELAS --}}
         @if(isset($links['notion']))
             <a href="{{ $links['notion']->link_url }}" target="_blank"
-                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 bg-white border border-slate-300 shadow-sm relative overflow-hidden">
                 <div class="flex flex-col justify-center h-full relative z-10">
                     <p class="text-slate-500/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Workspace</p>
                     <h3 class="text-lg font-bold text-slate-800 group-hover:text-black transition-colors mb-0.5">
@@ -220,7 +220,7 @@
         {{-- INSTAGRAM --}}
         @if(isset($links['instagram']))
             <a href="{{ $links['instagram']->link_url }}" target="_blank"
-                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-pink-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+                class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-pink-200/50 transition-all duration-300 bg-white border border-slate-300 shadow-sm relative overflow-hidden">
                 <div class="flex flex-col justify-center h-full relative z-10">
                     <p class="text-pink-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Social Media</p>
                     <h3 class="text-lg font-bold text-slate-800 group-hover:text-pink-600 transition-colors mb-0.5">
@@ -231,14 +231,14 @@
                 </div>
                 <div
                     class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 relative z-10">
-                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                    <i class="fa-brands fa-instagram fa-2x"></i>
                 </div>
             </a>
         @endif
 
         {{-- OUR PROJECTS --}}
         <a href="{{ route('projects') }}"
-            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 bg-white border border-slate-100 shadow-sm relative overflow-hidden">
+            class="glass-card rounded-[2rem] p-6 flex items-center justify-between group cursor-pointer hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 bg-white border border-slate-300 shadow-sm relative overflow-hidden">
             <div class="flex flex-col justify-center h-full relative z-10">
                 <p class="text-green-600/50 font-bold text-[10px] uppercase mb-1 tracking-wider">Portfolio</p>
                 <h3 class="text-lg font-bold text-slate-800 group-hover:text-green-600 transition-colors mb-0.5">
@@ -651,10 +651,10 @@
     </div>
 
     <div class="mt-16 text-center reveal">
-        <button
-            class="px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-600 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="{{ route('members')}}"
+            class="px-8 py-4 rounded-full bg-white border border-slate-300 text-slate-600 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl">
             View All 32 Members
-        </button>
+        </a>
     </div>
 </section>
 

@@ -73,7 +73,7 @@
                                             <span class="font-bold text-slate-800">Notion Kelas</span>
                                         @elseif($link->link_type == 'instagram')
                                             <div class="w-9 h-9 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center border border-pink-100 shadow-2xs">
-                                                <i data-lucide="instagram" class="w-4 h-4"></i>
+                                                <i class="fa-brands fa-instagram fa-lg"></i>
                                             </div>
                                             <span class="font-bold text-slate-800">Instagram</span>
                                         @elseif($link->link_type == 'schedule')

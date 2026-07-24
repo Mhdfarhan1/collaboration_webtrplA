@@ -33,7 +33,7 @@ class MemberController extends Controller
     {
         $request->validate([
             'member_name' => 'required|string|max:255',
-            'member_nim' => 'required|integer|max:20|unique:members,member_nim',
+            'member_nim' => 'required|integer|digits_between:1,20|unique:members,member_nim',
             'member_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'instagram_url' => 'nullable|url|max:255',
             'linkedin_url' => 'nullable|url|max:255',
@@ -68,7 +68,7 @@ class MemberController extends Controller
     {
         $request->validate([
             'member_name' => 'required|string|max:255',
-            'member_nim' => 'required|integer|max:20|unique:members,member_nim,' . $member->member_id . ',member_id',
+            'member_nim' => 'required|integer|digits_between:1,20|unique:members,member_nim,' . $member->member_id . ',member_id',
             'member_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'instagram_url' => 'nullable|url|max:255',
             'linkedin_url' => 'nullable|url|max:255',
