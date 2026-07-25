@@ -73,167 +73,133 @@
                         // Seseorang dianggap Manpro jika bertipe manpro di DB ATAU memegang proyek
                         $isManpro = ($lecturer->lecturer_type == 'manpro' || $lecturer->projects->count() > 0);
                     @endphp
-                    <div class="reveal group bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-200 h-full flex flex-col transition-all hover:shadow-xl hover:shadow-slate-200/50">
-                        
-                        <div class="flex flex-col sm:flex-row gap-6 md:gap-8 w-full flex-grow">
-                            <div class="shrink-0 flex justify-center sm:justify-start">
-                                <div class="relative w-32 h-32 rounded-full overflow-hidden border-4 border-slate-50 shadow-inner">
+                    <div class="reveal group bg-white rounded-3xl p-6 shadow-xs border border-slate-200/80 hover:shadow-xl hover:border-blue-300/60 transition-all duration-300 flex flex-col justify-between h-full min-w-0">
+                        <div>
+                            <!-- Top Row: Avatar + Main Info -->
+                            <div class="flex items-start gap-4 mb-4 pb-4 border-b border-slate-100 min-w-0">
+                                <!-- Avatar -->
+                                <a href="{{ route('lecturers.detail', \App\Helpers\SecurityHelper::encode($lecturer->lecturer_id)) }}" 
+                                    class="relative w-20 h-20 sm:w-22 sm:h-22 rounded-2xl overflow-hidden border-2 border-slate-100 shadow-xs shrink-0 bg-slate-100 group/avatar block">
                                     @if($lecturer->lecturer_image)
-                                        <img src="{{ asset($lecturer->lecturer_image) }}" alt="{{ $lecturer->lecturer_name }}"
-                                            class="w-full h-full object-cover">
+                                        <img src="{{ asset($lecturer->lecturer_image) }}" alt="{{ $lecturer->full_name_with_title }}"
+                                            class="w-full h-full object-cover transition-transform duration-500 group-hover/avatar:scale-105">
                                     @else
-                                        <div class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300">
-                                            <i data-lucide="user" class="w-16 h-16"></i>
+                                        <div class="w-full h-full flex items-center justify-center text-slate-300">
+                                            <i data-lucide="user" class="w-10 h-10"></i>
                                         </div>
                                     @endif
-                                    
-                                    @if($isManpro)
-                                        <div class="absolute bottom-0 right-0 bg-amber-500 text-white p-1.5 rounded-full shadow-lg border-2 border-white">
-                                            <i data-lucide="briefcase" class="w-3 h-3"></i>
+
+                                    @if(request('type') == 'manpro' && $isManpro)
+                                        <div class="absolute bottom-1 right-1 bg-amber-500 text-white p-1 rounded-full shadow-md border border-white" title="Manager Proyek">
+                                            <i data-lucide="briefcase" class="w-2.5 h-2.5"></i>
                                         </div>
                                     @endif
-                                </div>
-                            </div>
+                                </a>
 
-                            <div class="flex flex-col flex-1 text-slate-600">
-                                <div class="mb-4 text-center sm:text-left">
-                                    <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1 justify-center sm:justify-start flex-wrap">
-                                        <h2 class="text-xl md:text-2xl font-bold text-[#2A4365] leading-tight">
-                                            {{ $lecturer->lecturer_name }}{{ $lecturer->lecturer_title ? ', ' . $lecturer->lecturer_title : '' }}
-                                        </h2>
-                                        @if($isManpro)
-                                            <span class="inline-flex items-center text-[9px] font-black uppercase tracking-widest text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100 flex-shrink-0">Manager Proyek</span>
-                                        @endif
-                                        @if($lecturer->is_advisor)
-                                            <span class="inline-flex items-center text-[9px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100 flex-shrink-0">Wali Dosen</span>
-                                        @endif
+                                <!-- Name, Badges & Position -->
+                                <div class="min-w-0 flex-1">
+                                    <h2 class="text-lg sm:text-xl font-black text-slate-900 leading-tight mb-1 line-clamp-2">
+                                        <a href="{{ route('lecturers.detail', \App\Helpers\SecurityHelper::encode($lecturer->lecturer_id)) }}" class="hover:text-blue-600 transition-colors">
+                                            {{ $lecturer->full_name_with_title }}
+                                        </a>
+                                    </h2>
+
+                                    @if(!empty($lecturer->lecturer_nip))
+                                        <p class="text-xs font-semibold text-slate-500 mb-2 flex items-center gap-1.5">
+                                            <span class="text-slate-400 font-bold">NIDN/NIK:</span>
+                                            <span class="font-mono font-extrabold text-slate-700 tracking-wide">{{ $lecturer->lecturer_nip }}</span>
+                                        </p>
+                                    @endif
+
+                                    <div class="mb-2.5">
+                                        <span class="inline-block px-3 py-1 rounded-full bg-slate-50 border border-slate-200/90 text-[11px] sm:text-xs font-bold text-slate-700 leading-normal max-w-full">
+                                            {{ $lecturer->lecturer_position ?? 'Dosen Pengajar' }}
+                                        </span>
                                     </div>
-                                    <p class="text-[15px] font-medium text-slate-500">
-                                        {{ $lecturer->lecturer_position ?? 'Dosen Pengajar' }}
-                                    </p>
-                                </div>
 
-                                <div class="space-y-1.5 text-sm mb-6">
-                                    <p><span class="font-bold text-slate-800">NIK :</span> {{ $lecturer->lecturer_nip ?? '-' }}</p>
-                                    <p><span class="font-bold text-slate-800">Program Studi :</span> Teknologi Rekayasa Perangkat Lunak</p>
-                                    <p><span class="font-bold text-slate-800">Pendidikan Terakhir :</span> {{ $lecturer->last_education ?? 'Belum Diperbarui' }}</p>
-                                    <p>
-                                        <span class="font-bold text-slate-800">Email :</span> 
-                                        @if($lecturer->lecturer_email)
-                                            <a href="mailto:{{ $lecturer->lecturer_email }}" class="text-[#5D5CDB] hover:underline transition-colors">{{ $lecturer->lecturer_email }}</a>
-                                        @else
-                                            <span class="text-slate-400">-</span>
-                                        @endif
-                                    </p>
-                                </div>
-
-                                <div class="mb-6">
-                                    <h3 class="text-[18px] font-bold text-[#2A4365] mb-3">
-                                        Riwayat Pendidikan
-                                    </h3>
-                                    <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
-                                        @if($lecturer->education_history)
-                                            @foreach(explode("\n", $lecturer->education_history) as $edu)
-                                                @if(trim($edu))
-                                                    <p class="flex items-start gap-2">
-                                                        <span class="w-1.5 h-1.5 rounded-full bg-slate-200 mt-1.5 flex-shrink-0"></span>
-                                                        {{ trim($edu) }}
-                                                    </p>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <p class="italic text-slate-400">Informasi riwayat pendidikan belum tersedia.</p>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                {{-- Rekam Jejak / Riwayat Manpro di TRPL A Pagi (Hanya muncul saat filter Hanya Manager Proyek aktif) --}}
-                                @if(request('type') == 'manpro' && $lecturer->projects->count() > 0)
-                                    <div class="mb-6 p-4 bg-gradient-to-br from-amber-50/80 to-orange-50/40 rounded-2xl border border-amber-100 shadow-2xs">
-                                        <div class="flex items-center justify-between gap-2 mb-3">
-                                            <h3 class="text-xs font-extrabold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
-                                                <i data-lucide="folder-kanban" class="w-4 h-4 text-amber-600"></i>
-                                                <span>Riwayat Manpro di TRPL A Pagi</span>
-                                            </h3>
-                                            <span class="text-[10px] font-extrabold text-amber-700 bg-amber-100/80 px-2.5 py-0.5 rounded-full border border-amber-200">
-                                                {{ $lecturer->projects->count() }} Proyek
-                                            </span>
-                                        </div>
-
-                                        <div class="space-y-2">
-                                            @foreach($lecturer->projects as $project)
-                                                <div class="flex items-center justify-between gap-3 bg-white p-2.5 rounded-xl border border-amber-100/80 shadow-2xs group/project transition-all hover:border-amber-300 hover:shadow-xs">
-                                                    <div class="flex items-center gap-3 min-w-0 flex-1">
-                                                        <div class="w-9 h-9 rounded-xl overflow-hidden shrink-0 bg-slate-100 border border-slate-200/60 shadow-2xs">
-                                                            @if($project->image_url)
-                                                                <img src="{{ asset($project->image_url) }}" class="w-full h-full object-cover">
-                                                            @else
-                                                                <div class="w-full h-full flex items-center justify-center text-slate-400">
-                                                                    <i data-lucide="image" class="w-4 h-4"></i>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        <div class="min-w-0 flex-1">
-                                                            <a href="{{ route('projects.detail', \App\Helpers\SecurityHelper::encode($project->project_id)) }}" class="text-xs font-extrabold text-slate-800 truncate block group-hover/project:text-blue-600 transition-colors">
-                                                                {{ $project->title }}
-                                                            </a>
-                                                            <p class="text-[10px] text-slate-400 truncate mt-0.5">
-                                                                {{ Str::limit($project->description, 45) }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                    {{-- Semester Badge --}}
-                                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-100 shrink-0">
-                                                        <i data-lucide="layers" class="w-3 h-3 text-blue-500"></i>
-                                                        <span>Semester {{ $project->semester ?? 1 }}</span>
-                                                    </span>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endif
-
-                                <div class="mt-auto pt-4 border-t border-slate-50">
-                                    <p class="text-sm mb-5 text-slate-600">
-                                        <span class="font-bold text-slate-800">Bidang Spesialis :</span> {{ $lecturer->lecturer_expertise ?? 'Umum' }}
-                                    </p>
-
-                                    <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
-                                        @php
-                                            $socialIcons = [
-                                                'twitter' => ['url' => $lecturer->twitter_url, 'icon' => 'fa-brands fa-twitter'],
-                                                'facebook' => ['url' => $lecturer->facebook_url, 'icon' => 'fa-brands fa-facebook-f'],
-                                                'instagram' => ['url' => $lecturer->instagram_url, 'icon' => 'fa-brands fa-instagram'],
-                                                'linkedin' => ['url' => $lecturer->linkedin_url, 'icon' => 'fa-brands fa-linkedin-in'],
-                                            ];
-                                        @endphp
-
-                                        @foreach($socialIcons as $key => $social)
-                                            @if($social['url'])
-                                                <a href="{{ $social['url'] }}" target="_blank" 
-                                                   class="w-8 h-8 rounded-full bg-[#F3F4F6] flex items-center justify-center text-[#2A4365] hover:bg-[#2A4365] hover:text-white transition-all duration-300">
-                                                    <i class="{{ $social['icon'] }} text-[15px]"></i>
-                                                </a>
+                                    @if(request('type') == 'manpro' || request('type') == 'advisor')
+                                        <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                                            @if(request('type') == 'manpro' && $isManpro)
+                                                <span class="inline-flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200/80 shrink-0">
+                                                    <i data-lucide="briefcase" class="w-3 h-3 text-amber-500"></i>
+                                                    <span>Manager Proyek</span>
+                                                </span>
                                             @endif
-                                        @endforeach
-
-                                        @if($lecturer->scholar_url)
-                                            <a href="{{ $lecturer->scholar_url }}" target="_blank" 
-                                                class="w-8 h-8 rounded-full bg-[#F3F4F6] flex items-center justify-center text-[#2A4365] hover:bg-[#2A4365] hover:text-white transition-all duration-300">
-                                                <i data-lucide="graduation-cap" class="w-4 h-4 text-[15px]"></i>
-                                            </a>
-                                        @endif
-
-                                        @if($lecturer->scopus_url)
-                                            <a href="{{ $lecturer->scopus_url }}" target="_blank" 
-                                                class="w-8 h-8 rounded-full bg-[#1E5D6A] flex items-center justify-center hover:opacity-90 transition-all duration-300">
-                                                <span class="text-[6px] font-black text-white tracking-widest mt-px">SCOPUS</span>
-                                            </a>
-                                        @endif
-                                    </div>
+                                            @if(request('type') == 'advisor' && $lecturer->is_advisor)
+                                                <span class="inline-flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200/80 shrink-0">
+                                                    <i data-lucide="award" class="w-3 h-3 text-emerald-500"></i>
+                                                    <span>Wali Dosen</span>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
+
+                            <!-- Quick Summary List -->
+                            <div class="space-y-2.5 text-xs text-slate-600 mb-5 min-w-0">
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <span class="font-bold text-slate-400 w-24 shrink-0">Pendidikan</span>
+                                    @php
+                                        $lastEduDisplay = $lecturer->last_education;
+                                        if ($lecturer->education_history) {
+                                            $lines = array_values(array_filter(array_map('trim', explode("\n", $lecturer->education_history))));
+                                            if (!empty($lines)) {
+                                                $lastLine = end($lines);
+                                                if ($lastEduDisplay && str_contains($lastLine, $lastEduDisplay)) {
+                                                    $lastEduDisplay = str_replace(':', '—', $lastLine);
+                                                } elseif (!$lastEduDisplay) {
+                                                    $lastEduDisplay = str_replace(':', '—', $lastLine);
+                                                }
+                                            }
+                                        }
+                                    @endphp
+                                    <span class="font-semibold text-slate-700 truncate" title="{{ $lastEduDisplay ?? 'Belum Diperbarui' }}">
+                                        : {{ $lastEduDisplay ?? 'Belum Diperbarui' }}
+                                    </span>
+                                </div>
+
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <span class="font-bold text-slate-400 w-24 shrink-0">Keahlian</span>
+                                    <span class="font-bold text-blue-600 truncate">: {{ $lecturer->lecturer_expertise ?? '-' }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Bottom: Socials & Detail Button -->
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 min-w-0 mt-auto">
+                            <div class="flex flex-wrap gap-1.5">
+                                @php
+                                    $socialIcons = [
+                                        'twitter' => ['url' => $lecturer->twitter_url, 'icon' => 'fa-brands fa-twitter'],
+                                        'facebook' => ['url' => $lecturer->facebook_url, 'icon' => 'fa-brands fa-facebook-f'],
+                                        'instagram' => ['url' => $lecturer->instagram_url, 'icon' => 'fa-brands fa-instagram'],
+                                        'linkedin' => ['url' => $lecturer->linkedin_url, 'icon' => 'fa-brands fa-linkedin-in'],
+                                    ];
+                                @endphp
+
+                                @foreach($socialIcons as $key => $social)
+                                    @if($social['url'])
+                                        <a href="{{ $social['url'] }}" target="_blank" 
+                                           class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white transition-all duration-200">
+                                            <i class="{{ $social['icon'] }} text-xs"></i>
+                                        </a>
+                                    @endif
+                                @endforeach
+
+                                @if($lecturer->scholar_url)
+                                    <a href="{{ $lecturer->scholar_url }}" target="_blank" title="Google Scholar"
+                                        class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white transition-all duration-200">
+                                        <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
+                                    </a>
+                                @endif
+                            </div>
+
+                            <a href="{{ route('lecturers.detail', \App\Helpers\SecurityHelper::encode($lecturer->lecturer_id)) }}"
+                                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-extrabold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-600 hover:text-white transition-all shadow-2xs group/btn shrink-0">
+                                <span>Detail Profil</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5"></i>
+                            </a>
                         </div>
                     </div>
                 @empty

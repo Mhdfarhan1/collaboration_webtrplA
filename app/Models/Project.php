@@ -10,6 +10,7 @@ class Project extends Model
 
     protected $fillable = [
         'title',
+        'project_type',
         'semester',
         'description',
         'image_url',

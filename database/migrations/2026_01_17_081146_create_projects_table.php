@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id('project_id');
             $table->foreignId('project_manager_id')->nullable()->constrained('lecturers', 'lecturer_id')->nullOnDelete();
             $table->string('title');
+            $table->string('project_type')->default('Web Application');
             $table->unsignedTinyInteger('semester')->default(1);
             $table->text('description');
             $table->string('image_url');
-            $table->string('demo_url')->nullable(); 
+            $table->string('demo_url')->nullable();
             $table->timestamps();
         });
 

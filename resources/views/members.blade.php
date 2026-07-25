@@ -38,7 +38,7 @@
                             class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-600">Squad</span>
                     </h2>
                     <p class="text-gray-500 max-w-lg text-lg">
-                        Kenalan dengan tim hebat di balik layar.
+                        Get to know the talented team behind the scenes.
                     </p>
                 </div>
 
@@ -50,7 +50,7 @@
                     <div
                         class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-gray-100">
                         <form action="{{ route('members.search') }}" method="GET">
-                            <input type="text" placeholder="Cari nama atau NIM..." name="q"
+                            <input type="text" placeholder="Search name or NIM..." name="q"
                                 class="w-full pl-6 pr-14 py-4 text-sm font-medium text-gray-700 bg-transparent outline-none placeholder-gray-400">
                             <div class="absolute right-2 top-2 bottom-2">
                                 <button

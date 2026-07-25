@@ -35,7 +35,7 @@
                         Our <span class="text-brand-600">Gallery</span>
                     </h2>
                     <p class="text-slate-500 max-w-lg text-sm md:text-base font-medium">
-                        Kenangan dan dokumentasi kegiatan kami.
+                        Memories and documentation of our class activities.
                     </p>
                 </div>
 
@@ -46,7 +46,7 @@
                     </div>
                     <div
                         class="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden border border-slate-100">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari album kegiatan..."
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search activity albums..."
                             class="w-full pl-6 pr-14 py-4 text-sm font-medium text-slate-700 bg-transparent outline-none placeholder-slate-400">
                         <div class="absolute right-2 top-2 bottom-2">
                             <button type="submit"
@@ -110,8 +110,8 @@
                         <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
                             <i data-lucide="image-off" class="w-8 h-8 text-blue-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-2">Belum ada Album</h3>
-                        <p class="text-slate-500">Galeri kegiatan kelas saat ini sedang kosong.</p>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2">No Albums Available</h3>
+                        <p class="text-slate-500">The class activity gallery is currently empty.</p>
                     </div>
                 @endforelse
             </div>

@@ -32,6 +32,7 @@ Route::get('/members', [MemberController::class, 'index'])->name('members');
 Route::get('/search', [MemberController::class, 'searchMembers'])->name('members.search');
 
 Route::get('/lecturers', [LecturerController::class, 'index'])->name('lecturers');
+Route::get('/lecturers/{id}', [LecturerController::class, 'show'])->name('lecturers.detail');
 
 Route::get('/albums', [AlbumController::class, 'index'])->name('albums');
 Route::get('/albums/{id}', [AlbumController::class, 'show'])->name('albums.detail');

@@ -85,8 +85,9 @@
                 @forelse($projects as $project)
                 <div class="bg-white rounded-3xl p-5 flex flex-col justify-between group hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-400/60 transition-all duration-500 hover:-translate-y-1.5 border border-slate-200/80 overflow-hidden relative">
                     <div>
-                        <!-- Image Container with Clean Overlay Badges -->
-                        <div class="w-full aspect-[16/10] overflow-hidden rounded-2xl shadow-xs relative bg-slate-100 mb-4 group-hover:shadow-md transition-all">
+                        <!-- Image Container with Clean Overlay Badges (Clickable to Detail) -->
+                        <a href="{{ route('projects.detail', \App\Helpers\SecurityHelper::encode($project->project_id)) }}"
+                            class="block w-full aspect-[16/10] overflow-hidden rounded-2xl shadow-xs relative bg-slate-100 mb-4 group-hover:shadow-md transition-all cursor-pointer">
                             @if($project->image_url)
                                 <img src="{{ asset($project->image_url) }}"
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -97,21 +98,27 @@
                                 </div>
                             @endif
 
-                            <!-- Floating Semester Badge (Top-Left, Clean Dark Glassmorphism) -->
-                            <div class="absolute top-3 left-3 z-10 bg-slate-900/80 text-white backdrop-blur-md text-[10px] font-extrabold tracking-wider px-3 py-1 rounded-xl shadow-sm border border-white/20 flex items-center gap-1">
-                                <i data-lucide="layers" class="w-3 h-3 text-blue-400"></i>
-                                <span>Semester {{ $project->semester ?? 1 }}</span>
+                            <!-- Floating Semester & Project Type Badges (Top-Left, Ultra Compact White Pill Box) -->
+                            <div class="absolute top-2 left-2 z-10 flex items-center gap-1 flex-wrap max-w-[75%] pointer-events-none">
+                                <div class="bg-white/95 backdrop-blur-md text-slate-800 text-[8.5px] font-extrabold leading-none px-2 py-0.5 rounded-full shadow-2xs border border-white/80 flex items-center gap-1 shrink-0">
+                                    <i data-lucide="layers" class="w-2.5 h-2.5 text-blue-600"></i>
+                                    <span>Sem {{ $project->semester ?? 1 }}</span>
+                                </div>
+                                <div class="bg-white/95 backdrop-blur-md text-slate-800 text-[8.5px] font-extrabold leading-none px-2 py-0.5 rounded-full shadow-2xs border border-white/80 flex items-center gap-1 shrink-0">
+                                    <i data-lucide="{{ str_contains(strtolower($project->project_type ?? ''), 'mobile') ? 'smartphone' : (str_contains(strtolower($project->project_type ?? ''), 'hardware') || str_contains(strtolower($project->project_type ?? ''), 'iot') ? 'cpu' : (str_contains(strtolower($project->project_type ?? ''), 'desktop') ? 'monitor' : 'globe')) }}" class="w-2.5 h-2.5 text-emerald-600"></i>
+                                    <span>{{ $project->project_type ?? 'Web Application' }}</span>
+                                </div>
                             </div>
 
-                            <!-- Floating Demo Link / Action (Top-Right) -->
+                            <!-- Floating Demo Link / Action (Top-Right, Ultra Compact Pill) -->
                             @if($project->demo_url)
-                                <a href="{{ $project->demo_url }}" target="_blank"
-                                    class="absolute top-3 right-3 z-10 bg-blue-600/90 hover:bg-blue-600 text-white backdrop-blur-md px-3 py-1 rounded-xl text-[10px] font-extrabold inline-flex items-center gap-1 shadow-sm border border-white/20 transition-all active:scale-95">
-                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                <span onclick="window.open('{{ $project->demo_url }}', '_blank'); event.stopPropagation(); event.preventDefault();"
+                                    class="absolute top-2 right-2 z-20 bg-blue-600/90 hover:bg-blue-600 text-white backdrop-blur-md px-2 py-0.5 rounded-full text-[8.5px] font-extrabold leading-none inline-flex items-center gap-1 shadow-2xs border border-white/20 transition-all active:scale-95 cursor-pointer">
+                                    <i data-lucide="external-link" class="w-2.5 h-2.5"></i>
                                     <span>Demo</span>
-                                </a>
+                                </span>
                             @endif
-                        </div>
+                        </a>
 
                         <!-- Manpro Lecturer Chip (If available) -->
                         @if($project->projectManager)
@@ -124,14 +131,16 @@
                                     @endif
                                 </div>
                                 <p class="text-[11px] font-semibold text-slate-500 truncate pr-2">
-                                    Manpro: <span class="font-bold text-slate-800">{{ $project->projectManager->lecturer_name }}</span>
+                                    Manpro: <span class="font-bold text-slate-800">{{ $project->projectManager->full_name_with_title }}</span>
                                 </p>
                             </div>
                         @endif
 
-                        <!-- Title -->
-                        <h3 class="text-lg font-extrabold text-slate-800 mb-2 leading-snug group-hover:text-blue-600 transition-colors px-1 line-clamp-1">
-                            {{ $project->title }}
+                        <!-- Title (Clickable to Detail) -->
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-2 leading-snug px-1 line-clamp-1">
+                            <a href="{{ route('projects.detail', \App\Helpers\SecurityHelper::encode($project->project_id)) }}" class="hover:text-blue-600 transition-colors">
+                                {{ $project->title }}
+                            </a>
                         </h3>
 
                         <!-- Description -->

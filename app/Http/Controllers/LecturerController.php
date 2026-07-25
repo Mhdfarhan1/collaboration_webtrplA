@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SecurityHelper;
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
 
@@ -36,5 +37,16 @@ class LecturerController extends Controller
             ->withQueryString();
 
         return view('lecturers', compact('lecturers'));
+    }
+
+    /**
+     * Display the specified lecturer profile detail.
+     */
+    public function show($id)
+    {
+        $realId = SecurityHelper::decode($id) ?? $id;
+        $lecturer = Lecturer::with(['projects.projectTechs', 'projects.projectMembers.member'])->findOrFail($realId);
+
+        return view('lecturers-detail', compact('lecturer'));
     }
 }

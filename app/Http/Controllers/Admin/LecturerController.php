@@ -32,6 +32,9 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
+        // Build education_history from D3-S3 inputs if provided
+        $this->processEducationInputs($request);
+
         $request->validate([
             'lecturer_name' => 'required|string|max:255',
             'lecturer_title' => 'required|string|max:255',
@@ -54,7 +57,7 @@ class LecturerController extends Controller
             'project_ids.*' => 'exists:projects,project_id',
         ]);
 
-        $data = $request->except(['lecturer_image', 'project_ids']);
+        $data = $request->except(['lecturer_image', 'project_ids', 'edu_d3_campus', 'edu_d3_major', 'edu_s1_campus', 'edu_s1_major', 'edu_s2_campus', 'edu_s2_major', 'edu_s3_campus', 'edu_s3_major']);
         $data['is_advisor'] = $request->has('is_advisor') ? 1 : 0;
 
         if ($request->hasFile('lecturer_image')) {
@@ -89,6 +92,9 @@ class LecturerController extends Controller
      */
     public function update(Request $request, Lecturer $lecturer)
     {
+        // Build education_history from D3-S3 inputs if provided
+        $this->processEducationInputs($request);
+
         $request->validate([
             'lecturer_name' => 'required|string|max:255',
             'lecturer_title' => 'required|string|max:255',
@@ -111,7 +117,7 @@ class LecturerController extends Controller
             'project_ids.*' => 'exists:projects,project_id',
         ]);
 
-        $data = $request->except(['lecturer_image', 'project_ids']);
+        $data = $request->except(['lecturer_image', 'project_ids', 'edu_d3_campus', 'edu_d3_major', 'edu_s1_campus', 'edu_s1_major', 'edu_s2_campus', 'edu_s2_major', 'edu_s3_campus', 'edu_s3_major']);
         $data['is_advisor'] = $request->has('is_advisor') ? 1 : 0;
 
         if ($request->hasFile('lecturer_image')) {
@@ -138,6 +144,52 @@ class LecturerController extends Controller
         }
 
         return redirect()->route('admin.lecturers.index')->with('success', 'Data dosen berhasil diperbarui.');
+    }
+
+    /**
+     * Helper to process D3-S3 education inputs into education_history and last_education
+     */
+    private function processEducationInputs(Request $request)
+    {
+        $eduLines = [];
+        $highestEdu = null;
+
+        if ($request->filled('edu_d3_campus')) {
+            $campus = trim($request->edu_d3_campus);
+            $major = trim($request->edu_d3_major);
+            $eduLines[] = $major ? "Diploma (DIII) {$campus} : {$major}" : "Diploma (DIII) {$campus}";
+            $highestEdu = "Diploma (DIII) – {$campus}";
+        }
+
+        if ($request->filled('edu_s1_campus')) {
+            $campus = trim($request->edu_s1_campus);
+            $major = trim($request->edu_s1_major);
+            $eduLines[] = $major ? "Sarjana (S1) {$campus} : {$major}" : "Sarjana (S1) {$campus}";
+            $highestEdu = "Sarjana (S1) – {$campus}";
+        }
+
+        if ($request->filled('edu_s2_campus')) {
+            $campus = trim($request->edu_s2_campus);
+            $major = trim($request->edu_s2_major);
+            $eduLines[] = $major ? "Magister (S2) {$campus} : {$major}" : "Magister (S2) {$campus}";
+            $highestEdu = "Magister (S2) – {$campus}";
+        }
+
+        if ($request->filled('edu_s3_campus')) {
+            $campus = trim($request->edu_s3_campus);
+            $major = trim($request->edu_s3_major);
+            $eduLines[] = $major ? "Doktor (S3) {$campus} : {$major}" : "Doktor (S3) {$campus}";
+            $highestEdu = "Doktor (S3) – {$campus}";
+        }
+
+        if (!empty($eduLines)) {
+            $request->merge([
+                'education_history' => implode("\n", $eduLines),
+            ]);
+            if (!$request->filled('last_education') && $highestEdu) {
+                $request->merge(['last_education' => $highestEdu]);
+            }
+        }
     }
 
     /**

@@ -23,6 +23,7 @@ class ProjectController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('project_type', 'like', "%{$search}%")
                         ->orWhere('description', 'like', "%{$search}%")
                         ->orWhereHas('projectTechs', function ($qt) use ($search) {
                             $qt->where('tech_name', 'like', "%{$search}%");

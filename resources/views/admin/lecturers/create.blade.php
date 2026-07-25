@@ -195,27 +195,110 @@
 
                         <!-- Education Section -->
                         <div id="edu-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
-                            <h3 class="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                                <i data-lucide="graduation-cap" class="w-4 h-4"></i> Pendidikan Terakhir
-                            </h3>
+                            <div class="flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                                <h3 class="text-sm font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Riwayat Pendidikan Dosen
+                                </h3>
+                                <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md">Atur Jenjang D3 - S3</span>
+                            </div>
                             
-                            <div class="grid grid-cols-1 gap-6">
-                                <div>
-                                    <label for="last_education" class="block text-xs font-bold text-slate-700 mb-2">Pendidikan Tertinggi <span class="text-red-500">*</span></label>
-                                    <input type="text" name="last_education" id="last_education" value="{{ old('last_education') }}"
-                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
-                                        placeholder="Contoh: Magister Strata 2 (S2)">
-                                    @error('last_education')
-                                        <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
-                                    @enderror
+                            <div class="space-y-5">
+                                <!-- D3 / D4 -->
+                                <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-3">
+                                    <div class="flex items-center gap-2 text-xs font-black text-slate-700 uppercase tracking-wide">
+                                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px]">D3</span>
+                                        <span>Diploma (D3 / D4)</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Nama Kampus / Institusi</label>
+                                            <input type="text" name="edu_d3_campus" value="{{ old('edu_d3_campus') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Politeknik Negeri Batam">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Jurusan / Program Studi</label>
+                                            <input type="text" name="edu_d3_major" value="{{ old('edu_d3_major') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Teknik Informatika">
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <label for="education_history" class="block text-xs font-bold text-slate-700 mb-2">Riwayat Pendidikan (Satu baris per entri) <span class="text-red-500">*</span></label>
-                                    <textarea name="education_history" id="education_history" rows="4"
+                                <!-- S1 -->
+                                <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-3">
+                                    <div class="flex items-center gap-2 text-xs font-black text-slate-700 uppercase tracking-wide">
+                                        <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-[10px]">S1</span>
+                                        <span>Sarjana (S1)</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Nama Kampus / Institusi</label>
+                                            <input type="text" name="edu_s1_campus" value="{{ old('edu_s1_campus') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Institut Teknologi Bandung">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Jurusan / Program Studi</label>
+                                            <input type="text" name="edu_s1_major" value="{{ old('edu_s1_major') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Teknik Media Digital">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- S2 -->
+                                <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-3">
+                                    <div class="flex items-center gap-2 text-xs font-black text-slate-700 uppercase tracking-wide">
+                                        <span class="w-6 h-6 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center text-[10px]">S2</span>
+                                        <span>Magister (S2)</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Nama Kampus / Institusi</label>
+                                            <input type="text" name="edu_s2_campus" value="{{ old('edu_s2_campus') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Universitas Gadjah Mada">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Jurusan / Program Studi</label>
+                                            <input type="text" name="edu_s2_major" value="{{ old('edu_s2_major') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Teknologi Informasi">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- S3 -->
+                                <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/80 space-y-3">
+                                    <div class="flex items-center gap-2 text-xs font-black text-slate-700 uppercase tracking-wide">
+                                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]">S3</span>
+                                        <span>Doktor (S3)</span>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Nama Kampus / Institusi (Opsional)</label>
+                                            <input type="text" name="edu_s3_campus" value="{{ old('edu_s3_campus') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Universitas Indonesia">
+                                        </div>
+                                        <div>
+                                            <label class="block text-[10px] font-bold text-slate-500 mb-1">Jurusan / Program Studi (Opsional)</label>
+                                            <input type="text" name="edu_s3_major" value="{{ old('edu_s3_major') }}"
+                                                class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 outline-none text-xs font-medium"
+                                                placeholder="Contoh: Ilmu Komputer">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Main summary fields -->
+                                <div class="pt-4 border-t border-slate-100">
+                                    <label for="last_education" class="block text-xs font-bold text-slate-700 mb-1.5">Pendidikan Tertinggi (Gelar Terakhir) <span class="text-red-500">*</span></label>
+                                    <input type="text" name="last_education" id="last_education" value="{{ old('last_education') }}"
                                         class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-500 outline-none transition-all placeholder:text-slate-300 text-sm font-medium"
-                                        placeholder="Contoh:&#10;Sarjana (S1) Institut Teknologi Bandung : Teknik Media Digital&#10;Magister (S2) Universitas Gadjah Mada : Teknologi Informasi">{{ old('education_history') }}</textarea>
-                                    @error('education_history')
+                                        placeholder="Contoh: Magister (S2) – Universitas Gadjah Mada">
+                                    <p class="text-[10.5px] text-slate-400 mt-1 italic">Otomatis terisi dari pilihan jenjang di atas jika dikosongkan.</p>
+                                    @error('last_education')
                                         <p class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</p>
                                     @enderror
                                 </div>

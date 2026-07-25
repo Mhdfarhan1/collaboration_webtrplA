@@ -134,10 +134,14 @@
                                                     <i data-lucide="layers" class="w-3 h-3 text-blue-500"></i>
                                                     <span>Semester {{ $project->semester ?? 1 }}</span>
                                                 </span>
+                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                                                    <i data-lucide="{{ str_contains(strtolower($project->project_type ?? ''), 'mobile') ? 'smartphone' : (str_contains(strtolower($project->project_type ?? ''), 'hardware') || str_contains(strtolower($project->project_type ?? ''), 'iot') ? 'cpu' : (str_contains(strtolower($project->project_type ?? ''), 'desktop') ? 'monitor' : 'globe')) }}" class="w-3 h-3 text-emerald-500"></i>
+                                                    <span>{{ $project->project_type ?? 'Web Application' }}</span>
+                                                </span>
                                                 @if($project->projectManager)
                                                     <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-100">
                                                         <i data-lucide="graduation-cap" class="w-3 h-3 text-indigo-500"></i>
-                                                        <span>Manpro: {{ $project->projectManager->lecturer_name }}</span>
+                                                        <span>Manpro: {{ $project->projectManager->full_name_with_title }}</span>
                                                     </div>
                                                 @endif
                                             </div>
@@ -241,10 +245,14 @@
                                         <i data-lucide="layers" class="w-3 h-3 text-blue-500"></i>
                                         <span>Semester {{ $project->semester ?? 1 }}</span>
                                     </span>
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0">
+                                        <i data-lucide="{{ str_contains(strtolower($project->project_type ?? ''), 'mobile') ? 'smartphone' : (str_contains(strtolower($project->project_type ?? ''), 'hardware') || str_contains(strtolower($project->project_type ?? ''), 'iot') ? 'cpu' : (str_contains(strtolower($project->project_type ?? ''), 'desktop') ? 'monitor' : 'globe')) }}" class="w-3 h-3 text-emerald-500"></i>
+                                        <span>{{ $project->project_type ?? 'Web Application' }}</span>
+                                    </span>
                                     @if($project->projectManager)
-                                        <span class="text-[10px] font-bold text-indigo-700 tracking-tight flex items-center gap-1 truncate max-w-[130px]" title="Manpro: {{ $project->projectManager->lecturer_name }}">
+                                        <span class="text-[10px] font-bold text-indigo-700 tracking-tight flex items-center gap-1 truncate max-w-[130px]" title="Manpro: {{ $project->projectManager->full_name_with_title }}">
                                             <i data-lucide="graduation-cap" class="w-3 h-3 text-indigo-500 shrink-0"></i>
-                                            <span class="truncate">{{ $project->projectManager->lecturer_name }}</span>
+                                            <span class="truncate">{{ $project->projectManager->full_name_with_title }}</span>
                                         </span>
                                     @endif
                                 </div>

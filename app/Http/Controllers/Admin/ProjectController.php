@@ -25,6 +25,7 @@ class ProjectController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('project_type', 'like', "%{$search}%")
                       ->orWhere('description', 'like', "%{$search}%")
                       ->orWhereHas('projectTechs', function ($qt) use ($search) {
                           $qt->where('tech_name', 'like', "%{$search}%");
@@ -55,6 +56,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'project_type' => 'required|string|max:100',
             'semester' => 'required|integer|min:1|max:8',
             'description' => 'required|string',
             'technologies' => 'required|string',
@@ -63,7 +65,7 @@ class ProjectController extends Controller
             'project_manager_id' => 'nullable|exists:lecturers,lecturer_id',
         ]);
 
-        $data = $request->only(['title', 'semester', 'description', 'demo_url', 'project_manager_id']);
+        $data = $request->only(['title', 'project_type', 'semester', 'description', 'demo_url', 'project_manager_id']);
 
         if ($request->hasFile('image_url')) {
             $image = $request->file('image_url');
@@ -99,6 +101,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'project_type' => 'required|string|max:100',
             'semester' => 'required|integer|min:1|max:8',
             'description' => 'required|string',
             'technologies' => 'required|string',
@@ -107,7 +110,7 @@ class ProjectController extends Controller
             'project_manager_id' => 'nullable|exists:lecturers,lecturer_id',
         ]);
 
-        $data = $request->only(['title', 'semester', 'description', 'demo_url', 'project_manager_id']);
+        $data = $request->only(['title', 'project_type', 'semester', 'description', 'demo_url', 'project_manager_id']);
 
         if ($request->hasFile('image_url')) {
             // Hapus gambar lama

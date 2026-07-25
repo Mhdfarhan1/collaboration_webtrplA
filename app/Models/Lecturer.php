@@ -34,6 +34,11 @@ class Lecturer extends Model
         'is_advisor' => 'boolean',
     ];
 
+    public function getFullNameWithTitleAttribute()
+    {
+        return $this->lecturer_name . ($this->lecturer_title ? ', ' . $this->lecturer_title : '');
+    }
+
     public function projects()
     {
         return $this->hasMany(Project::class, 'project_manager_id', 'lecturer_id');

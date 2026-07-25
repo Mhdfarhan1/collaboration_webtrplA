@@ -12,7 +12,7 @@ class HeroMediaSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function up(): void
+    public function run(): void
     {
         // Add sample hero data
         DB::table('hero_media')->insert([
