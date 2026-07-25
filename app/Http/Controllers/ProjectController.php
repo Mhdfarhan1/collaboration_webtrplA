@@ -35,7 +35,7 @@ class ProjectController extends Controller
             }, function ($query) {
                 return $query->latest();
             })
-            ->paginate(9)
+            ->paginate(6)
             ->withQueryString();
 
         return view('projects', compact('projects', 'semester', 'search'));

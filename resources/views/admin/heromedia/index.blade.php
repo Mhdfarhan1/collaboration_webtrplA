@@ -32,11 +32,20 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ route('admin.heromedia.create') }}"
-                class="w-full md:w-auto group inline-flex justify-center items-center gap-2 px-5 py-3 bg-gradient-to-r from-brand-600 to-blue-600 text-white text-sm font-bold rounded-xl hover:from-brand-700 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
-                <i data-lucide="plus" class="w-5 h-5 transition-transform group-hover:rotate-90"></i>
-                <span>Tambah Banner Baru</span>
-            </a>
+            @if(!$hasBanner)
+                <a href="{{ route('admin.heromedia.create') }}"
+                    class="w-full md:w-auto group inline-flex justify-center items-center gap-2 px-5 py-3 bg-gradient-to-r from-brand-600 to-blue-600 text-white text-sm font-bold rounded-xl hover:from-brand-700 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
+                    <i data-lucide="plus" class="w-5 h-5 transition-transform group-hover:rotate-90"></i>
+                    <span>Tambah Banner Baru</span>
+                </a>
+            @else
+                <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-50 text-amber-800 text-xs font-extrabold border border-amber-200/80 shadow-2xs">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-amber-600"></i>
+                        <span>Banner Sudah Diatur (Hanya Bisa Update)</span>
+                    </span>
+                </div>
+            @endif
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">

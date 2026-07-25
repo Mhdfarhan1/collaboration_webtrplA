@@ -75,7 +75,7 @@
                         @if($project->demo_url)
                             <div class="pt-2 border-t border-slate-100/80">
                                 <a href="{{ $project->demo_url }}" target="_blank"
-                                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg font-bold text-[11px] shadow-2xs hover:shadow transition-all duration-200 active:scale-95">
+                                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-[11px] shadow-2xs hover:shadow transition-all duration-200 active:scale-95">
                                     <i data-lucide="globe" class="w-3.5 h-3.5"></i>
                                     <span>Kunjungi Web / Live Demo</span>
                                     <i data-lucide="external-link" class="w-3 h-3"></i>
@@ -176,25 +176,34 @@
                         
                         <div class="space-y-2.5">
                             @forelse($project->projectMembers as $pm)
-                                <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-100 hover:bg-blue-50/50 hover:border-blue-100 transition-all duration-200 group">
-                                    <div class="w-9 h-9 rounded-lg overflow-hidden shadow-2xs shrink-0 bg-white border border-slate-200/60 flex items-center justify-center">
+                                <div class="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-100 hover:bg-white hover:border-blue-200/80 hover:shadow-xs transition-all duration-300 group">
+                                    <div class="w-10 h-10 rounded-lg overflow-hidden shadow-2xs shrink-0 bg-white border border-slate-200/60 flex items-center justify-center" style="width: 40px; height: 40px;">
                                         @if($pm->member && $pm->member->member_image)
                                             <img src="{{ asset($pm->member->member_image) }}" alt="{{ $pm->member->member_name }}" 
-                                                class="w-full h-full object-cover">
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" style="width: 40px; height: 40px;">
                                         @else
                                             <span class="text-xs font-extrabold text-slate-500">
                                                 {{ substr($pm->member ? $pm->member->member_name : 'M', 0, 1) }}
                                             </span>
                                         @endif
                                     </div>
+
                                     <div class="flex-1 min-w-0">
-                                        <p class="font-bold text-slate-800 text-xs truncate leading-tight group-hover:text-blue-600 transition-colors">
+                                        <p class="font-bold text-slate-900 text-xs truncate leading-tight group-hover:text-blue-600 transition-colors">
                                             {{ $pm->member ? $pm->member->member_name : 'Anggota Tim' }}
                                         </p>
-                                        <span class="inline-block px-1.5 py-0.5 mt-0.5 rounded text-[9px] font-bold bg-white text-slate-500 border border-slate-200/60">
+                                        @if($pm->member && $pm->member->member_nim)
+                                            <p class="text-[11px] font-medium text-slate-400 mt-0.5 tracking-wide">
+                                                NIM. {{ $pm->member->member_nim }}
+                                            </p>
+                                        @endif
+                                    </div>
+
+                                    @if($pm->project_member_role)
+                                        <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold text-slate-600 bg-white border border-slate-200/80 shadow-2xs shrink-0 ml-auto group-hover:bg-blue-50 group-hover:text-blue-700 group-hover:border-blue-200/60 transition-colors">
                                             {{ $pm->project_member_role }}
                                         </span>
-                                    </div>
+                                    @endif
                                 </div>
                             @empty
                                 <div class="py-5 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200">

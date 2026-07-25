@@ -11,11 +11,14 @@ use App\Http\Controllers\Admin\HeroMediaController;
 use App\Http\Controllers\Admin\LecturerController as AdminLecturerController;
 use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\ProjectMemberController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\MemberController;
@@ -42,43 +45,23 @@ Route::get('/activities/{id}', [ActivityController::class, 'show'])->name('activ
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+Route::get('/login/otp', [AuthController::class, 'showOtpForm'])->name('login.otp');
+Route::post('/login/otp', [AuthController::class, 'verifyLoginOtp'])->name('login.otp.verify');
+Route::post('/login/otp/resend', [AuthController::class, 'resendOtp'])->name('login.otp.resend');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::prefix('password')->name('password.')->group(function () {
-    Route::get('/email', function () {
-        return view('auth.passwords.email');
-    })->name('request');
-
-    Route::post('/email', function () {
-        // Placeholder send OTP logic
-        return redirect()->route('password.verify', ['email' => request('email')]);
-    })->name('email');
-
-    Route::get('/verify', function () {
-        return view('auth.passwords.otp');
-    })->name('verify');
-
-    Route::post('/verify', function () {
-        // Placeholder verify OTP logic
-        return redirect()->route('password.reset', [
-            'email' => request('email'),
-            'token' => 'dummy-token'
-        ]);
-    })->name('verify.check');
-
-    Route::get('/reset', function () {
-        return view('auth.passwords.reset');
-    })->name('reset');
-
-    Route::post('/reset', function () {
-        // Placeholder reset password logic
-        return redirect()->route('login');
-    })->name('update');
+    Route::get('/email', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('request');
+    Route::post('/email', [ForgotPasswordController::class, 'sendResetOtp'])->name('email');
+    Route::get('/verify', [ForgotPasswordController::class, 'showOtpVerifyForm'])->name('verify');
+    Route::post('/verify', [ForgotPasswordController::class, 'verifyResetOtp'])->name('verify.check');
+    Route::get('/reset', [ForgotPasswordController::class, 'showResetForm'])->name('reset');
+    Route::post('/reset', [ForgotPasswordController::class, 'resetPassword'])->name('update');
 });
 
 // Route Admin
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
     // Route Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -119,4 +102,17 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Site Settings Routes
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+
+    // Profile Management Routes
+    Route::get('profile', [AdminProfileController::class, 'index'])->name('profile.index');
+    Route::put('profile', [AdminProfileController::class, 'update'])->name('profile.update');
+    Route::post('profile/request-otp', [AdminProfileController::class, 'requestProfileOtp'])->name('profile.request_otp');
+    Route::post('profile/verify-otp', [AdminProfileController::class, 'verifyProfileOtp'])->name('profile.verify_otp');
+
+    // Super Admin Only: User Management Routes
+    Route::middleware('super_admin')->group(function () {
+        Route::post('users/{user}/request-reset-otp', [AdminUserController::class, 'requestResetOtp'])->name('users.request_reset_otp');
+        Route::post('users/{user}/verify-reset-otp', [AdminUserController::class, 'verifyResetOtp'])->name('users.verify_reset_otp');
+        Route::resource('users', AdminUserController::class);
+    });
 });

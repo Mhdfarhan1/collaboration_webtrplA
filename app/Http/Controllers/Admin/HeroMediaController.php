@@ -12,16 +12,28 @@ class HeroMediaController extends Controller
     public function index()
     {
         $heroMedias = HeroMedia::latest('created_at')->paginate(10);
-        return view('admin.heromedia.index', compact('heroMedias'));
+        $hasBanner = HeroMedia::exists();
+        return view('admin.heromedia.index', compact('heroMedias', 'hasBanner'));
     }
 
     public function create()
     {
+        $existing = HeroMedia::first();
+        if ($existing) {
+            return redirect()->route('admin.heromedia.edit', $existing->hero_media_id)
+                ->with('info', 'Hero Banner sudah diatur. Anda hanya dapat memperbarui (update) banner yang ada.');
+        }
         return view('admin.heromedia.create');
     }
 
     public function store(Request $request)
     {
+        $existing = HeroMedia::first();
+        if ($existing) {
+            return redirect()->route('admin.heromedia.edit', $existing->hero_media_id)
+                ->with('info', 'Hero Banner sudah diatur. Anda hanya dapat melakukan update.');
+        }
+
         $request->validate([
             'hero_title' => 'required|string|max:255',
             'image_file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',

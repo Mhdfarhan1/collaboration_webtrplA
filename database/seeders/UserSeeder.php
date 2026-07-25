@@ -13,10 +13,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => env('ADMIN_NAME'),
-            'email' => env('ADMIN_EMAIL'),
-            'password' => Hash::make(env('ADMIN_PASSWORD')),
-        ]);
+        // 1. Super Admin (Pemilik Utama / Dev)
+        User::updateOrCreate(
+            ['email' => 'farhankudap06@gmail.com'],
+            [
+                'name' => 'Farhan (Super Admin)',
+                'role' => 'super_admin',
+                'password' => Hash::make('superadmin123'),
+            ]
+        );
+
+        // 2. Admin Pengurus (Akun Tambahan)
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Pengurus Kelas',
+                'role' => 'admin',
+                'password' => Hash::make('Admin123'),
+            ]
+        );
     }
 }

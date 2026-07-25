@@ -210,6 +210,9 @@
     {{-- FOOTER --}}
     @include('partials.footer')
 
+    {{-- COOKIE CONSENT BANNER --}}
+    @include('partials.cookie-banner')
+
     {{-- SCRIPT GLOBAL --}}
     @include('partials.scripts')
 

@@ -172,10 +172,25 @@
             {{ request()->routeIs('admin.settings.*') ? 'bg-gradient-to-r from-blue-50/90 via-blue-50/40 to-transparent text-brand-700 font-extrabold border-l-4 border-brand-600 rounded-r-xl shadow-2xs' : 'text-slate-600 font-semibold hover:text-brand-600 hover:bg-slate-50/80' }}">
             <i data-lucide="sliders-horizontal" class="w-5 h-5 flex-shrink-0 transition-all {{ request()->routeIs('admin.settings.*') ? 'text-brand-600' : 'text-slate-400 group-hover:text-brand-600' }}"></i>
             <span class="menu-text whitespace-nowrap transition-all duration-300 opacity-100">Pengaturan Halaman</span>
-            <div class="sidebar-tooltip absolute left-14 bg-slate-800 text-white text-xs px-3 py-2 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-x-2 group-hover:translate-x-0 z-[60] shadow-lg pointer-events-none whitespace-nowrap hidden">
-                Pengaturan Halaman
-            </div>
         </a>
+
+        <!-- Profil Saya -->
+        <a href="{{ route('admin.profile.index') }}"
+            class="group relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer overflow-hidden 
+            {{ request()->routeIs('admin.profile.*') ? 'bg-gradient-to-r from-blue-50/90 via-blue-50/40 to-transparent text-brand-700 font-extrabold border-l-4 border-brand-600 rounded-r-xl shadow-2xs' : 'text-slate-600 font-semibold hover:text-brand-600 hover:bg-slate-50/80' }}">
+            <i data-lucide="user-cog" class="w-5 h-5 flex-shrink-0 transition-all {{ request()->routeIs('admin.profile.*') ? 'text-brand-600' : 'text-slate-400 group-hover:text-brand-600' }}"></i>
+            <span class="menu-text whitespace-nowrap transition-all duration-300 opacity-100">Profil Saya</span>
+        </a>
+
+        @if(Auth::check() && Auth::user()->isSuperAdmin())
+            <!-- Kelola Admin (Super Admin Only) -->
+            <a href="{{ route('admin.users.index') }}"
+                class="group relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all cursor-pointer overflow-hidden 
+                {{ request()->routeIs('admin.users.*') ? 'bg-gradient-to-r from-blue-50/90 via-blue-50/40 to-transparent text-brand-700 font-extrabold border-l-4 border-brand-600 rounded-r-xl shadow-2xs' : 'text-slate-600 font-semibold hover:text-brand-600 hover:bg-slate-50/80' }}">
+                <i data-lucide="shield-check" class="w-5 h-5 flex-shrink-0 transition-all {{ request()->routeIs('admin.users.*') ? 'text-brand-600' : 'text-slate-400 group-hover:text-brand-600' }}"></i>
+                <span class="menu-text whitespace-nowrap transition-all duration-300 opacity-100">Kelola Admin</span>
+            </a>
+        @endif
 
     </nav>
 

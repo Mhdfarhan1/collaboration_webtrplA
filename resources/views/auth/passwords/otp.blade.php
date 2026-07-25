@@ -1,131 +1,79 @@
 @extends('layouts.app')
 
-@section('title', 'Verify OTP')
+@section('title', 'Verifikasi OTP Lupa Password')
 
 @section('content')
-<section class="min-h-screen pt-24 pb-12 flex items-center justify-center px-4 relative">
+<section class="min-h-[calc(100vh-80px)] pt-36 sm:pt-40 pb-20 flex items-center justify-center px-4 relative">
     
     <!-- Background Animated Orbs -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-[20%] left-[20%] w-72 h-72 bg-purple-400/30 rounded-full blur-[100px] animate-blob"></div>
-        <div class="absolute bottom-[20%] right-[20%] w-72 h-72 bg-cyan-400/30 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s"></div>
-        <div class="absolute top-[40%] right-[30%] w-64 h-64 bg-blue-400/30 rounded-full blur-[100px] animate-blob" style="animation-delay: 4s"></div>
+        <div class="absolute top-[20%] left-[20%] w-72 h-72 bg-blue-400/20 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute bottom-[20%] right-[20%] w-72 h-72 bg-cyan-400/20 rounded-full blur-[100px] animate-blob" style="animation-delay: 2s"></div>
     </div>
 
-    <div class="w-full max-w-md glass-card rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden reveal z-10">
+    <div class="w-full max-w-md bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-200/80 shadow-2xl relative overflow-hidden z-10 space-y-6">
         
-        <!-- Decorative Elements -->
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 blur-[50px] rounded-full pointer-events-none"></div>
-        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-cyan-500/20 blur-[50px] rounded-full pointer-events-none"></div>
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/30 mb-2">
+                <i data-lucide="key-round" class="w-7 h-7"></i>
+            </div>
+            <h1 class="text-2xl font-black text-slate-900 tracking-tight">Verifikasi Lupa Password</h1>
+            <p class="text-xs text-slate-500 font-medium">Masukkan Kode OTP 6-Digit yang dikirimkan ke email Anda.</p>
+        </div>
 
-        <div class="relative z-10">
-            <div class="text-center mb-8">
-                <span class="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-bold uppercase tracking-wider mb-3">
-                    Verification
-                </span>
-                <h1 class="text-3xl font-black text-slate-800 mb-2">Enter OTP Code</h1>
-                <p class="text-slate-500 text-sm">Kode OTP telah dikirim ke email Anda.</p>
+
+
+        @if(session('info'))
+            <div class="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold flex items-center gap-2 shadow-2xs">
+                <i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                <span>{{ session('info') }}</span>
+            </div>
+        @endif
+
+        <div class="space-y-6">
+            <div class="text-center space-y-1">
+                <p class="text-xs font-bold text-slate-500">Kode OTP 6-Digit dikirim ke email:</p>
+                <p class="text-sm font-black text-blue-600 bg-blue-50 px-3.5 py-1 rounded-full inline-block border border-blue-100">
+                    {{ substr($user->email, 0, 3) . '***' . strrchr($user->email, '@') }}
+                </p>
             </div>
 
-            <form action="{{ route('password.verify') }}" method="POST" class="space-y-6">
-                @csrf
-                <input type="hidden" name="email" value="{{ request('email') }}">
-                
-                {{-- OTP Input --}}
-                <div class="group text-center">
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-                        6-Digit Code
-                    </label>
-                    <div class="flex justify-center gap-2 sm:gap-4" id="otp-container">
-                        @for($i = 0; $i < 6; $i++)
-                        <input type="text" maxlength="1"
-                            class="otp-input w-10 h-12 sm:w-12 sm:h-14 rounded-xl bg-white/50 border border-slate-200 text-slate-800 text-xl font-bold text-center focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all placeholder:text-slate-300"
-                            required>
-                        @endfor
-                        {{-- Hidden Input for actual submission --}}
-                        <input type="hidden" name="otp" id="otp-hidden">
+            @if($errors->any())
+                <div class="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold space-y-1 shadow-2xs">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600 shrink-0"></i>
+                        <span>{{ $errors->first() }}</span>
                     </div>
                 </div>
+            @endif
 
-                {{-- Action Buttons --}}
-                <button type="submit" class="group relative w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-white rounded-xl bg-brand-600 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-500 overflow-hidden shadow-lg shadow-brand-500/30">
-                    <div class="absolute inset-0 bg-gradient-to-br from-brand-500 via-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span class="relative z-10 flex items-center gap-2">
-                        Verify Code
-                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </span>
-                </button>
+            <form action="{{ route('password.verify.check') }}" method="POST" class="space-y-5">
+                @csrf
 
-                <div class="text-center">
-                    <button type="button" class="text-slate-500 text-sm font-medium hover:text-brand-600 transition-colors">
-                        Tidak menerima kode? <span class="font-bold underline">Kirim Ulang</span>
-                    </button>
+                <!-- OTP Input Field -->
+                <div class="space-y-2">
+                    <label for="otp_code" class="block text-xs font-bold text-slate-700 text-center">Masukkan Kode OTP 6-Digit</label>
+                    <input type="text" id="otp_code" name="otp_code" maxlength="6" autocomplete="one-time-code" autofocus required
+                           placeholder="------"
+                           class="w-full text-center text-2xl font-black tracking-[12px] py-3 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-blue-700 font-mono transition-all">
                 </div>
 
+                <!-- Submit Button -->
+                <button type="submit"
+                        class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow-md hover:shadow-lg transition-all active:scale-98 flex items-center justify-center gap-2">
+                    <span>Verifikasi Kode OTP</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
             </form>
+        </div>
+
+        <div class="text-center pt-2">
+            <a href="{{ route('password.request') }}" class="text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors inline-flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Kembali ke Input Email</span>
+            </a>
         </div>
     </div>
 </section>
 @endsection
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('otp-container');
-        const inputs = container.querySelectorAll('.otp-input');
-        const hiddenInput = document.getElementById('otp-hidden');
-
-        // Update hidden input every time
-        const updateHiddenInput = () => {
-            let otp = '';
-            inputs.forEach(input => otp += input.value);
-            hiddenInput.value = otp;
-        };
-
-        inputs.forEach((input, index) => {
-            // Handle Type (Move to next)
-            input.addEventListener('input', (e) => {
-                if (input.value.length === 1) {
-                    if (index < inputs.length - 1) {
-                        inputs[index + 1].focus();
-                    }
-                }
-                updateHiddenInput();
-            });
-
-            // Handle Backspace (Move to prev)
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && input.value.length === 0) {
-                    if (index > 0) {
-                        inputs[index - 1].focus();
-                    }
-                }
-                setTimeout(updateHiddenInput, 0);
-            });
-
-            // Handle Paste (Fill all)
-            input.addEventListener('paste', (e) => {
-                e.preventDefault();
-                const pasteData = e.clipboardData.getData('text').replace(/\D/g, '').split(''); // Only digits
-                
-                if (pasteData.length > 0) {
-                    inputs.forEach((inp, i) => {
-                        if (pasteData[i]) {
-                            inp.value = pasteData[i];
-                        }
-                    });
-                    updateHiddenInput();
-                    
-                    // Focus logic after paste
-                    const focusIndex = Math.min(pasteData.length, inputs.length) - 1;
-                    if (focusIndex >= 0 && focusIndex < inputs.length) {
-                        inputs[focusIndex].focus();
-                    } else if (pasteData.length >= inputs.length) {
-                         inputs[inputs.length - 1].focus();
-                    }
-                }
-            });
-        });
-    });
-</script>

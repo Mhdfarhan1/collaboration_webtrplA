@@ -211,10 +211,60 @@
                 @endforelse
             </div>
 
-            {{-- PAGINATION --}}
-            @if(isset($projects) && $projects->hasPages())
-                <div class="mt-16 flex justify-center">
-                    {{ $projects->links() }}
+            {{-- PAGINATION & ENTRIES INFO --}}
+            @if(isset($projects) && $projects->total() > 0)
+                <div class="mt-12 pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <!-- Entries Info -->
+                    <div class="text-xs font-semibold text-slate-500">
+                        Menampilkan <span class="font-extrabold text-slate-800">{{ $projects->firstItem() ?? 0 }}</span> sampai <span class="font-extrabold text-slate-800">{{ $projects->lastItem() ?? 0 }}</span> dari <span class="font-extrabold text-blue-600">{{ $projects->total() }}</span> proyek
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    @if($projects->hasPages())
+                        <div class="flex items-center gap-1.5 flex-wrap justify-center">
+                            <!-- Back / Previous Button -->
+                            @if($projects->onFirstPage())
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-300 bg-slate-100 border border-slate-200/60 cursor-not-allowed inline-flex items-center gap-1">
+                                    <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+                                    <span>Kembali</span>
+                                </span>
+                            @else
+                                <a href="{{ $projects->previousPageUrl() }}" 
+                                   class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-600 border border-slate-200/80 shadow-2xs hover:border-blue-200 transition-all inline-flex items-center gap-1">
+                                    <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+                                    <span>Kembali</span>
+                                </a>
+                            @endif
+
+                            <!-- Page Numbers (1, 2, 3...) -->
+                            @foreach($projects->getUrlRange(1, $projects->lastPage()) as $page => $url)
+                                @if($page == $projects->currentPage())
+                                    <span class="w-8 h-8 rounded-xl bg-blue-600 text-white text-xs font-extrabold flex items-center justify-center shadow-md shadow-blue-500/20 border border-blue-600">
+                                        {{ $page }}
+                                    </span>
+                                @else
+                                    <a href="{{ $url }}" 
+                                       class="w-8 h-8 rounded-xl bg-white text-slate-700 hover:bg-blue-50 hover:text-blue-600 text-xs font-bold flex items-center justify-center border border-slate-200/80 shadow-2xs hover:border-blue-200 transition-all">
+                                        {{ $page }}
+                                    </a>
+                                @endif
+                            @endforeach
+
+                            <!-- Next Button -->
+                            @if($projects->hasMorePages())
+                                <a href="{{ $projects->nextPageUrl() }}" 
+                                   class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-600 border border-slate-200/80 shadow-2xs hover:border-blue-200 transition-all inline-flex items-center gap-1">
+                                    <span>Lanjut</span>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                                </a>
+                            @else
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-300 bg-slate-100 border border-slate-200/60 cursor-not-allowed inline-flex items-center gap-1">
+                                    <span>Lanjut</span>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             @endif
 

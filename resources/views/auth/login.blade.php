@@ -36,8 +36,8 @@
                         Email Address
                     </label>
                     <div class="relative">
-                        <input type="email" name="email" id="email" 
-                            class="w-full px-4 py-3 rounded-xl bg-white/50 border border-slate-200 text-slate-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all placeholder:text-slate-400"
+                        <input type="email" name="email" id="email" value="{{ old('email') }}"
+                            class="w-full px-4 py-3 rounded-xl bg-white/50 border @error('email') border-rose-500 focus:ring-rose-500 @else border-slate-200 focus:ring-brand-500/50 focus:border-brand-500 @enderror text-slate-800 text-sm font-medium focus:outline-none focus:ring-2 transition-all placeholder:text-slate-400"
                             placeholder="nama@polibatam.ac.id" required>
                         <div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,6 +45,11 @@
                             </svg>
                         </div>
                     </div>
+                    @error('email')
+                        <p class="text-xs text-rose-500 font-bold mt-1.5 flex items-center gap-1">
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5 inline"></i> {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- Password Input --}}
@@ -54,7 +59,7 @@
                     </label>
                     <div class="relative">
                         <input type="password" name="password" id="password" 
-                            class="w-full px-4 py-3 rounded-xl bg-white/50 border border-slate-200 text-slate-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all placeholder:text-slate-400"
+                            class="w-full px-4 py-3 rounded-xl bg-white/50 border @error('password') border-rose-500 focus:ring-rose-500 @else border-slate-200 focus:ring-brand-500/50 focus:border-brand-500 @enderror text-slate-800 text-sm font-medium focus:outline-none focus:ring-2 transition-all placeholder:text-slate-400"
                             placeholder="••••••••" required>
                         <button type="button" onclick="togglePassword()"
                             class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 focus:text-brand-600 transition-colors focus:outline-none"
@@ -70,6 +75,11 @@
                             </svg>
                         </button>
                     </div>
+                    @error('password')
+                        <p class="text-xs text-rose-500 font-bold mt-1.5 flex items-center gap-1">
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5 inline"></i> {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- Remember & Forgot --}}
